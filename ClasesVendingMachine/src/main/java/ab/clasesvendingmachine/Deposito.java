@@ -34,7 +34,7 @@ public class Deposito {
         this.b20e = b20e;
         this.dineroTarjeta = dineroTarjeta;
     }
-    
+
     public Deposito() {
 
         m10c = 0;
@@ -127,8 +127,8 @@ public class Deposito {
         return "Depósito{\n" + "Monedas: \n -10cents: " + m10c + "\n -20cents: "
                 + m20c + "\n -50cents: " + m50c + "\n -1€: " + m1e + "\n -2€: "
                 + m2e + "\nBilletes: \n -5€: " + b5e + "\n -10€: " + b10e
-                + "\n -20€: " + b20e + "\n introducido por crédito/débito: " + 
-                dineroTarjeta + "\n}";
+                + "\n -20€: " + b20e + "\n introducido por crédito/débito: "
+                + dineroTarjeta + "\n}";
     }
 
 }
