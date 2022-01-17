@@ -5,40 +5,80 @@
  */
 package ab.clasesvendingmachine;
 
+// Clase para tratar fechas (sÃ³lo dÃ­a, mes y aÃ±o)
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+// Enumerado para los meses del aÃ±o (Enero, ...)
+import java.time.Month;
+import java.time.MonthDay;
+import java.time.Period;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.time.temporal.ChronoUnit;
+import java.util.Locale;
+
 public class Pago {
 
-    private boolean tarjeta;
+    private boolean tarjetta;
+    private Tarjeta tarjeta;
     private Deposito Deposito;
     private double introducido;
     private double cambio;
-    private Fecha fechaPago;
+    private LocalDate fechaPago;
     private Articulo producto;
     private Deposito cambioM;
 
     //Contructor parametrizado para cuando se paga con tarjeta.
-    public Pago(boolean tarjeta, Deposito Deposito, Articulo producto) {
+    public Pago(Tarjeta tarjeta, Deposito Deposito, Articulo producto) {
 
+        tarjetta = true;
         this.tarjeta = tarjeta;
         this.producto = producto;
         this.introducido = producto.getPrecio();
         this.cambio = 0;
         this.Deposito = Deposito;
-        fechaPago = new Fecha();
+        fechaPago = LocalDate.now();
+        
+        if(this.tarjeta.getSaldo() >= producto.getPrecio() 
+                && this.producto.getCantidad() > 0){
+            
+            this.tarjeta.setSaldo(this.tarjeta.getSaldo() - producto.getPrecio());
+            this.Deposito.setDineroTarjeta(this.Deposito.getDineroTarjeta() + 
+                producto.getPrecio());
+            this.producto.setCantidad(this.producto.getCantidad() - 1);
+            
+        }else if (this.tarjeta.getSaldo() < producto.getPrecio()){
+            
+            System.out.println("ERROR. No hay saldo suficiente en la tarjeta");
+            
+        }else{
+            
+            System.out.println("ERROR. No hay cantidad suficiente de productos");
+            
+        }
 
     }
 
     //Constructor parametrizado para cuando se paga en metálico.
     public Pago(Deposito Deposito, double introducido, Articulo producto) {
 
-        tarjeta = false;
+        tarjetta = false;
         this.introducido = introducido;
         this.producto = producto;
         this.Deposito = Deposito;
-        cambio = introducido - producto.getPrecio();
-        double c = cambio * 100;
+        double c;
         cambioM = new Deposito();
-
-        //Algoritmo para decidir cuantas monedas se dan en el cambio.
+        fechaPago = LocalDate.now();
+        
+        if(this.producto.getCantidad() > 0){
+              
+            cambio = introducido - producto.getPrecio();
+            c = cambio * 100;
+            this.producto.setCantidad(this.producto.getCantidad() - 1);
+            
+            //Algoritmo para decidir cuantas monedas se dan en el cambio.
         cambioM.setM2e((int) c / 200);
         c -= cambioM.getM2e() * 200;
         cambioM.setM1e((int) c / 100);
@@ -50,42 +90,35 @@ public class Pago {
         cambioM.setM10c((int) c / 10);
         c -= cambioM.getM10c() * 10;
         cambio = c;
-
-    }
-
-    public boolean isTarjeta() {
-        return tarjeta;
-    }
-
-    public Deposito getDeposito() {
-        return Deposito;
-    }
-
-    public double getIntroducido() {
-        return introducido;
-    }
-
-    public double getCambio() {
-        return cambio;
-    }
-
-    public Fecha getFechaPago() {
-        return fechaPago;
-    }
-
-    public Articulo getProducto() {
-        return producto;
-    }
-
-    public Deposito getCambioM() {
-        return cambioM;
+            
+        }else if (this.tarjeta.getSaldo() < producto.getPrecio()){
+            
+            System.out.println("ERROR. No hay saldo suficiente en la tarjeta");
+            
+        }else{
+            
+            System.out.println("ERROR. No hay cantidad suficiente de productos");
+            
+        }
+        
     }
 
     @Override
     public String toString() {
-        return "Factura{\n" + "Pagado con tarjeta " + tarjeta + "\nProducto comprado " + producto
-                + "\nDinero introducido: " + introducido + "\nEl cambio es de "
-                + cambio + "\nFecha:  " + fechaPago + "\n}";
+        if(tarjetta){
+            return "Factura{\nPagado con tarjeta " 
+                    + "\nProducto comprado: " + producto
+                    + "\nDinero introducido: " + introducido 
+                    + "\nFecha:  " + fechaPago + "\n}";
+        }else{
+            
+            return "Factura{ \nPagado en metálico "
+                    + "\nProducto comprado: " + producto
+                    + "\nDinero introducido: " + introducido 
+                    + "\nCambio : " + cambio  + '(' + cambioM + ')'
+                    + "\nFecha:  " + fechaPago + "\n}";
+            
+        }
     }
 
 }
