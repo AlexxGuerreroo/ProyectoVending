@@ -29,6 +29,7 @@ public class Pago {
     private LocalDate fechaPago;
     private Articulo producto;
     private Deposito cambioM;
+    private boolean fallo;
 
     //Contructor parametrizado para cuando se paga con tarjeta.
     public Pago(Tarjeta tarjeta, Deposito Deposito, Articulo producto) {
@@ -48,14 +49,17 @@ public class Pago {
             this.Deposito.setDineroTarjeta(this.Deposito.getDineroTarjeta() + 
                 producto.getPrecio());
             this.producto.setCantidad(this.producto.getCantidad() - 1);
+            fallo = false;
             
         }else if (this.tarjeta.getSaldo() < producto.getPrecio()){
             
             System.out.println("ERROR. No hay saldo suficiente en la tarjeta");
+            fallo = true;
             
         }else{
             
             System.out.println("ERROR. No hay cantidad suficiente de productos");
+            fallo = true;
             
         }
 
@@ -105,7 +109,10 @@ public class Pago {
 
     @Override
     public String toString() {
-        if(tarjetta){
+        
+        if (fallo){
+            return "OPERACIÓN CANCELADA";
+        }else if(tarjetta){
             return "Factura{\nPagado con tarjeta " 
                     + "\nProducto comprado: " + producto
                     + "\nDinero introducido: " + introducido 
