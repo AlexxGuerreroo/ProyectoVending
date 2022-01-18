@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
+import java.time.LocalTime;
 
 public class Pago {
 
@@ -27,6 +28,7 @@ public class Pago {
     private double introducido;
     private double cambio;
     private LocalDate fechaPago;
+    private LocalTime horaPago;
     private Articulo producto;
     private Deposito cambioM;
     private boolean fallo;
@@ -41,9 +43,10 @@ public class Pago {
         this.cambio = 0;
         this.Deposito = Deposito;
         fechaPago = LocalDate.now();
+        horaPago = LocalTime.now();
         
         if(this.tarjeta.getSaldo() >= producto.getPrecio() 
-                && this.producto.getCantidad() > 0){
+                && this.producto.getCantidad() > 0 && this.tarjeta.isValido()){
             
             this.tarjeta.setSaldo(this.tarjeta.getSaldo() - producto.getPrecio());
             this.Deposito.setDineroTarjeta(this.Deposito.getDineroTarjeta() + 
@@ -51,7 +54,8 @@ public class Pago {
             this.producto.setCantidad(this.producto.getCantidad() - 1);
             fallo = false;
             
-        }else if (this.tarjeta.getSaldo() < producto.getPrecio()){
+        }else if (this.tarjeta.getSaldo() < producto.getPrecio() 
+                || !this.tarjeta.isValido()){
             
             System.out.println("ERROR. No hay saldo suficiente en la tarjeta");
             fallo = true;
@@ -75,6 +79,7 @@ public class Pago {
         double c;
         cambioM = new Deposito();
         fechaPago = LocalDate.now();
+        horaPago = LocalTime.now();
         
         if(this.producto.getCantidad() > 0){
               
@@ -94,14 +99,13 @@ public class Pago {
         cambioM.setM10c((int) c / 10);
         c -= cambioM.getM10c() * 10;
         cambio = c;
-            
-        }else if (this.tarjeta.getSaldo() < producto.getPrecio()){
-            
-            System.out.println("ERROR. No hay saldo suficiente en la tarjeta");
+        
+        fallo = false;
             
         }else{
             
             System.out.println("ERROR. No hay cantidad suficiente de productos");
+            fallo = true;
             
         }
         
@@ -123,7 +127,7 @@ public class Pago {
                     + "\nProducto comprado: " + producto
                     + "\nDinero introducido: " + introducido 
                     + "\nCambio : " + cambio  + '(' + cambioM + ')'
-                    + "\nFecha:  " + fechaPago + "\n}";
+                    + "\nFecha: " + fechaPago + "\nHora: " + horaPago + "\n}";
             
         }
     }

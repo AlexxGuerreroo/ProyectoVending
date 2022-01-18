@@ -17,14 +17,39 @@ public class Tarjeta {
     private String apellido2;
     private String cvv;
     private double saldo;
+    private boolean valido = true;
 
-    public Tarjeta(String numTarjeta, String nombre, String apellido1, String apellido2, String cvv, double saldo) {
-        this.numTarjeta = numTarjeta;
-        this.nombre = nombre;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.cvv = cvv;
+    public Tarjeta(String numTarjeta, String nombre, String apellido1, 
+            String apellido2, String cvv, double saldo) {
+        
+        if(numTarjeta.length() == 16){
+            
+            this.numTarjeta = numTarjeta;
+        }else{
+            System.out.println("Nº de tarjeta introducido incorrecto");
+            this.numTarjeta = "0000000000000000";
+            valido = false;
+        }
+        
+            this.nombre = nombre;
+            this.apellido1 = apellido1;
+            this.apellido2 = apellido2;
+            
+        if(cvv.length() == 3){
+            this.cvv = cvv;
+        }else{
+            System.out.println("Nº secreto introducido incorrecto");
+            this.cvv = "000";
+            valido = false;
+        }
+        
         this.saldo = saldo;
+        if (saldo < 0){
+            
+            valido = false;
+            
+        }
+            
     }
 
     public void setSaldo(double saldo) {
@@ -55,11 +80,15 @@ public class Tarjeta {
         return saldo;
     }
 
+    public boolean isValido() {
+        return valido;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return "Tarjeta{" + "numTarjeta=" + numTarjeta + ", nombre=" + nombre
-                + ", apellido1=" + apellido1 + ", apellido2=" + apellido2
-                + ", cvv=" + cvv + ", saldo=" + saldo + '}';
+        return "Tarjeta{" + "numTarjeta=" + numTarjeta + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", cvv=" + cvv + ", saldo=" + saldo + ", valido=" + valido + '}';
     }
 
 }

@@ -35,6 +35,22 @@ public class Deposito {
         this.dineroTarjeta = dineroTarjeta;
     }
 
+    public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e, int b10e, int b20e) {
+        
+        this.m10c = m10c;
+        this.m20c = m20c;
+        this.m50c = m50c;
+        this.m1e = m1e;
+        this.m2e = m2e;
+        this.b5e = b5e;
+        this.b10e = b10e;
+        this.b20e = b20e;
+        dineroTarjeta = 0;
+        
+    }
+    
+    
+
     public Deposito() {
 
         m10c = 0;
