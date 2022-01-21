@@ -9,7 +9,7 @@ package ab.clasesvendingmachine;
  *
  * @author alexx
  */
-public class Tarjeta {
+public class Tarjeta1 {
 
     private String numTarjeta;
     private String nombre;
@@ -19,7 +19,7 @@ public class Tarjeta {
     private double saldo;
     private boolean valido = true;
 
-    public Tarjeta(String numTarjeta, String nombre, String apellido1, 
+    public Tarjeta1(String numTarjeta, String nombre, String apellido1, 
             String apellido2, String cvv, double saldo) {
         
         if(numTarjeta.length() == 16){
