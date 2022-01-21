@@ -16,10 +16,10 @@ public class MiTarjeta {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Tarjeta robameFuerte = new Tarjeta("0123456789098765", "AEC", "Contigo",
+        Tarjeta1 robameFuerte = new Tarjeta1("0123456789098765", "AEC", "Contigo",
                 "PIPO", "666", 420.69);
         
-        Tarjeta trampita = new Tarjeta("01234567890987654", "Agustín", "Nomerobas",
+        Tarjeta1 trampita = new Tarjeta1("01234567890987654", "Agustín", "Nomerobas",
                 "Cojones", "0", -420.69);
         
         System.out.println(robameFuerte);
