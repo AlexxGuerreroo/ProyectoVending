@@ -136,6 +136,21 @@ public class Deposito {
     public void setDineroTarjeta(double dineroTarjeta) {
         this.dineroTarjeta = dineroTarjeta;
     }
+    
+    public boolean coinCheck(){
+        
+        if(this.m10c >= 0 && this.m20c >= 0 && this.m50c >= 0 && this.m1e >= 0
+       && this.m2e >= 0 && this.b5e >= 0 && this.b10e >= 0 && this.b20e >= 0){
+        
+            return true;
+        
+        }else{
+            
+            return false;
+        
+        }
+        
+    }
 
     @Override
     public String toString() {
