@@ -119,12 +119,12 @@ public class Pago {
                 this.producto.setCantidad(this.producto.getCantidad() - 1);
 
                 fallo = false;
-
-            } else {//De no ser así, se revierten las operaciones previas y se
-                //cancela el pago
-
+            
+            }else{  //En el caso de que no haya cambio suficiente nos aparecerá
+                    //un error que nos impida seguir con el pago del artículo.
+                
                 System.out.println("No hay cambio suficiente. Lo sentimos");
-
+                
                 this.deposito.setM2e(this.deposito.getM2e() + cambioM.getM2e());
                 this.deposito.setM1e(this.deposito.getM1e() + cambioM.getM1e());
                 this.deposito.setM50c(this.deposito.getM50c() + cambioM.getM50c());

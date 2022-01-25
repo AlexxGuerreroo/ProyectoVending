@@ -138,6 +138,8 @@ public class Deposito {
     }
     
     public boolean coinCheck(){
+        //El método comprueba si el depósito sea siempre pasitivo, existiendo 
+        //el cambio en monedas y así poder realizar el pago.
         
         if(this.m10c >= 0 && this.m20c >= 0 && this.m50c >= 0 && this.m1e >= 0
        && this.m2e >= 0 && this.b5e >= 0 && this.b10e >= 0 && this.b20e >= 0){
