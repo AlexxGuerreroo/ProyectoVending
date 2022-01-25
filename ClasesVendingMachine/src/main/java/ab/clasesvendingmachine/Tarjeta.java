@@ -23,13 +23,15 @@ public class Tarjeta {
     private String apellido2;
     private String banco;
     private String cvv;
-    private double saldo;
+    private double saldo;//Con cada pago, se reducirá esta cantidad
     private boolean valido;
     private LocalDate caducidad;
     //Por último, estas dos clases determinan la cantidad mínima y máxima que 
     //puede haber de saldo:
-    public static final double MIN = 500;
-    public static final double MAX = 3000;
+    public static final double MIN = 500;//Mínima cantidad de dinero al crear
+    //la tarjeta
+    public static final double MAX = 3000;//Máxima cantidad de dinero al crear
+    //la tarjeta
 
     public Tarjeta(String numTarjeta, String nombre, String apellido1,
             String apellido2, String banco, String cvv, double saldo, int mes,
@@ -104,13 +106,16 @@ public class Tarjeta {
         boolean v = true;
         char d;
 
+        //Comprueba si el número de tarjeta (nT) y el CVV tienen la longitud 
+        //exacta:
         if (nT.length() == 16 && cvv.length() == 3) {
 
-            for (int i = 0; i < 16; i++) {
+            for (int i = 0; i < 16; i++) {//Comprueba que cada parte del string
+                //es un nº
 
                 d = nT.charAt(i);
                 if (!(Character.isDigit(d))) {
-
+                    //Si hay un caracter no numérico, salta el mensaje de error
                     System.out.println("El nº de tarjeta es inválido "
                             + "(no es numérico)");
                     v = false;
@@ -119,11 +124,12 @@ public class Tarjeta {
 
             }
 
-            for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < 3; j++) {//Comprueba que cada parte del string
+                //es un nº
 
                 d = cvv.charAt(j);
                 if (!(Character.isDigit(d))) {
-
+                    //Si hay un caracter no numérico, salta el mensaje de error
                     System.out.println("El CVV es inválido (no es numérico)");
                     v = false;
 
@@ -131,12 +137,13 @@ public class Tarjeta {
 
             }
 
-        } else if (nT.length() != 16) {
+        } else if (nT.length() != 16) {//Si el número de tarjeta no es de 16 
+            //cifras...
 
             System.out.println("El nº de tarjeta es inválido (fallo de longitud");
             v = false;
 
-        } else {
+        } else {//si el CVV no es de 3 cifras...
 
             System.out.println("El CVV es inválido (fallo de longitud)");
             v = false;
@@ -147,17 +154,18 @@ public class Tarjeta {
 
     }
 
-    public boolean caducado() {
+    public boolean caducado() {//Comprueba si la tarjeta ha caducado
 
         LocalDate ahora = LocalDate.now();
         boolean caduco;
-        if (!(ahora.isBefore(caducidad))) {
+        if (!(ahora.isBefore(caducidad))) {//Si el día actual no es antes de
+            //la fecha de caducidad, se indica que la tarjeta ha caducado:
 
             caduco = true;
             System.out.println("Esta tarjeta ya está caducada");
             this.valido = false;
 
-        } else {
+        } else {//Si el día actual es antes de la fecha de caducidad:
 
             caduco = false;
 
