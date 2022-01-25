@@ -28,7 +28,7 @@ public class Tarjeta {
     private LocalDate caducidad;
     //Por último, estas dos clases determinan la cantidad mínima y máxima que 
     //puede haber de saldo:
-    public static final double MIN = 500;//Mínima cantidad de dinero al crear
+    public static final double MIN = 1.50;//Mínima cantidad de dinero al crear
     //la tarjeta
     public static final double MAX = 3000;//Máxima cantidad de dinero al crear
     //la tarjeta
@@ -84,6 +84,23 @@ public class Tarjeta {
         valido = false;
 
     }
+
+    public Tarjeta(String numTarjeta, String cvv, int mes, int ano) {
+        Random tombola = new Random();
+        
+        this.numTarjeta = numTarjeta;
+        this.cvv = cvv;
+        this.caducidad = LocalDate.of(ano, mes, 1);
+        nombre = "User";
+        apellido1 = "";
+        apellido2 = "";
+        banco = "PrepH";
+        saldo = tombola.nextInt(3000) + 1;
+        valido = true;
+        
+    }
+    
+    
 
     public Tarjeta() {//Constructor por defecto
         //Introducimos valores por defecto:
