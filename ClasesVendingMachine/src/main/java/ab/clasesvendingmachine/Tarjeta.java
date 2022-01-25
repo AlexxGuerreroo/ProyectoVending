@@ -24,12 +24,12 @@ public class Tarjeta {
     private String banco;
     private String cvv;
     private double saldo;
-    private boolean valido = true;
+    private boolean valido;
     private LocalDate caducidad;
     //Por último, estas dos clases determinan la cantidad mínima y máxima que 
     //puede haber de saldo:
-    private final double Min = 500;
-    private double max = 3000;
+    public static final double MIN = 500;
+    public static final double MAX = 3000;
 
     public Tarjeta(String numTarjeta, String nombre, String apellido1,
             String apellido2, String banco, String cvv, double saldo, int mes,
@@ -57,7 +57,7 @@ public class Tarjeta {
         this.banco = banco;
 
         //Comprobamos el saldo introducido:
-        if (saldo < Min || saldo > max) {
+        if (saldo < MIN || saldo > MAX) {
             //Si se sale del rango establecido por min y max, se establece por 
             //defecto:
 
@@ -175,21 +175,15 @@ public class Tarjeta {
 
     public double getMin() {
 
-        return Min;
+        return MIN;
 
     }
 
     public double getMax() {
 
-        return max;
+        return MAX;
 
-    }
-
-    public void setMax(double max) {
-
-        this.max = max;
-
-    }
+    }   
 
     public String getNumTarjeta() {
 
