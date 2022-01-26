@@ -21,7 +21,7 @@ public class Maquina {
     private Articulo a7;
     private Articulo a8;
     private Deposito deposito;
-    private String codeAdmin;
+    private final String CODE_ADMIN;
     private Pago pago;
     private Tarjeta t1;
     private Tarjeta t2;
@@ -43,10 +43,10 @@ public class Maquina {
         this.deposito = deposito;
         
         //Usamos un método para generar el código de Admin
-        codeAdmin = this.generarCodigo();
+        CODE_ADMIN = this.generarCodigo();
         
         //Y lo mostramos en consola
-        System.out.println("Código de Administrador: " + codeAdmin);
+        System.out.println("Código de Administrador: " + CODE_ADMIN);
         
     }
     
@@ -99,7 +99,7 @@ public class Maquina {
         //el del administrador. 
         boolean admin = false;
         
-        if(code.equals(codeAdmin)){
+        if(code.equals(CODE_ADMIN)){
             admin = true;
         }
         return admin;
