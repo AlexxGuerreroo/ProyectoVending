@@ -188,15 +188,17 @@ public class Deposito {
     
     public void recargar(int m10c, int m20c, int m50c, int m1e, int m2e, 
             int b5e, int b10e, int b20e){
+        //Este método servirá para llamar a todos los add, en vez de llamarlos 
+        //uno a uno 
         
-        this.m10c += m10c;
-        this.m20c += m20c;
-        this.m50c += m50c;
-        this.m1e += m1e;
-        this.m2e += m2e;
-        this.b5e += b5e;
-        this.b10e += b10e;
-        this.b20e += b20e;
+        this.addM10c(m10c);
+        this.addM20c(m20c);
+        this.addM50c(m50c);
+        this.addM1e(m1e);
+        this.addM2e(m2e);
+        this.addB5e(b5e);
+        this.addB10e(b10e);
+        this.addB20e(b20e);
         
     }
         
