@@ -34,21 +34,30 @@ public class Tarjeta {
     //la tarjeta
     public static final double MAX = 3000;//Máxima cantidad de dinero al crear
     //la tarjeta
-
+    
     public Tarjeta(String numTarjeta, String nombre, String apellido1,
             String apellido2, String banco, String cvv, double saldo, int mes,
-            int ano) {//Constructor parametrizado
+            int ano) {//Constructor para el método copiar:
 
-        //Comprobamos que el número de la tarjeta y el nº secreto son válidos
-        if (validez(numTarjeta, cvv)) {//En caso afirmativo, ponemos los datos
-
+        //Comprobamos que el número de la tarjeta y el nº secreto son válidos               
+        if (validezNum(numTarjeta)){//En caso afirmativo, ponemos los datos
+            
             this.numTarjeta = numTarjeta;
-            this.cvv = cvv;
-        } else {//Si no, se pondrán datos por defecto, 
-            //y la tarjeta será inhabilitada:
-            System.out.println("Nº de tarjeta y/o Nº secreto introducido "
-                    + "no son válidos");
+            
+        }else{//Si no, se pondrán datos por defecto
+            
+            System.out.println("Nº de tarjeta introducido no es válido");
             this.numTarjeta = "0123456789012345";
+            
+        }
+        
+        if (validezCVV(cvv)) {//En caso afirmativo, ponemos los datos
+            
+            this.cvv = cvv;
+            
+        } else {//Si no, se pondrán datos por defecto
+            
+            System.out.println("Nº secreto introducido no es válido");
             this.cvv = "012";
         }
 
@@ -60,19 +69,11 @@ public class Tarjeta {
         //Pasamos el nombre de la entidad bancaria
         this.banco = banco;
 
-        //Comprobamos el saldo introducido:
-        if (saldo < MIN || saldo > MAX) {
-            //Si se sale del rango establecido por min y max, se establece por 
-            //defecto:
-
-            System.out.println("El saldo aportado se sale del rango...");
-            this.saldo = 803.19;
-
-        } else {//Sino, se pasa el valor parametrizado:
+        //Se pasa el valor parametrizado del saldo:
 
             this.saldo = saldo;
 
-        }
+        
 
         //Pasamos la fecha de caducidad y comprobamos si la fecha está cumplida
         this.caducidad = LocalDate.of(ano, mes, 1);
@@ -85,23 +86,41 @@ public class Tarjeta {
         //activar con un método aparte
         valido = false;
 
-        //Aumentamos en 1 el contador:
-        contador++;
-
     }
-
+    
+    
+    
     public Tarjeta(String numTarjeta, String cvv, int mes, int ano) {
+        //Constructor parametrizado:
         Random tombola = new Random();
 
-        this.numTarjeta = numTarjeta;
-        this.cvv = cvv;
+        if(this.validezNum(numTarjeta)){
+            
+            this.numTarjeta = numTarjeta;
+            
+        }else{
+            
+            this.numTarjeta = "0123456789012345";
+            
+        }
+        
+        if(this.validezCVV(cvv)){
+            
+            this.cvv = cvv;
+        
+        }else{
+            
+            this.cvv = "012";
+            
+        }
+        
         this.caducidad = LocalDate.of(ano, mes, 1);
-        nombre = "User";
-        apellido1 = "";
-        apellido2 = "";
-        banco = "PrepH";
-        saldo = tombola.nextInt(3000) + 1;
-        valido = true;
+        nombre = "User";//Valor por defecto
+        apellido1 = "";//Valor por defecto
+        apellido2 = "";//Valor por defecto
+        banco = "PrepH";//Valor por defecto
+        saldo = tombola.nextInt(3000) + 1;//Se genera el saldo al azar
+        valido = false;//Se establece como anulada.
 
         //Aumentamos en 1 el contador:
         contador++;
@@ -126,15 +145,15 @@ public class Tarjeta {
         /*PD: Los valores del nombre, apellidos y la fecha son relacionados a un
         meme (este: https://www.youtube.com/watch?v=huie2_3Pekg ) */
     }
-
-    public boolean validez(String nT, String cvv) {
+        
+    public boolean validezNum(String nT) {
 
         boolean v = true;
         char d;
 
         //Comprueba si el número de tarjeta (nT) y el CVV tienen la longitud 
         //exacta:
-        if (nT.length() == 16 && cvv.length() == 3) {
+        if (nT.length() == 16) {
 
             for (int i = 0; i < 16; i++) {//Comprueba que cada parte del string
                 //es un nº
@@ -148,7 +167,28 @@ public class Tarjeta {
 
                 }
 
-            }
+            }            
+
+        } else {//Si el número de tarjeta no es de 16 
+            //cifras...
+
+            System.out.println("El nº de tarjeta es inválido (fallo de longitud");
+            v = false;
+
+        }
+
+        return v;
+
+    }
+    
+    public boolean validezCVV(String cvv) {
+
+        boolean v = true;
+        char d;
+
+        //Comprueba si el número de tarjeta (nT) y el CVV tienen la longitud 
+        //exacta:
+        if (cvv.length() == 3) {
 
             for (int j = 0; j < 3; j++) {//Comprueba que cada parte del string
                 //es un nº
@@ -162,12 +202,6 @@ public class Tarjeta {
                 }
 
             }
-
-        } else if (nT.length() != 16) {//Si el número de tarjeta no es de 16 
-            //cifras...
-
-            System.out.println("El nº de tarjeta es inválido (fallo de longitud");
-            v = false;
 
         } else {//si el CVV no es de 3 cifras...
 
@@ -289,7 +323,7 @@ public class Tarjeta {
 
         if (saldo < 0 || this.caducado()) {
             this.valido = false;
-        } else if (validez(numTarjeta, cvv)) {
+        } else if (validezNum(numTarjeta) && validezCVV(cvv)) {
             this.valido = true;
         }
 
@@ -306,22 +340,15 @@ public class Tarjeta {
         String cvv;
         int aux;
         boolean pago;
-
-        System.out.println("Introduce el CVV: ");
-        cvv = entry.next();
-
-        if (cvv.equals(this.cvv) && this.valido && coste < saldo) {
+        
+        this.setValido();
+        
+        if (this.valido && coste < saldo) {
 
             aux = (int) ((this.saldo * 100) - (coste * 100));
             this.setSaldo(aux / 100.00);
             System.out.println("Operación realizada con éxito");
             pago = true;
-
-        } else if (!(cvv.equals(this.cvv))) {
-
-            System.out.println("El CVV no corresponde con la tarjeta,"
-                    + " anulando pago...");
-            pago = false;
 
         } else if (!this.valido) {
 
@@ -339,27 +366,21 @@ public class Tarjeta {
 
     }
 
-    public void copiar(Tarjeta c) {
+    public static Tarjeta copiar(Tarjeta c) {
 
-        numTarjeta = c.getNumTarjeta();
-        cvv = c.getCvv();
-        nombre = c.getNombre();
-        apellido1 = c.getApellido1();
-        apellido2 = c.getApellido2();
-        banco = c.getBanco();
-        saldo = c.getSaldo();
-        caducidad = c.getCaducidad();
-        valido = c.isValido();
+        Tarjeta aux = new Tarjeta(c.getNumTarjeta(), c.getNombre(), 
+                c.getApellido1(), c.getApellido2(), c.getBanco(), c.getCvv(),
+                c.getSaldo(), c.getCaducidad().getMonthValue(),
+                c.getCaducidad().getYear());
 
+                return aux;
     }
 
     @Override
     public String toString() {
-        return "Tarjeta{\n" + "\n\tTitular: " + nombre + " " + apellido1 + " "
-                + apellido2 + "\t Banco: " + banco
+        return "Tarjeta{\n" + "\n\tNumTarjeta = " + numTarjeta + "\tCVV: " + cvv
                 + "\n\tCaduca en " + caducidad.getMonthValue() + '/'
-                + caducidad.getYear() + "\tSaldo = " + saldo + '€'
-                + "\n\tNumTarjeta = " + numTarjeta + "\n}";
+                + caducidad.getYear() + "\n}";
     }
 
 }
