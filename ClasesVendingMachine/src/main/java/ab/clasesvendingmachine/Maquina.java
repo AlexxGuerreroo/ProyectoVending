@@ -42,68 +42,61 @@ public class Maquina {
         this.a8 = a8;
         this.deposito = deposito;
         
+        //Usamos un método para generar el código de Admin
         codeAdmin = this.generarCodigo();
         
+        //Y lo mostramos en consola
         System.out.println("Código de Administrador: " + codeAdmin);
         
     }
     
     public String generarCodigo(){
+        //Este método genera al azar el código de Admin de la máquina:
         
         Random tecla = new Random();        
         int aux;
         String codex = "";
         
-        //
+        //Primer símbolo al azar
         aux = tecla.nextInt(15) + 33;                
         codex += (char) aux;
         
-        aux = tecla.nextInt(10) + 48;                
-        codex += (char) aux;
-        //
-        aux = tecla.nextInt(26) + 97;                
-        codex += (char) aux;
-        
-        aux = tecla.nextInt(26) + 65;                
-        codex += (char) aux;
-        //
-        aux = tecla.nextInt(26) + 97;                
-        codex += (char) aux;
-        
-        aux = tecla.nextInt(26) + 65;                
-        codex += (char) aux;
-        
+        //Primera cifra numérica al azar
         aux = tecla.nextInt(10) + 48;                
         codex += (char) aux;
         
+        //Primera letra minúscula al azar
+        aux = tecla.nextInt(26) + 97;                
+        codex += (char) aux;
+        
+        //Primera letra mayúscula al azar
+        aux = tecla.nextInt(26) + 65;                
+        codex += (char) aux;
+        
+        //Primera letra minúscula al azar
+        aux = tecla.nextInt(26) + 97;                
+        codex += (char) aux;
+        
+        //Primera letra mayúscula al azar
+        aux = tecla.nextInt(26) + 65;                
+        codex += (char) aux;
+        
+        //Primera cifra numérica al azar
+        aux = tecla.nextInt(10) + 48;                
+        codex += (char) aux;
+        
+        //Primer símbolo al azar
         aux = tecla.nextInt(15) + 33;                
         codex += (char) aux;
         
         return codex;
         
     }
-
-    public Maquina(Articulo a1, Articulo a2, Articulo a3, Articulo a4, 
-            Articulo a5, Articulo a6, Articulo a7, Articulo a8, 
-            Deposito deposito, String code) {
         
-        this.a1 = a1;
-        this.a2 = a2;
-        this.a3 = a3;
-        this.a4 = a4;
-        this.a5 = a5;
-        this.a6 = a6;
-        this.a7 = a7;
-        this.a8 = a8;
-        this.deposito = deposito;
-        this.codeAdmin = code;
-        
-    }
-    
-    //Crearemos un método para comprobar que el código introducido coincide con
-    //el del administrados.
-    
+       
     public boolean adminCheck (String code) {
+        //Método para comprobar que el código introducido coincide con
+        //el del administrador. 
         boolean admin = false;
         
         if(code.equals(codeAdmin)){
@@ -111,11 +104,7 @@ public class Maquina {
         }
         return admin;
     }
-    
-    //Crearemos un método para comprobar que el código introducido coincide con
-    //el de la bandeja.
-
-        
+                
     public void elegirProducto(String code) {
         //Este método cogerá el artículo seleccionado y comenzará el pago;
         
@@ -151,7 +140,7 @@ public class Maquina {
             
             elegirPago(a8);
             
-        }else{
+        }else{//Si no coincide con ninguno, mandamos un mensaje de error.
             
             System.out.println("El código introducido no coincide con ningún"
                     + " producto.");
@@ -217,8 +206,8 @@ public class Maquina {
                     System.out.println("Introduce la cantidad a pagar: ");
                     double pag = entry.nextDouble();
 
-                    pago = new Pago(deposito, pag, art);
-
+                    pago = new Pago(deposito, pag, art);                    
+                    
                 }        
 
                 repeat = false;
@@ -279,7 +268,7 @@ public class Maquina {
 
     }
     
-    //Esto se podrá usar en modo Admin:
+    //Estos getters y setters se podrán usar en modo Admin:
 
     public Articulo getA1() {
         
@@ -395,33 +384,15 @@ public class Maquina {
         
     }
 
-    public void setT1(Tarjeta t1) {
-        
-        this.t1 = t1;
-        
-    }
-
     public Tarjeta getT2() {
         
         return t2;
         
     }
 
-    public void setT2(Tarjeta t2) {
-        
-        this.t2 = t2;
-        
-    }
-
     public Tarjeta getT3() {
         
         return t3;
-        
-    }
-
-    public void setT3(Tarjeta t3) {
-        
-        this.t3 = t3;
         
     }
 
