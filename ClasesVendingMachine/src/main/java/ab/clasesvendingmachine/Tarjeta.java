@@ -26,6 +26,8 @@ public class Tarjeta {
     private double saldo;//Con cada pago, se reducirá esta cantidad
     private boolean valido;
     private LocalDate caducidad;
+    private static int contador = 0;
+
     //Por último, estas dos clases determinan la cantidad mínima y máxima que 
     //puede haber de saldo:
     public static final double MIN = 1.50;//Mínima cantidad de dinero al crear
@@ -83,11 +85,14 @@ public class Tarjeta {
         //activar con un método aparte
         valido = false;
 
+        //Aumentamos en 1 el contador:
+        contador++;
+
     }
 
     public Tarjeta(String numTarjeta, String cvv, int mes, int ano) {
         Random tombola = new Random();
-        
+
         this.numTarjeta = numTarjeta;
         this.cvv = cvv;
         this.caducidad = LocalDate.of(ano, mes, 1);
@@ -97,10 +102,11 @@ public class Tarjeta {
         banco = "PrepH";
         saldo = tombola.nextInt(3000) + 1;
         valido = true;
-        
+
+        //Aumentamos en 1 el contador:
+        contador++;
+
     }
-    
-    
 
     public Tarjeta() {//Constructor por defecto
         //Introducimos valores por defecto:
@@ -113,6 +119,9 @@ public class Tarjeta {
         saldo = 803.19;
         caducidad = LocalDate.of(2077, 9, 13);
         valido = false; //Siempre empieza anulada
+
+        //Aumentamos en 1 el contador:
+        contador++;
 
         /*PD: Los valores del nombre, apellidos y la fecha son relacionados a un
         meme (este: https://www.youtube.com/watch?v=huie2_3Pekg ) */
@@ -208,7 +217,7 @@ public class Tarjeta {
 
         return MAX;
 
-    }   
+    }
 
     public String getNumTarjeta() {
 
@@ -264,6 +273,12 @@ public class Tarjeta {
 
     }
 
+    public static int getContador() {
+
+        return contador;
+
+    }
+
     public boolean isValido() {
 
         return valido;
@@ -291,14 +306,14 @@ public class Tarjeta {
         String cvv;
         int aux;
         boolean pago;
-                   
+
         System.out.println("Introduce el CVV: ");
         cvv = entry.next();
 
         if (cvv.equals(this.cvv) && this.valido && coste < saldo) {
 
-            aux =(int) ((this.saldo*100) - (coste*100));
-            this.setSaldo(aux/100.00);
+            aux = (int) ((this.saldo * 100) - (coste * 100));
+            this.setSaldo(aux / 100.00);
             System.out.println("Operación realizada con éxito");
             pago = true;
 
@@ -319,7 +334,7 @@ public class Tarjeta {
             pago = false;
 
         }
-               
+
         return pago;
 
     }
