@@ -31,6 +31,7 @@ public class AdminMode {
     }
             
     public void consultarBandejas(){
+        //Muestra todos los artículos (bandejas) de la máquina:
         
         System.out.println(maquina.getA1());
         System.out.println(maquina.getA2());
@@ -44,12 +45,15 @@ public class AdminMode {
     }
     
     public void consultarDeposito(){
+        //Muestra los datos del depósito de la máquina:
         
         System.out.println(maquina.getDeposito());
         
     }
     
     public void recaudarDelDeposito(){
+        //Vacía el depósito para recaudar beneficios y establece la fecha de la 
+        //acción acordemente:
         
         maquina.getDeposito().vaciarDeposito();
         
@@ -59,6 +63,8 @@ public class AdminMode {
     
     public void recargarDeposito(int m10c, int m20c, int m50c, int m1e, int m2e, 
             int b5e, int b10e, int b20e){
+        //Recarga el depósito para tener cambio y establece la fecha de la acción
+        //acordemente:
         
         maquina.getDeposito().recargar(m10c, m20c, m50c, m1e, m2e, b5e, b10e
                 , b20e);
