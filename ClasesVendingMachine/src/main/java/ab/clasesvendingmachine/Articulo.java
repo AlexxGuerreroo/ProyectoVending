@@ -17,6 +17,7 @@ public class Articulo {
     private double precio; //Precio del artículo
     private int cantidad; //Cantidad del artículo
     private String codigo; //Código del artículo
+    public static final int MAX = 15;
 
     public Articulo(String nombre, double precio, int cantidad, String codigo) {
         Random generate = new Random();
@@ -43,7 +44,7 @@ public class Articulo {
             
             //Si la cantidad está fuera del rango (entre 0 y 15), saldrá error
             //y se generará la cantidad al azar.
-            if (this.cantidad < 0 || this.cantidad > 15) {
+            if (this.cantidad < 0 || this.cantidad > MAX) {
                 
                 System.out.println("La cantidad introducida se halla fuera de los límites ");
                 this.cantidad = generate.nextInt(16);
@@ -165,7 +166,7 @@ public class Articulo {
 
     public void setCantidad(int cantidad) {
 
-        if (cantidad < 0 || cantidad > 15) {
+        if (cantidad < 0 || cantidad > MAX) {
             //Si la cantidad está fuera del rango (entre 0 y 15), saldrá error
             System.out.println("La cantidad introducida se halla fuera de los límites");
 
@@ -195,9 +196,9 @@ public class Articulo {
     //Método toString que devuelve los datos de la clase.
     @Override
     public String toString() { //Devuelve los datos de la clase como String
-        return "Articulo" + "\n" + '{' + "\n Nombre = " + nombre
+        return "Articulo " + codigo + "\n" + '{' + "\n Nombre = " + nombre
                 + "\n Precio = " + precio + "0€" + "\n Cantidad = "
-                + cantidad + "\n Código = " + codigo + "\n" + '}';
+                + cantidad + "\n" + '}';
     }
 
 }
