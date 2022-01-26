@@ -20,112 +20,146 @@ public class Articulo {
 
     public Articulo(String nombre, double precio, int cantidad, String codigo) {
         Random generate = new Random();
-        //Constructor que pedirá los datos como parámetros
+        
+        //Constructor que pedirá los datos como parámetros.
         try {
-            this.nombre = nombre; //El parámetro nombre será asignado al artículo
-            this.precio = precio; //El parámetro precio será asignado al artículo
+            //El parámetro nombre será asignado al artículo.
+            this.nombre = nombre;
+            
+            //El parámetro precio será asignado al artículo.
+            this.precio = precio;
+            
+            //Si el precio está fuera del rango (entre 0,30€ y 5€), saldrá error
+            //y se generará el precio al azar.
             if (this.precio < 0.30 || this.precio > 5) {
-                //Si el precio está fuera del rango (entre 0,30€ y 5€), saldrá error
-                //y se generará el precio al azar
-                System.out.println("El precio introducido se halla fuera de los límites");
+                            
+                System.out.println("El precio introducido se halla fuera de los límites ");
                 this.precio = (double) (generate.nextInt(50) + 3) / 10;
 
             }
-            this.cantidad = cantidad; //El parámetro cantidad será asignado al artículo
+            
+            //El parámetro cantidad será asignado al artículo.
+            this.cantidad = cantidad;
+            
+            //Si la cantidad está fuera del rango (entre 0 y 15), saldrá error
+            //y se generará la cantidad al azar.
             if (this.cantidad < 0 || this.cantidad > 15) {
-                //Si la cantidad está fuera del rango (entre 0 y 15), saldrá error
-                //y se generará la cantidad al azar
-                System.out.println("La cantidad introducida se halla fuera de los límites");
+                
+                System.out.println("La cantidad introducida se halla fuera de los límites ");
                 this.cantidad = generate.nextInt(16);
             }
-
-            this.codigo = codigo; //El parámetro código será asignado al artículo
+            //El parámetro código será asignado al artículo. 
+            this.codigo = codigo;
 
             if (this.codigo.length() != 3) {
-                //Si el código está fuera del rango (entre 1 y 999), saldrá error
-                //y se generará el código al azar
-                System.out.println("El código introducido se halla fuera de los límites");
+                
+                //Si el código está fuera del rango (entre 0 y 999), saldrá error
+                //y se generará el código al azar.
+                System.out.println("Error al introducir el código, en su defecto"
+                        + "se creará uno nuevo por defecto ");
+                
+                //Esto generará 3 número al azar entre el 0 y el 9.
                 this.codigo = "" + generate.nextInt(10) + generate.nextInt(10)
                         + generate.nextInt(10);
             }
+            
         } catch (InputMismatchException ime) {
+            
             //Si en los datos numéricos se introducen otro tipo de caracteres,
             //salta este error.
-            System.out.println("Error. Los datos numéricos introducidos no son válidos");
-            System.out.println("Se generarán los datos numéricos al azar");
-            this.nombre = nombre; //El parámetro nombre será asignado al artículo
+            System.out.println("Error. Valores introducidos no válidos "
+                    + "\nSe generarán los datos numéricos al azar");
+            
+            //El parámetro nombre será asignado al artículo.
+            this.nombre = nombre;
+            
+            //Se generará el código al azar (entre 1 y 999).    
             this.codigo = "" + generate.nextInt(10) + generate.nextInt(10)
-                    + generate.nextInt(10); //Se generará el código al azar 
-            //(entre 1 y 999)       
+                    + generate.nextInt(10); 
+            
+            //Se generará el precio al azar (desde 0,30€ hasta 5€ sin centésimas).
             this.precio = (double) (generate.nextInt(50) + 3) / 10;
-            //Se generará el precio al azar (desde 0,30€ hasta 5€ sin centésimas)
+            
+            //Se generará la cantidad al azar (entre 0 y 15).
             this.cantidad = generate.nextInt(16);
-            //Se generará la cantidad al azar (entre 0 y 15)
         }
     }
 
     public Articulo() {
-        //Constructor que generará los datos del artículo al azar:
-        Random generate = new Random(); //Se crea un random para ello
-        int x = generate.nextInt(4); //Será usado para elegir entre 4 nombres
-        //predeterminados
+        
+        //Declaramos e inicializamos el constructor que generará los datos
+        //del artículo al azar.
+        Random generate = new Random();
+        
+        //ELegirá cuatro nombres predeterminados al azar.
+        int x = generate.nextInt(4); 
+        
+        //Se generará el código al azar (entre 0 y 999).       
         codigo = "" + generate.nextInt(10) + generate.nextInt(10)
-                + generate.nextInt(10); //Se generará el código al azar 
-        //(entre 1 y 999)       
-        precio = (double) (generate.nextInt(50) + 3) / 10;
+                + generate.nextInt(10); 
+        
         //Se generará el precio al azar (desde 0,30€ hasta 5€ sin centésimas)
-        cantidad = generate.nextInt(16);
+        precio = (double) (generate.nextInt(50) + 3) / 10;
         //Se generará la cantidad al azar (entre 0 y 15)
-
-        switch (x) { // Asignará como nombre una de estas cuatro opciones
-
-            case 0: //Primera opción
-                nombre = "Milka Hacendado";
+        cantidad = generate.nextInt(16);
+        
+        //Asignará como nombre una de las cuatro opciones.
+        switch (x) {
+            
+            //Primera opción.
+            case 0:
+                nombre = "Milka";
                 break;
 
+            //Segunda opción .
             case 1: //Segunda opción
-                nombre = "Oreo Hacendado";
+                nombre = "Oreo";
                 break;
-
+                
+            //Tercera opción.
             case 2: //Tercera opción
-                nombre = "Chips Ahoy Hacendado";
+                nombre = "Chips Ahoy";
                 break;
-
+                
+            //Cuarta opción.
             case 3: //Cuarta opción
-                nombre = "Nestlé Hacendado";
+                nombre = "Nestlé";
                 break;
 
         }
 
     }
-
-    public String getNombre() { //Devolverá el nombre asignado a la clase
+    
+    //Devolverá el nombre asignado a la clase.
+    public String getNombre() { 
         return nombre;
     }
-
+    
+    //Se asignará a la clase el nombre que le sea introducido.
     public void setNombre(String nombre) {
-        //Se asignará a la clase el nombre que le sea introducido
+        
         this.nombre = nombre;
     }
-
-    public double getPrecio() { //Devolverá el precio asignado a la clase
+    //Devolverá el precio asignado a la clase.
+    public double getPrecio() {
         return precio;
     }
 
     public void setPrecio(double precio) {
 
         if (precio < 0.30 || precio > 5) {
-            //Si el precio está fuera del rango (entre 0,30€ y 5€), saldrá error
+            //Si el precio está fuera del rango (entre 0,30€ y 5€), saldrá error.
             System.out.println("El precio introducido se halla fuera de los límites");
 
         } else {
-            //Si no, se asignará a la clase el precio que le sea introducido
+            //Si no, se asignará a la clase el precio que le sea introducido.
             this.precio = precio;
         }
 
     }
-
-    public int getCantidad() { //Devolverá la cantidad asignada a la clase
+    
+    //Devolverá la cantidad asignada a la clase.
+    public int getCantidad() { 
         return cantidad;
     }
 
@@ -136,12 +170,13 @@ public class Articulo {
             System.out.println("La cantidad introducida se halla fuera de los límites");
 
         } else {
-            //Si no, se asignará a la clase la cantidad que le sea introducida
+            //Si no, se asignará a la clase la cantidad que le sea introducida.
             this.cantidad = cantidad;
         }
     }
-
-    public String getCodigo() { //Devolverá el código asignado a la clase
+    
+    //Devolverá el código asignado a la clase.
+    public String getCodigo() {
         return codigo;
     }
 
@@ -157,6 +192,7 @@ public class Articulo {
         }
     }
 
+    //Método toString que devuelve los datos de la clase.
     @Override
     public String toString() { //Devuelve los datos de la clase como String
         return "Articulo" + "\n" + '{' + "\n Nombre = " + nombre
