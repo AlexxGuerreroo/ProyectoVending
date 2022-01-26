@@ -5,6 +5,10 @@
  */
 package ab.clasesvendingmachine;
 
+
+import java.time.LocalDate;
+
+
 /**
  *
  * @author alexx
@@ -21,6 +25,8 @@ public class Deposito {
     private int b10e;   //Billetes de 10 euros.
     private int b20e;   //Billetes de 20 euros.
     private double dineroTarjeta; //Dinero recibido de una tarjeta (débito o crédito).
+    private LocalDate fechaUltRecaudacion;
+    private LocalDate fechaUltRecarga;
 
     //Constructor parametrizado del depósito de dinero (monedas, billetes y transacciones).
     public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e, int b10e, int b20e, double dineroTarjeta) {
@@ -64,79 +70,109 @@ public class Deposito {
         dineroTarjeta = 0;
 
     }
-
-    public int getM10c() {
-        return m10c;
+    
+    public void vaciarDeposito(){
+        
+        m10c = 0;
+        m20c = 0;
+        m50c = 0;
+        m1e = 0;
+        m2e = 0;
+        b5e = 0;
+        b10e = 0;
+        b20e = 0;
+        dineroTarjeta = 0;
+        
     }
 
-    public void setM10c(int m10c) {
-        this.m10c = m10c;
+    public int getM10c() {
+        
+        return m10c;
+        
+    }
+
+    public void addM10c(int m10c) {
+        
+        this.m10c += m10c;
+        
     }
 
     public int getM20c() {
+        
         return m20c;
+        
     }
 
-    public void setM20c(int m20c) {
-        this.m20c = m20c;
+    public void addM20c(int m20c) {
+        
+        this.m20c += m20c;
+        
     }
 
     public int getM50c() {
+        
         return m50c;
+        
     }
 
-    public void setM50c(int m50c) {
-        this.m50c = m50c;
+    public void addM50c(int m50c) {
+        
+        this.m50c += m50c;
+        
     }
 
     public int getM1e() {
+        
         return m1e;
+        
     }
 
-    public void setM1e(int m1e) {
-        this.m1e = m1e;
+    public void addM1e(int m1e) {
+        
+        this.m1e += m1e;
+        
     }
 
     public int getM2e() {
+        
         return m2e;
+        
     }
 
-    public void setM2e(int m2e) {
-        this.m2e = m2e;
+    public void addM2e(int m2e) {
+        
+        this.m2e += m2e;
+        
     }
 
     public int getB5e() {
+        
         return b5e;
+        
     }
-
-    public void setB5e(int b5e) {
-        this.b5e = b5e;
-    }
-
+    
     public int getB10e() {
+        
         return b10e;
+        
     }
-
-    public void setB10e(int b10e) {
-        this.b10e = b10e;
-    }
-
+    
     public int getB20e() {
+        
         return b20e;
+        
     }
-
-    public void setB20e(int b20e) {
-        this.b20e = b20e;
-    }
-
+    
     public double getDineroTarjeta() {
         return dineroTarjeta;
     }
-
-    public void setDineroTarjeta(double dineroTarjeta) {
-        this.dineroTarjeta = dineroTarjeta;
-    }
     
+    public void recargar(){
+        
+        
+        
+    }
+        
     public boolean coinCheck(){
         //El método comprueba si el depósito sea siempre pasitivo, existiendo 
         //el cambio en monedas y así poder realizar el pago.
@@ -152,6 +188,50 @@ public class Deposito {
         
         }
         
+    }
+
+    public void quitarM10c(int m10c) {
+        this.m10c -= m10c;
+    }
+
+    public void quitarM20c(int m20c) {
+        this.m20c -= m20c;
+    }
+
+    public void quitarM50c(int m50c) {
+        this.m50c -= m50c;
+    }
+
+    public void quitarM1e(int m1e) {
+        this.m1e -= m1e;
+    }
+
+    public void quitarM2e(int m2e) {
+        this.m2e -= m2e;
+    }
+
+    public void setB5e(int b5e) {
+        this.b5e = b5e;
+    }
+
+    public void setB10e(int b10e) {
+        this.b10e = b10e;
+    }
+
+    public void setB20e(int b20e) {
+        this.b20e = b20e;
+    }
+
+    public void setDineroTarjeta(double dineroTarjeta) {
+        this.dineroTarjeta = dineroTarjeta;
+    }
+
+    public void setFechaUltRecaudacion(LocalDate fechaUltRecaudacion) {
+        this.fechaUltRecaudacion = fechaUltRecaudacion;
+    }
+
+    public void setFechaUltRecarga(LocalDate fechaUltRecarga) {
+        this.fechaUltRecarga = fechaUltRecarga;
     }
 
     @Override
