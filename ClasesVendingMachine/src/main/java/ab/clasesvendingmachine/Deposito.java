@@ -41,7 +41,8 @@ public class Deposito {
         this.dineroTarjeta = dineroTarjeta;
     }
 
-    public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e, int b10e, int b20e) {
+    public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e
+            , int b10e, int b20e) {
         
         this.m10c = m10c;
         this.m20c = m20c;
@@ -143,17 +144,29 @@ public class Deposito {
         
         this.m2e += m2e;
         
-    }
-
+    }        
+    
     public int getB5e() {
         
         return b5e;
         
     }
     
+    public void addB5e(int b5e) {
+        
+        this.b5e += b5e;
+        
+    }  
+    
     public int getB10e() {
         
         return b10e;
+        
+    }
+    
+    public void addB10e(int b10e) {
+        
+        this.b10e += b10e;
         
     }
     
@@ -163,13 +176,27 @@ public class Deposito {
         
     }
     
+    public void addB20e(int b20e) {
+        
+        this.b20e += b20e;
+        
+    }
+    
     public double getDineroTarjeta() {
         return dineroTarjeta;
     }
     
-    public void recargar(){
+    public void recargar(int m10c, int m20c, int m50c, int m1e, int m2e, 
+            int b5e, int b10e, int b20e){
         
-        
+        this.m10c += m10c;
+        this.m20c += m20c;
+        this.m50c += m50c;
+        this.m1e += m1e;
+        this.m2e += m2e;
+        this.b5e += b5e;
+        this.b10e += b10e;
+        this.b20e += b20e;
         
     }
         
