@@ -29,7 +29,9 @@ public class Deposito {
     private LocalDate fechaUltRecarga;
 
     //Constructor parametrizado del depósito de dinero (monedas, billetes y transacciones).
-    public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e, int b10e, int b20e, double dineroTarjeta) {
+    public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e, 
+            int b10e, int b20e, double dineroTarjeta) {
+        
         this.m10c = m10c;
         this.m20c = m20c;
         this.m50c = m50c;
@@ -39,6 +41,11 @@ public class Deposito {
         this.b10e = b10e;
         this.b20e = b20e;
         this.dineroTarjeta = dineroTarjeta;
+                
+        //Se le aportarán a las fechas un valor por defecto: 1/1/2022 :
+        fechaUltRecaudacion = LocalDate.of(2022, 1, 1);
+        fechaUltRecarga = LocalDate.of(2022, 1, 1);
+        
     }
 
     public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e
@@ -53,6 +60,10 @@ public class Deposito {
         this.b10e = b10e;
         this.b20e = b20e;
         dineroTarjeta = 0;
+        
+        //Se le aportarán a las fechas el valor por defecto: 1/1/2022 :
+        fechaUltRecaudacion = LocalDate.of(2022, 1, 1);
+        fechaUltRecarga = LocalDate.of(2022, 1, 1);
         
     }
     
@@ -270,7 +281,8 @@ public class Deposito {
                 + m20c + "\n -50cents: " + m50c + "\n -1€: " + m1e + "\n -2€: "
                 + m2e + "\nBilletes: \n -5€: " + b5e + "\n -10€: " + b10e
                 + "\n -20€: " + b20e + "\n introducido por crédito/débito: "
-                + dineroTarjeta + "\n}";
+                + dineroTarjeta + "\nÚltima recarga: " + fechaUltRecarga
+                + "\nÚltima recaudación: " + fechaUltRecaudacion + "\n}";
     }
 
 }
