@@ -44,6 +44,8 @@ public class Maquina {
         
         codeAdmin = this.generarCodigo();
         
+        System.out.println("Código de Administrador: " + codeAdmin);
+        
     }
     
     public String generarCodigo(){
@@ -149,6 +151,11 @@ public class Maquina {
             
             elegirPago(a8);
             
+        }else{
+            
+            System.out.println("El código introducido no coincide con ningún"
+                    + " producto.");
+            
         }
         
         
@@ -157,38 +164,74 @@ public class Maquina {
     public void elegirPago (Articulo art) {
         //Declaramos e inicializamos las variables que vamos a necesitar.
         Scanner entry = new Scanner(System.in);
+        boolean repeat;
         
-        System.out.println("¿Desea pagar con tarjeta? (S para afirmar)");
+        do{
         
-        if (entry.next().equalsIgnoreCase("S")){
-            String numero;
-            String cvv;
-            int mes, ano;
-            
+            try{
+
+                System.out.println("¿Desea pagar con tarjeta? (S para afirmar)");
+
+                if (entry.next().equalsIgnoreCase("S")){
+                    String numero;
+                    String cvv;
+                    int mes, ano;
+
+
+                    System.out.println("Introduzca el número de su tarjeta");
+                    numero = entry.next();
+                    System.out.println("Introduzca el CVV");
+                    cvv = entry.next();
+                    System.out.println("Introduzca el mes de caducidad");
+                    mes = entry.nextInt();
+                    System.out.println("Introduzca el año de caducidad");
+                    ano = entry.nextInt();
+
+                    Tarjeta t = new Tarjeta(numero, cvv, mes, ano);
+
+                    pago = new Pago(t, deposito, art);
+                    
+                    switch(t.getContador() % 3){
+                        //Dependiendo del contador, se pasarán los atributos de
+                        //t a t1, t2 o t3:
                         
-            System.out.println("Introduzca el número de su tarjeta");
-            numero = entry.next();
-            System.out.println("Introduzca el CVV");
-            cvv = entry.next();
-            System.out.println("Introduzca el mes de caducidad");
-            mes = entry.nextInt();
-            System.out.println("Introduzca el año de caducidad");
-            ano = entry.nextInt();
+                        case 1://Si el resto da uno (como cuando es la primera
+                            //tarjeta creada)
+                            this.t1.copiar(t);
+                            break;
+                        
+                        case 2://Si el resto da uno (como cuando es la segunda
+                            //tarjeta creada)
+                            this.t2.copiar(t);
+                            break;
+                            
+                        case 0://Si el resto da uno (como cuando es la tercera
+                            //tarjeta creada)
+                            this.t3.copiar(t);
+                            break;
+                        
+                    }
+
+                }else{
+
+                    System.out.println("Introduce la cantidad a pagar: ");
+                    double pag = entry.nextDouble();
+
+                    pago = new Pago(deposito, pag, art);
+
+                }        
+
+                repeat = false;
+                System.out.println(pago);
+
+            }catch(InputMismatchException ime){
+
+                System.out.println("ERROR. INTRODUCE UN NÚMERO.");
+                repeat = true;
+
+            }
             
-            t1 = new Tarjeta(numero, cvv, mes, ano);
-            
-            pago = new Pago(t1, deposito, art);
-                                    
-        }else{
-            
-            System.out.println("Introduce la cantidad a pagar: ");
-            double pag = entry.nextDouble();
-            
-            pago = new Pago(deposito, pag, art);
-            
-        }        
-        
-        System.out.println(pago);
+        }while(repeat);
         
     }
     
@@ -212,7 +255,7 @@ public class Maquina {
         
         if(this.adminCheck(codigo)){
             
-            System.out.println("Aquí irá el administrador");
+            System.out.println("(Aquí irá el administrador)");
      
         } else {
 
@@ -234,6 +277,152 @@ public class Maquina {
 
         }
 
+    }
+    
+    //Esto se podrá usar en modo Admin:
+
+    public Articulo getA1() {
+        
+        return a1;
+        
+    }
+
+    public void setA1(Articulo a1) {
+        
+        this.a1 = a1;
+        
+    }
+
+    public Articulo getA2() {
+        
+        return a2;
+        
+    }
+
+    public void setA2(Articulo a2) {
+        
+        this.a2 = a2;
+        
+    }
+
+    public Articulo getA3() {
+        
+        return a3;
+        
+    }
+
+    public void setA3(Articulo a3) {
+        
+        this.a3 = a3;
+        
+    }
+
+    public Articulo getA4() {
+        
+        return a4;
+        
+    }
+
+    public void setA4(Articulo a4) {
+        
+        this.a4 = a4;
+        
+    }
+
+    public Articulo getA5() {
+        
+        return a5;
+        
+    }
+
+    public void setA5(Articulo a5) {
+        
+        this.a5 = a5;
+        
+    }
+
+    public Articulo getA6() {
+        
+        return a6;
+        
+    }
+
+    public void setA6(Articulo a6) {
+        
+        this.a6 = a6;
+        
+    }
+
+    public Articulo getA7() {
+        
+        return a7;
+        
+    }
+
+    public void setA7(Articulo a7) {
+        
+        this.a7 = a7;
+        
+    }
+
+    public Articulo getA8() {
+        
+        return a8;
+        
+    }
+
+    public void setA8(Articulo a8) {
+        
+        this.a8 = a8;
+        
+    }
+
+    public Deposito getDeposito() {
+        
+        return deposito;
+        
+    }
+
+    public void setDeposito(Deposito deposito) {
+        
+        this.deposito = deposito;
+        
+    }
+
+    public Tarjeta getT1() {
+        
+        return t1;
+        
+    }
+
+    public void setT1(Tarjeta t1) {
+        
+        this.t1 = t1;
+        
+    }
+
+    public Tarjeta getT2() {
+        
+        return t2;
+        
+    }
+
+    public void setT2(Tarjeta t2) {
+        
+        this.t2 = t2;
+        
+    }
+
+    public Tarjeta getT3() {
+        
+        return t3;
+        
+    }
+
+    public void setT3(Tarjeta t3) {
+        
+        this.t3 = t3;
+        
     }
 
     
