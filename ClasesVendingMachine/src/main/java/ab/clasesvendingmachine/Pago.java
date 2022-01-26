@@ -53,10 +53,10 @@ public class Pago {
             //del escogido, se podrá pagar:
             this.deposito.setDineroTarjeta(this.deposito.getDineroTarjeta()
                     + this.producto.getPrecio());//Cogerá el dinero de la tarjeta
-            
+
             //Restará uno a la cantidad de productos
             this.producto.setCantidad(this.producto.getCantidad() - 1);
-            
+
             fallo = false;//Y será realizado el pago con éxito
 
         } else {//Si una de las dos condiciones falla, saltará error
@@ -119,12 +119,13 @@ public class Pago {
                 this.producto.setCantidad(this.producto.getCantidad() - 1);
 
                 fallo = false;
-            
-            }else{  //En el caso de que no haya cambio suficiente nos aparecerá
-                    //un error que nos impida seguir con el pago del artículo.
-                
+
+            } else {  //En el caso de que no haya cambio suficiente nos aparecerá
+                //un error que nos impida seguir con el pago del artículo.
+
                 System.out.println("No hay cambio suficiente. Lo sentimos");
-                
+                System.out.println("Tendrá que pagar la cantidad suficiente");
+
                 this.deposito.setM2e(this.deposito.getM2e() + cambioM.getM2e());
                 this.deposito.setM1e(this.deposito.getM1e() + cambioM.getM1e());
                 this.deposito.setM50c(this.deposito.getM50c() + cambioM.getM50c());
