@@ -5,19 +5,8 @@
  */
 package ab.clasesvendingmachine;
 
-// Clase para tratar fechas (sÃ³lo dÃ­a, mes y aÃ±o)
-import java.time.DayOfWeek;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-// Enumerado para los meses del aÃ±o (Enero, ...)
-import java.time.Month;
-import java.time.MonthDay;
-import java.time.Period;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
-import java.time.temporal.ChronoUnit;
-import java.util.Locale;
 import java.time.LocalTime;
 
 public class Pago {
@@ -80,38 +69,59 @@ public class Pago {
         this.introducido = introducido;//El dinero introducido
         this.producto = producto;//El producto a pagar
         this.deposito = deposito;//El depósito de dinero de la máquina
-        double c;//Una variable auxiliar que ayudará respecto a realizar cambio
+        double aux;//Una variable auxiliar que ayudará respecto a realizar cambio
         cambioM = new Deposito();//Un "depósito" que devolverá el cambio en monedas
+        Deposito insertar = new Deposito();//Un "Depósito" auxiliar que añadirá 
+        //a deposito el valor de las monedas
         fechaPago = LocalDate.now();//Recoge la fecha del pago
         horaPago = LocalTime.now();//Recoge la hora del pago
 
         if (this.producto.getCantidad() > 0) {//Si el producto no está agotado
 
+            /*
+            aux = producto.getPrecio() * 100;            
+            insertar.addM2e((int) aux / 200);//Se divide por 200 para obtener 
+            //las monedas de 2€ para meter en el dep
+            aux -= cambioM.getM2e() * 200;//Y se resta al auxiliar
+            insertar.addM1e((int) aux / 100);//Se divide por 100 para obtener 
+            //las monedas de 1€ y se le resta al depósitothis.deposito.quitarM1e(cambioM.getM1e());
+            aux -= cambioM.getM1e() * 100;//Y se resta al auxiliar
+            insertar.addM50c((int) aux / 50);//Se divide por 50 para obtener 
+            //las monedas de 1€ y se le resta al depósito
+            aux -= cambioM.getM50c() * 50;//Y se resta al auxiliar
+            cambioM.addM20c((int) aux / 20);//Se divide por 50 para obtener 
+            //las monedas de 1€ y se le resta al depósito
+            aux -= cambioM.getM20c() * 20;//Y se resta al auxiliar
+            cambioM.addM10c((int) aux / 10);//Se divide por 50 para obtener 
+            //las monedas de 1€ y se le resta al depósito
+            aux -= cambioM.getM10c()
+            */
+                        
             cambio = introducido - producto.getPrecio();//Se calcula el cambio
-            c = cambio * 100;//Se multiplica por 100 (se verá su utilidad más adelante
+            aux = cambio * 100;//Se multiplica por 100 (se verá su utilidad más adelante
 
             //Algoritmo para decidir cuantas monedas se dan en el cambio.
-            cambioM.setM2e((int) c / 200);//Se divide por 200 para obtener 
+            cambioM.addM2e((int) aux / 200);//Se divide por 200 para obtener 
             //las monedas de 2€ y se le resta al depósito
-            this.deposito.setM2e(this.deposito.getM2e() - cambioM.getM2e());
-            c -= cambioM.getM2e() * 200;//Y se resta al auxiliar
-            cambioM.setM1e((int) c / 100);//Se divide por 100 para obtener 
+            this.deposito.quitarM2e(cambioM.getM2e());
+            aux -= cambioM.getM2e() * 200;//Y se resta al auxiliar
+            cambioM.addM1e((int) aux / 100);//Se divide por 100 para obtener 
             //las monedas de 1€ y se le resta al depósito
-            this.deposito.setM1e(this.deposito.getM1e() - cambioM.getM1e());
-            c -= cambioM.getM1e() * 100;//Y se resta al auxiliar
-            cambioM.setM50c((int) c / 50);//Se divide por 50 para obtener 
+            this.deposito.quitarM1e(cambioM.getM1e());
+            aux -= cambioM.getM1e() * 100;//Y se resta al auxiliar
+            cambioM.addM50c((int) aux / 50);//Se divide por 50 para obtener 
             //las monedas de 1€ y se le resta al depósito
-            this.deposito.setM50c(this.deposito.getM50c() - cambioM.getM50c());
-            c -= cambioM.getM50c() * 50;//Y se resta al auxiliar
-            cambioM.setM20c((int) c / 20);//Se divide por 50 para obtener 
+            this.deposito.quitarM50c(cambioM.getM50c());
+            aux -= cambioM.getM50c() * 50;//Y se resta al auxiliar
+            cambioM.addM20c((int) aux / 20);//Se divide por 50 para obtener 
             //las monedas de 1€ y se le resta al depósito
-            this.deposito.setM20c(this.deposito.getM20c() - cambioM.getM20c());
-            c -= cambioM.getM20c() * 20;//Y se resta al auxiliar
-            cambioM.setM10c((int) c / 10);//Se divide por 50 para obtener 
+            this.deposito.quitarM20c(cambioM.getM20c());
+            aux -= cambioM.getM20c() * 20;//Y se resta al auxiliar
+            cambioM.addM10c((int) aux / 10);//Se divide por 50 para obtener 
             //las monedas de 1€ y se le resta al depósito
-            this.deposito.setM10c(this.deposito.getM10c() - cambioM.getM10c());
-            c -= cambioM.getM10c() * 10;//Y se resta al auxiliar
-            cambio = c;//Por último se le asigna el valor restante al cambio
+            this.deposito.quitarM10c(cambioM.getM10c());
+            aux -= cambioM.getM10c() * 10;//Y se resta al auxiliar
+            cambio = aux;//Por último se le asigna el valor restante al cambio
 
             if (this.deposito.coinCheck()) {//Se comprueba si el depósito tiene
                 //la cantidad de monedas necesarias para el cambio.
@@ -126,12 +136,19 @@ public class Pago {
                 System.out.println("No hay cambio suficiente. Lo sentimos");
                 System.out.println("Tendrá que pagar la cantidad suficiente");
 
-                this.deposito.setM2e(this.deposito.getM2e() + cambioM.getM2e());
+                /*
+                this.deposito.addM2e(this.deposito.getM2e() + cambioM.getM2e());
                 this.deposito.setM1e(this.deposito.getM1e() + cambioM.getM1e());
                 this.deposito.setM50c(this.deposito.getM50c() + cambioM.getM50c());
                 this.deposito.setM20c(this.deposito.getM20c() + cambioM.getM20c());
                 this.deposito.setM10c(this.deposito.getM10c() + cambioM.getM10c());
-
+                */
+                this.deposito.addM2e(cambioM.getM2e());
+                this.deposito.addM1e(cambioM.getM1e());
+                this.deposito.addM50c(cambioM.getM50c());
+                this.deposito.addM20c(cambioM.getM20c());
+                this.deposito.addM10c(cambioM.getM10c());
+                
                 fallo = true;
 
             }
