@@ -16,7 +16,7 @@ public class MiFactura {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Articulo noRandom = new Articulo("Kit Kat", 1.60, 10, 236);
+        Articulo noRandom = new Articulo("Kit Kat", 1.60, 10, "236");
         
         
         

@@ -21,7 +21,7 @@ public class MiArticulo {
         
         System.out.println(random);
         
-        Articulo noRandom = new Articulo("Kit Kat", 1.60, 10, 236);
+        Articulo noRandom = new Articulo("Kit Kat", 1.60, 10, "236");
         
         System.out.println(noRandom);
         
