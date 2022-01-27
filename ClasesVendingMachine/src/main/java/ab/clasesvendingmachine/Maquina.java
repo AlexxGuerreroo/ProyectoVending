@@ -36,51 +36,14 @@ public class Maquina {
     public static final int NUM_TARJETAS = 3;//Para su array correspondiente
     //Se declara un array que contendrá un nº de artículos determinado por la
     //variable NUM_BANDEJAS:
-    private Articulo[] bandejas = new Articulo[NUM_BANDEJAS];
-    private Articulo a1;//ANTICUADO, pronto será sustituido por el array bandejas
-    private Articulo a2;//ANTICUADO, pronto será sustituido por el array bandejas
-    private Articulo a3;//ANTICUADO, pronto será sustituido por el array bandejas
-    private Articulo a4;//ANTICUADO, pronto será sustituido por el array bandejas
-    private Articulo a5;//ANTICUADO, pronto será sustituido por el array bandejas
-    private Articulo a6;//ANTICUADO, pronto será sustituido por el array bandejas
-    private Articulo a7;//ANTICUADO, pronto será sustituido por el array bandejas
-    private Articulo a8;//ANTICUADO, pronto será sustituido por el array bandejas
+    private Articulo[] bandejas = new Articulo[NUM_BANDEJAS];    
     private Deposito deposito;//El depósito que guarda el dinero de la máquina
     private final String CODE_ADMIN;//El código de administrador.
     private Pago pago;//La clase pago, que servirá para realizar dicha función
     //Se declara un array que contendrá un nº de tarjetas determinado por la
     //variable NUM_TARJETAS:
     private Tarjeta[] tarjetas = new Tarjeta[NUM_TARJETAS];
-    private Tarjeta t1;//ANTICUADO, pronto será sustituido por el array tarjetas
-    private Tarjeta t2;//ANTICUADO, pronto será sustituido por el array tarjetas
-    private Tarjeta t3;//ANTICUADO, pronto será sustituido por el array tarjetas
-
-    public Maquina(Articulo a1, Articulo a2, Articulo a3, Articulo a4,
-            Articulo a5, Articulo a6, Articulo a7, Articulo a8,
-            Deposito deposito) {
-        //Constructor que pronto será quitado                
-
-        this.a1 = a1;
-        this.a2 = a2;
-        this.a3 = a3;
-        this.a4 = a4;
-        this.a5 = a5;
-        this.a6 = a6;
-        this.a7 = a7;
-        this.a8 = a8;
-        this.deposito = deposito;
-
-        //Establecemos el código UUID al azar:
-        ID_MAQUINA = UUID.randomUUID();
-
-        //Usamos un método para generar el código de Admin
-        CODE_ADMIN = this.generarCodigo();
-
-        //Y lo mostramos en consola
-        System.out.println("Código de Administrador: " + CODE_ADMIN);
-
-    }
-
+    
     public Maquina(Articulo[] art, Deposito deposito) {
         //Constructor usando arrays
 
@@ -182,51 +145,7 @@ public class Maquina {
                     + " producto.");
 
         }
-
-        /**
-         * *****MÉTODO A CONTINUACIÓN ANTICUADO, PRONTO SERÁ SUSTITUIDO******
-         */
-        if (a1.getCodigo().equals(code)) {
-
-            elegirPago(a1);
-
-        } else if (a2.getCodigo().equals(code)) {
-
-            elegirPago(a2);
-
-        } else if (a3.getCodigo().equals(code)) {
-
-            elegirPago(a3);
-
-        } else if (a4.getCodigo().equals(code)) {
-
-            elegirPago(a4);
-
-        } else if (a5.getCodigo().equals(code)) {
-
-            elegirPago(a5);
-
-        } else if (a6.getCodigo().equals(code)) {
-
-            elegirPago(a6);
-
-        } else if (a7.getCodigo().equals(code)) {
-
-            elegirPago(a7);
-
-        } else if (a8.getCodigo().equals(code)) {
-
-            elegirPago(a8);
-
-        } else {//Si no coincide con ninguno, mandamos un mensaje de error.
-
-            System.out.println("El código introducido no coincide con ningún"
-                    + " producto.");
-
-        }
         
-        /*******************************************************************/
-
     }
 
     public void elegirPago(Articulo art) {
@@ -344,126 +263,7 @@ public class Maquina {
         }
 
     }
-
-    /**
-     * *************GETTERS Y SETTERS QUE PRONTO SE IRÁN******************
-     */
-    public Articulo getA1() {
-
-        return a1;
-
-    }
-
-    public void setA1(Articulo a1) {
-
-        this.a1 = a1;
-
-    }
-
-    public Articulo getA2() {
-
-        return a2;
-
-    }
-
-    public void setA2(Articulo a2) {
-
-        this.a2 = a2;
-
-    }
-
-    public Articulo getA3() {
-
-        return a3;
-
-    }
-
-    public void setA3(Articulo a3) {
-
-        this.a3 = a3;
-
-    }
-
-    public Articulo getA4() {
-
-        return a4;
-
-    }
-
-    public void setA4(Articulo a4) {
-
-        this.a4 = a4;
-
-    }
-
-    public Articulo getA5() {
-
-        return a5;
-
-    }
-
-    public void setA5(Articulo a5) {
-
-        this.a5 = a5;
-
-    }
-
-    public Articulo getA6() {
-
-        return a6;
-
-    }
-
-    public void setA6(Articulo a6) {
-
-        this.a6 = a6;
-
-    }
-
-    public Articulo getA7() {
-
-        return a7;
-
-    }
-
-    public void setA7(Articulo a7) {
-
-        this.a7 = a7;
-
-    }
-
-    public Articulo getA8() {
-
-        return a8;
-
-    }
-
-    public void setA8(Articulo a8) {
-
-        this.a8 = a8;
-
-    }
-
-    public Tarjeta getT1() {
-
-        return t1;
-
-    }
-
-    public Tarjeta getT2() {
-
-        return t2;
-
-    }
-
-    public Tarjeta getT3() {
-
-        return t3;
-
-    }
     
-    /*********************************************************************/
-
     //Estos getters y setters se podrán usar en modo Admin:
     public Deposito getDeposito() {
 
