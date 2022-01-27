@@ -5,9 +5,7 @@
  */
 package ab.clasesvendingmachine;
 
-
 import java.time.LocalDate;
-
 
 /**
  *
@@ -29,9 +27,9 @@ public class Deposito {
     private LocalDate fechaUltRecarga;
 
     //Constructor parametrizado del depósito de dinero (monedas, billetes y transacciones).
-    public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e, 
+    public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e,
             int b10e, int b20e, double dineroTarjeta) {
-        
+
         this.m10c = m10c;
         this.m20c = m20c;
         this.m50c = m50c;
@@ -41,16 +39,16 @@ public class Deposito {
         this.b10e = b10e;
         this.b20e = b20e;
         this.dineroTarjeta = dineroTarjeta;
-                
+
         //Se le aportarán a las fechas un valor por defecto: 1/1/2022 :
         fechaUltRecaudacion = LocalDate.of(2022, 1, 1);
         fechaUltRecarga = LocalDate.of(2022, 1, 1);
-        
+
     }
 
-    public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e
-            , int b10e, int b20e) {
-        
+    public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e,
+             int b10e, int b20e) {
+
         this.m10c = m10c;
         this.m20c = m20c;
         this.m50c = m50c;
@@ -60,14 +58,12 @@ public class Deposito {
         this.b10e = b10e;
         this.b20e = b20e;
         dineroTarjeta = 0;
-        
+
         //Se le aportarán a las fechas el valor por defecto: 1/1/2022 :
         fechaUltRecaudacion = LocalDate.of(2022, 1, 1);
         fechaUltRecarga = LocalDate.of(2022, 1, 1);
-        
+
     }
-    
-    
 
     public Deposito() {
 
@@ -82,9 +78,9 @@ public class Deposito {
         dineroTarjeta = 0;
 
     }
-    
-    public void vaciarDeposito(){
-        
+
+    public void vaciarDeposito() {
+
         m10c = 0;
         m20c = 0;
         m50c = 0;
@@ -94,114 +90,114 @@ public class Deposito {
         b10e = 0;
         b20e = 0;
         dineroTarjeta = 0;
-        
+
     }
 
     public int getM10c() {
-        
+
         return m10c;
-        
+
     }
 
     public void addM10c(int m10c) {
-        
+
         this.m10c += m10c;
-        
+
     }
 
     public int getM20c() {
-        
+
         return m20c;
-        
+
     }
 
     public void addM20c(int m20c) {
-        
+
         this.m20c += m20c;
-        
+
     }
 
     public int getM50c() {
-        
+
         return m50c;
-        
+
     }
 
     public void addM50c(int m50c) {
-        
+
         this.m50c += m50c;
-        
+
     }
 
     public int getM1e() {
-        
+
         return m1e;
-        
+
     }
 
     public void addM1e(int m1e) {
-        
+
         this.m1e += m1e;
-        
+
     }
 
     public int getM2e() {
-        
+
         return m2e;
-        
+
     }
 
     public void addM2e(int m2e) {
-        
+
         this.m2e += m2e;
-        
-    }        
-    
+
+    }
+
     public int getB5e() {
-        
+
         return b5e;
-        
+
     }
-    
+
     public void addB5e(int b5e) {
-        
+
         this.b5e += b5e;
-        
-    }  
-    
+
+    }
+
     public int getB10e() {
-        
+
         return b10e;
-        
+
     }
-    
+
     public void addB10e(int b10e) {
-        
+
         this.b10e += b10e;
-        
+
     }
-    
+
     public int getB20e() {
-        
+
         return b20e;
-        
+
     }
-    
+
     public void addB20e(int b20e) {
-        
+
         this.b20e += b20e;
-        
+
     }
-    
+
     public double getDineroTarjeta() {
         return dineroTarjeta;
     }
-    
-    public void recargar(int m10c, int m20c, int m50c, int m1e, int m2e, 
-            int b5e, int b10e, int b20e){
+
+    public void recargar(int m10c, int m20c, int m50c, int m1e, int m2e,
+            int b5e, int b10e, int b20e) {
         //Este método servirá para llamar a todos los add, en vez de llamarlos 
         //uno a uno 
-        
+
         this.addM10c(m10c);
         this.addM20c(m20c);
         this.addM50c(m50c);
@@ -210,96 +206,97 @@ public class Deposito {
         this.addB5e(b5e);
         this.addB10e(b10e);
         this.addB20e(b20e);
-        
+
     }
-        
-    public boolean coinCheck(){
-        //El método comprueba si el depósito sea siempre pasitivo, existiendo 
-        //el cambio en monedas y así poder realizar el pago.
-        
-        if(this.m10c >= 0 && this.m20c >= 0 && this.m50c >= 0 && this.m1e >= 0
-       && this.m2e >= 0 && this.b5e >= 0 && this.b10e >= 0 && this.b20e >= 0){
-        
+
+    public boolean coinCheck(Deposito d) {
+        //El método comprueba si el depósito posee más monedas que el del 
+        //parámetro (el cambio), para así poder realizar el pago:
+
+        if (this.m10c >= d.getM10c() && this.m20c >= d.getM20c()
+                && this.m50c >= d.getM50c() && this.m1e >= d.getM1e()
+                && this.m2e >= d.getM2e()) {
+
             return true;
-        
-        }else{
-            
+
+        } else {
+
             return false;
-        
+
         }
-        
+
     }
 
     public void quitarM10c(int m10c) {
-        
+
         this.m10c -= m10c;
-        
+
     }
 
     public void quitarM20c(int m20c) {
-        
+
         this.m20c -= m20c;
-        
+
     }
 
     public void quitarM50c(int m50c) {
-        
+
         this.m50c -= m50c;
-        
+
     }
 
     public void quitarM1e(int m1e) {
-        
+
         this.m1e -= m1e;
-        
+
     }
 
     public void quitarM2e(int m2e) {
-        
+
         this.m2e -= m2e;
-        
+
     }
 
     public void setB5e(int b5e) {
-        
+
         this.b5e = b5e;
-        
+
     }
 
     public void setB10e(int b10e) {
-        
+
         this.b10e = b10e;
-        
+
     }
 
     public void setB20e(int b20e) {
-        
+
         this.b20e = b20e;
-        
+
     }
-       
+
     public void addDineroTarjeta(double dineroTarjeta) {
-        
+
         this.dineroTarjeta += dineroTarjeta;
-        
+
     }
-    
+
     public void quitarDineroTarjeta(double dineroTarjeta) {
-        
+
         this.dineroTarjeta -= dineroTarjeta;
-        
+
     }
 
     public void setFechaUltRecaudacion(LocalDate fechaUltRecaudacion) {
-        
+
         this.fechaUltRecaudacion = fechaUltRecaudacion;
-        
+
     }
 
     public void setFechaUltRecarga(LocalDate fechaUltRecarga) {
-        
+
         this.fechaUltRecarga = fechaUltRecarga;
-        
+
     }
 
     @Override
