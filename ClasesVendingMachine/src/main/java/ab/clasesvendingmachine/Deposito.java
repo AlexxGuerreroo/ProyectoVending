@@ -26,9 +26,10 @@ public class Deposito {
     private LocalDate fechaUltRecaudacion;
     private LocalDate fechaUltRecarga;
 
-    //Constructor parametrizado del depósito de dinero (monedas, billetes y transacciones).
+    
     public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e,
             int b10e, int b20e, double dineroTarjeta) {
+    //Constructor parametrizado del depósito de dinero (monedas, billetes y transacciones).
 
         this.m10c = m10c;
         this.m20c = m20c;
@@ -48,6 +49,7 @@ public class Deposito {
 
     public Deposito(int m10c, int m20c, int m50c, int m1e, int m2e, int b5e,
              int b10e, int b20e) {
+    //Constructor parametrizado del depósito de dinero (monedas y billetes)
 
         this.m10c = m10c;
         this.m20c = m20c;
