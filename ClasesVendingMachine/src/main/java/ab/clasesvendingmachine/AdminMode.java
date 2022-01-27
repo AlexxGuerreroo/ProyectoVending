@@ -44,16 +44,7 @@ public class AdminMode {
             
             System.out.println(maquina.getBandejas()[i]);
             
-        }
-
-        System.out.println(maquina.getA1());
-        System.out.println(maquina.getA2());
-        System.out.println(maquina.getA3());
-        System.out.println(maquina.getA4());
-        System.out.println(maquina.getA5());
-        System.out.println(maquina.getA6());
-        System.out.println(maquina.getA7());
-        System.out.println(maquina.getA8());
+        }       
 
     }
 
