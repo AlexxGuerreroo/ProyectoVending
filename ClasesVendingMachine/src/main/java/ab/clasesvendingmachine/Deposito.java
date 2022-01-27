@@ -231,47 +231,75 @@ public class Deposito {
     }
 
     public void quitarM10c(int m10c) {
+        
         this.m10c -= m10c;
+        
     }
 
     public void quitarM20c(int m20c) {
+        
         this.m20c -= m20c;
+        
     }
 
     public void quitarM50c(int m50c) {
+        
         this.m50c -= m50c;
+        
     }
 
     public void quitarM1e(int m1e) {
+        
         this.m1e -= m1e;
+        
     }
 
     public void quitarM2e(int m2e) {
+        
         this.m2e -= m2e;
+        
     }
 
     public void setB5e(int b5e) {
+        
         this.b5e = b5e;
+        
     }
 
     public void setB10e(int b10e) {
+        
         this.b10e = b10e;
+        
     }
 
     public void setB20e(int b20e) {
+        
         this.b20e = b20e;
+        
     }
-
-    public void setDineroTarjeta(double dineroTarjeta) {
-        this.dineroTarjeta = dineroTarjeta;
+       
+    public void addDineroTarjeta(double dineroTarjeta) {
+        
+        this.dineroTarjeta += dineroTarjeta;
+        
+    }
+    
+    public void quitarDineroTarjeta(double dineroTarjeta) {
+        
+        this.dineroTarjeta -= dineroTarjeta;
+        
     }
 
     public void setFechaUltRecaudacion(LocalDate fechaUltRecaudacion) {
+        
         this.fechaUltRecaudacion = fechaUltRecaudacion;
+        
     }
 
     public void setFechaUltRecarga(LocalDate fechaUltRecarga) {
+        
         this.fechaUltRecarga = fechaUltRecarga;
+        
     }
 
     @Override

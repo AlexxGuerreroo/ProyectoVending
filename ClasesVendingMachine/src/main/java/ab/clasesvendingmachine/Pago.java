@@ -39,8 +39,9 @@ public class Pago {
                 && (this.producto.getCantidad() > 0)) {
             //Si la tarjeta puede realizar el pago y hay al menos un producto
             //del escogido, se podrá pagar:
-            this.deposito.setDineroTarjeta(this.deposito.getDineroTarjeta()
-                    + this.producto.getPrecio());//Cogerá el dinero de la tarjeta
+            
+            //Cogerá el dinero de la tarjeta y lo sumará
+            this.deposito.addDineroTarjeta(this.producto.getPrecio());            
 
             //Restará uno a la cantidad de productos
             this.producto.setCantidad(this.producto.getCantidad() - 1);
