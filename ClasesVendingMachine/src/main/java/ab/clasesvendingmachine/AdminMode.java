@@ -38,6 +38,13 @@ public class AdminMode {
 
     public void consultarBandejas() {
         //Muestra todos los artículos (bandejas) de la máquina:
+        
+        for(int i = 0; i < maquina.NUM_BANDEJAS; i++){
+            //Método con arrays:
+            
+            System.out.println(maquina.getBandejas()[i]);
+            
+        }
 
         System.out.println(maquina.getA1());
         System.out.println(maquina.getA2());
@@ -50,14 +57,14 @@ public class AdminMode {
 
     }
 
-    public void consultarDeposito() {
+    public void consultarDeposito() {//POR MODIFICAR CUANDO SE IMPLEMENTE ARRAYS
         //Muestra los datos del depósito de la máquina:
 
         System.out.println(maquina.getDeposito());
 
     }
 
-    public void recaudarDelDeposito() {
+    public void recaudarDelDeposito() {//POR MODIFICAR CUANDO SE IMPLEMENTE ARRAYS
         //Vacía el depósito para recaudar beneficios y establece la fecha de la 
         //acción acordemente:
 
@@ -68,7 +75,7 @@ public class AdminMode {
     }
 
     public void recargarDeposito(int m10c, int m20c, int m50c, int m1e, int m2e,
-            int b5e, int b10e, int b20e) {
+            int b5e, int b10e, int b20e) {//POR MODIFICAR CUANDO SE IMPLEMENTE ARRAYS
         //Recarga el depósito para tener cambio y establece la fecha de la acción
         //acordemente:
 
@@ -78,134 +85,30 @@ public class AdminMode {
         maquina.getDeposito().setFechaUltRecarga(LocalDate.now());
 
     }
+    
+    public void cambiarCodigo(int posicion, String newCode) {
+        //Método que ajusta el código del artículo correspondiente a su posición
+        //en el array bandejas
 
-    public void cambiarCodigo(String code, String newCode) {
-
-        if (maquina.getA1().getCodigo().equals(code)) {
-
-            maquina.getA1().setCodigo(newCode);
-
-        } else if (maquina.getA2().getCodigo().equals(code)) {
-
-            maquina.getA2().setCodigo(newCode);
-
-        } else if (maquina.getA3().getCodigo().equals(code)) {
-
-            maquina.getA3().setCodigo(newCode);
-
-        } else if (maquina.getA4().getCodigo().equals(code)) {
-
-            maquina.getA4().setCodigo(newCode);
-
-        } else if (maquina.getA5().getCodigo().equals(code)) {
-
-            maquina.getA5().setCodigo(newCode);
-
-        } else if (maquina.getA6().getCodigo().equals(code)) {
-
-            maquina.getA6().setCodigo(newCode);
-
-        } else if (maquina.getA7().getCodigo().equals(code)) {
-
-            maquina.getA7().setCodigo(newCode);
-
-        } else if (maquina.getA8().getCodigo().equals(code)) {
-
-            maquina.getA8().setCodigo(newCode);
-
-        } else {//Si no coincide con ninguno, mandamos un mensaje de error.
-
-            System.out.println("El código introducido no coincide con ningún"
-                    + " producto.");
-
-        }
+        maquina.getBandejas()[posicion].setCodigo(newCode);
 
     }
-
-    public void cambiarProducto(String code, String newProducto) {
-
-        if (maquina.getA1().getCodigo().equals(code)) {
-
-            maquina.getA1().setNombre(newProducto);
-
-        } else if (maquina.getA2().getCodigo().equals(code)) {
-
-            maquina.getA2().setNombre(newProducto);
-
-        } else if (maquina.getA3().getCodigo().equals(code)) {
-
-            maquina.getA3().setNombre(newProducto);
-
-        } else if (maquina.getA4().getCodigo().equals(code)) {
-
-            maquina.getA4().setNombre(newProducto);
-
-        } else if (maquina.getA5().getCodigo().equals(code)) {
-
-            maquina.getA5().setNombre(newProducto);
-
-        } else if (maquina.getA6().getCodigo().equals(code)) {
-
-            maquina.getA6().setNombre(newProducto);
-
-        } else if (maquina.getA7().getCodigo().equals(code)) {
-
-            maquina.getA7().setNombre(newProducto);
-
-        } else if (maquina.getA8().getCodigo().equals(code)) {
-
-            maquina.getA8().setNombre(newProducto);
-
-        } else {//Si no coincide con ninguno, mandamos un mensaje de error.
-
-            System.out.println("El código introducido no coincide con ningún"
-                    + " producto.");
-
-        }
+    
+    public void cambiarProducto(int posicion, String newProducto) {
+        //Método que ajusta el producto del artículo correspondiente a su posición
+        //en el array bandejas
+        
+        
+        maquina.getBandejas()[posicion].setNombre(newProducto);        
 
     }
-
-    public void cambiarStock(String code, int nuevaCantidad) {
-
-        if (maquina.getA1().getCodigo().equals(code)) {
-
-            maquina.getA1().setCantidad(nuevaCantidad);
-
-        } else if (maquina.getA2().getCodigo().equals(code)) {
-
-            maquina.getA2().setCantidad(nuevaCantidad);
-
-        } else if (maquina.getA3().getCodigo().equals(code)) {
-
-            maquina.getA3().setCantidad(nuevaCantidad);
-
-        } else if (maquina.getA4().getCodigo().equals(code)) {
-
-            maquina.getA4().setCantidad(nuevaCantidad);
-
-        } else if (maquina.getA5().getCodigo().equals(code)) {
-
-            maquina.getA5().setCantidad(nuevaCantidad);
-
-        } else if (maquina.getA6().getCodigo().equals(code)) {
-
-            maquina.getA6().setCantidad(nuevaCantidad);
-
-        } else if (maquina.getA7().getCodigo().equals(code)) {
-
-            maquina.getA7().setCantidad(nuevaCantidad);
-
-        } else if (maquina.getA8().getCodigo().equals(code)) {
-
-            maquina.getA8().setCantidad(nuevaCantidad);
-
-        } else {//Si no coincide con ninguno, mandamos un mensaje de error.
-
-            System.out.println("El código introducido no coincide con ningún"
-                    + " producto.");
-
-        }
-
+    
+    public void cambiarStock(int posicion, int nuevaCantidad) {
+        //Método que ajusta el stock del artículo correspondiente a su posición
+        //en el array bandejas
+        
+        maquina.getBandejas()[posicion].setCantidad(nuevaCantidad);
+        
     }
-
+        
 }
