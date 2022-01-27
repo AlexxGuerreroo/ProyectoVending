@@ -1,8 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+Requisitos de la práctica:
+1. Funciones del administrador.
+    Consultar y cambiar el código de las bandejas.
+    Consultar y cambiar el producto contenido en las bandejas.
+    Consultar y cambiar el stock de las bandejas usando el código de las mismas
+    cantidad máxima 15 artículos).
+    Consultar el efectivo que hay en la máquina.
+    Recaudar el dinero de la máquina (debe quedar registrado la fecha de recaudación).
+    Recargar efectivo para que la máquina siempre tenga dinero (debe quedar registado la fecha de recargo).
+    Consultar el dinero recaudado mediante tarjetas de créditos.
+*/
+
 package ab.clasesvendingmachine;
 
 import java.time.LocalDate;

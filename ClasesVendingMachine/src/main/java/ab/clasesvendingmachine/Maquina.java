@@ -1,8 +1,22 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+Requisitos de la práctica:
+2. Funciones del usuario.
+    Selección del producto.
+    Pago en efectivo y recolección de las monedas.
+    Pago con tarjeta y consultar la tarjeta.
+    Actualización de las cantidades.
+    Actualización del stock.
+*/
+
+/*
+Diseño de la clase Máquina.
+    1. Número de serie único que no cambia nada (usando la clase UUID)
+    2. Tamaño (número de bandejas).
+    3. Dirección donde está ubicada la misma.
+    4. Tarjetas de crédito (cvv, número de tarjeta y fecha de vencimiento)
+    5. Código aleatorio del administrador.
+*/
+
 package ab.clasesvendingmachine;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
