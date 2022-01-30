@@ -32,6 +32,7 @@ public class Maquina {
     DE ATRIBUTOS
      */
     private final UUID ID_MAQUINA;
+    private AdminMode control;
     public static final int NUM_BANDEJAS = 8;//Para su array correspondiente
     public static final int NUM_TARJETAS = 3;//Para su array correspondiente
     //Se declara un array que contendrá un nº de artículos determinado por la
@@ -241,7 +242,7 @@ public class Maquina {
 
         if (this.adminCheck(codigo)) {
 
-            System.out.println("(Aquí irá el administrador)");
+            control = new AdminMode(this);
 
         } else {
 
