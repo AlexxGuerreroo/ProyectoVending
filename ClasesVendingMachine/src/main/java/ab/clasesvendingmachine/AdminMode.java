@@ -14,6 +14,7 @@ Requisitos de la práctica:
 package ab.clasesvendingmachine;
 
 import java.time.LocalDate;
+import java.util.*;
 
 /**
  *
@@ -33,6 +34,143 @@ public class AdminMode {
 
     public void optionSelect() {
         //Este método indicará los métodos para poder seleccionarse:
+        
+        Scanner entry = new Scanner(System.in);
+        int select, p;
+            
+        try{
+
+            System.out.println("ESTÁ EN MODO ADMINISTRADOR");
+            System.out.println("Elige una opción:");
+            System.out.println("*********************************");
+            System.out.println("1: Consultar Bandejas");
+            System.out.println("2: Consultar Dinero");
+            System.out.println("3: Recaudar Dinero");
+            System.out.println("4: Recargar Dinero");
+            System.out.println("5: Cambiar Código de una Bandeja");
+            System.out.println("6: Cambiar Producto de una Bandeja");
+            System.out.println("7: Cambiar Stock de una Bandeja");
+            System.out.println("8: Cambiar Precio de un Producto");
+            System.out.println("*********************************");
+
+            select = entry.nextInt();
+
+            switch(select){
+
+                case 1:
+
+                    this.consultarBandejas();
+                    break;
+
+                case 2:
+
+                    this.consultarDeposito();
+                    break;
+
+                case 3:
+
+                    this.recaudarDelDeposito();
+                    break;
+
+                case 4:
+
+                    int a, b, c, d, e, f, g, h;
+
+                    System.out.println("¿Cuántas monedas de 10cent quiere añadir?");
+                    a = entry.nextInt();
+
+                    System.out.println("¿Cuántas monedas de 20cent quiere añadir?");
+                    b = entry.nextInt();
+
+                    System.out.println("¿Cuántas monedas de 50cent quiere añadir?");
+                    c = entry.nextInt();
+
+                    System.out.println("¿Cuántas monedas de 1€ quiere añadir?");
+                    d = entry.nextInt();
+
+                    System.out.println("¿Cuántas monedas de 2€ quiere añadir?");
+                    e = entry.nextInt();
+
+                    System.out.println("¿Cuántos billetes de 5€ quiere añadir?");
+                    f = entry.nextInt();
+
+                    System.out.println("¿Cuántos billetes de 10€ quiere añadir?");
+                    g = entry.nextInt();
+
+                    System.out.println("¿Cuántos billetes de 20€ quiere añadir?");
+                    h = entry.nextInt();
+
+                    this.recargarDeposito(a, b, c, d, e, f, g, h);
+                    break;
+
+                case 5:
+
+                    String newC;
+
+                    System.out.println("Indique la posición del artículo en el array:");
+                    p = entry.nextInt();
+
+                    System.out.println("Indique el nuevo código del producto:");
+                    newC = entry.next();
+
+                    this.cambiarCodigo(p, newC);
+
+                    break;
+
+                case 6:
+
+                    String newN;
+
+                    System.out.println("Indique la posición del artículo en el array:");
+                    p = entry.nextInt();
+
+                    System.out.println("Indique el nuevo producto:");
+                    newN = entry.next();
+
+                    this.cambiarCodigo(p, newN);
+
+                    break;
+
+                case 7:
+
+                    int newCantidad;
+
+                    System.out.println("Indique la posición del artículo en el array:");
+                    p = entry.nextInt();
+
+                    System.out.println("Indique la nueva cantidad:");
+                    newCantidad = entry.nextInt();
+
+                    this.cambiarStock(p, newCantidad);
+
+                    break;
+
+                case 8:
+
+                    int newPrecio;
+
+                    System.out.println("Indique la posición del artículo en el array:");
+                    p = entry.nextInt();
+
+                    System.out.println("Indique el nuevo precio:");
+                    newPrecio = entry.nextInt();
+
+                    this.cambiarPrecio(p, newPrecio);
+
+                    break;
+
+                default:
+                    System.out.println("Saliendo del modo admin...");
+                    break;
+
+            }
+            
+        }catch(InputMismatchException ime){
+            
+            System.out.println("ERROR, Caracter no numérico introducido indebidamente.");
+            entry.nextLine();
+            
+        }
 
     }
 
@@ -48,14 +186,14 @@ public class AdminMode {
 
     }
 
-    public void consultarDeposito() {//POR MODIFICAR CUANDO SE IMPLEMENTE ARRAYS
+    public void consultarDeposito() {
         //Muestra los datos del depósito de la máquina:
 
         System.out.println(maquina.getDeposito());
 
     }
 
-    public void recaudarDelDeposito() {//POR MODIFICAR CUANDO SE IMPLEMENTE ARRAYS
+    public void recaudarDelDeposito() {
         //Vacía el depósito para recaudar beneficios y establece la fecha de la 
         //acción acordemente:
 
@@ -66,7 +204,7 @@ public class AdminMode {
     }
 
     public void recargarDeposito(int m10c, int m20c, int m50c, int m1e, int m2e,
-            int b5e, int b10e, int b20e) {//POR MODIFICAR CUANDO SE IMPLEMENTE ARRAYS
+            int b5e, int b10e, int b20e) {
         //Recarga el depósito para tener cambio y establece la fecha de la acción
         //acordemente:
 
@@ -99,6 +237,14 @@ public class AdminMode {
         //en el array bandejas
         
         maquina.getBandejas()[posicion].setCantidad(nuevaCantidad);
+        
+    }
+    
+    public void cambiarPrecio(int posicion, int nuevoPrecio) {
+        //Método que ajusta el precio del artículo correspondiente a su posición
+        //en el array bandejas
+        
+        maquina.getBandejas()[posicion].setPrecio(nuevoPrecio);
         
     }
         
