@@ -64,6 +64,8 @@ public class Maquina {
 
         //Y lo mostramos en consola
         System.out.println("Código de Administrador: " + CODE_ADMIN);
+        
+        
 
     }
 
