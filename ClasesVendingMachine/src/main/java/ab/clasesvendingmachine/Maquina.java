@@ -69,6 +69,30 @@ public class Maquina {
 
     }
 
+    public Maquina() {
+        //Constructor por defecto:        
+        
+        for (int i = 0; i < NUM_BANDEJAS; i++) {
+
+            //Este bucle generará artículos por defecto:
+            bandejas[i] = new Articulo();
+
+        }
+        
+        //Establecemos un depósito vacío (lo rellenaremos en el modo admin
+        deposito = new Deposito();
+        
+        //Establecemos el código UUID al azar:
+        ID_MAQUINA = UUID.randomUUID();
+
+        //Usamos un método para generar el código de Admin
+        CODE_ADMIN = this.generarCodigo();
+
+        //Y lo mostramos en consola
+        System.out.println("Código de Administrador: " + CODE_ADMIN);
+        
+    }        
+
     public String generarCodigo() {
         //Este método genera al azar el código de Admin de la máquina con un 
         //algoritmo que asegura que no se repite tipo de caracter o símbolo:
