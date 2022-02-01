@@ -35,232 +35,237 @@ public class AdminMode {
         //Este método indicará los métodos para poder seleccionarse:
 
         Scanner entry = new Scanner(System.in);
-        int select, p;
-        boolean repeat;
         
-        do{
+        //Declaramos variables que vamos a necesitar.
+        int select, p;
+            
+        //Método que nos indicará las opciones que podemos elegir dentro del modo 
+        //administrador.
+        try{
 
-            try {
+            System.out.println("ESTÁ EN MODO ADMINISTRADOR");
+            System.out.println("Elige una opción:");
+            System.out.println("*********************************");
+            System.out.println("1: Consultar Bandejas");
+            System.out.println("2: Consultar Dinero");
+            System.out.println("3: Recaudar Dinero");
+            System.out.println("4: Recargar Dinero");
+            System.out.println("5: Cambiar Código de una Bandeja");
+            System.out.println("6: Cambiar Producto de una Bandeja");
+            System.out.println("7: Cambiar Stock de una Bandeja");
+            System.out.println("8: Cambiar Precio de un Producto");
+            System.out.println("*********************************");
+        
+        //Seleccionamos las opciones mediante un número introducido por Scanner
+            select = entry.nextInt();
 
-                System.out.println("ESTÁ EN MODO ADMINISTRADOR");
-                System.out.println("Elige una opción:");
-                System.out.println("*********************************");
-                System.out.println("1: Consultar Bandejas");
-                System.out.println("2: Consultar Dinero");
-                System.out.println("3: Recaudar Dinero");
-                System.out.println("4: Recargar Dinero");
-                System.out.println("5: Cambiar Código de una Bandeja");
-                System.out.println("6: Cambiar Producto de una Bandeja");
-                System.out.println("7: Cambiar Stock de una Bandeja");
-                System.out.println("8: Cambiar Precio de un Producto");
-                System.out.println("Cualquier otro numero: Salir");
-                System.out.println("*********************************");
+            //Bucle switch que mediante el valor introducido por scanner 
+            //anteriormente, nos dará acceso a a cada uno de los métodos
+            switch(select){
 
-                select = entry.nextInt();
+                case 1:
 
-                switch (select) {
+                    this.consultarBandejas();
+                    break;
 
-                    case 1:
+                case 2:
 
-                        this.consultarBandejas();
-                        repeat = true;
-                        break;
+                    this.consultarDeposito();
+                    break;
 
-                    case 2:
+                case 3:
 
-                        this.consultarDeposito();
-                        repeat = true;
-                        break;
+                    this.recaudarDelDeposito();
+                    break;
+                    
+                //Un sout nos preguntará por el número de monedas que queremos
+                //recargar en la máquina.        
+                case 4: 
 
-                    case 3:
+                    int a, b, c, d, e, f, g, h;
 
-                        this.recaudarDelDeposito();
-                        repeat = true;
-                        break;
+                    System.out.println("¿Cuántas monedas de 10cent quiere añadir?");
+                    a = entry.nextInt();
 
-                    case 4:
+                    System.out.println("¿Cuántas monedas de 20cent quiere añadir?");
+                    b = entry.nextInt();
 
-                        int a, b, c, d, e, f, g, h;
+                    System.out.println("¿Cuántas monedas de 50cent quiere añadir?");
+                    c = entry.nextInt();
 
-                        System.out.println("¿Cuántas monedas de 10cent quiere añadir?");
-                        a = entry.nextInt();
+                    System.out.println("¿Cuántas monedas de 1€ quiere añadir?");
+                    d = entry.nextInt();
 
-                        System.out.println("¿Cuántas monedas de 20cent quiere añadir?");
-                        b = entry.nextInt();
+                    System.out.println("¿Cuántas monedas de 2€ quiere añadir?");
+                    e = entry.nextInt();
 
-                        System.out.println("¿Cuántas monedas de 50cent quiere añadir?");
-                        c = entry.nextInt();
+                    System.out.println("¿Cuántos billetes de 5€ quiere añadir?");
+                    f = entry.nextInt();
 
-                        System.out.println("¿Cuántas monedas de 1€ quiere añadir?");
-                        d = entry.nextInt();
+                    System.out.println("¿Cuántos billetes de 10€ quiere añadir?");
+                    g = entry.nextInt();
 
-                        System.out.println("¿Cuántas monedas de 2€ quiere añadir?");
-                        e = entry.nextInt();
+                    System.out.println("¿Cuántos billetes de 20€ quiere añadir?");
+                    h = entry.nextInt();
 
-                        System.out.println("¿Cuántos billetes de 5€ quiere añadir?");
-                        f = entry.nextInt();
+                    this.recargarDeposito(a, b, c, d, e, f, g, h);
+                    break;
+                
+                //Seleccionando este método, volvemos a introducir el número del
+                //artículo y elegimos el nuevo valor que le queremos dar.
+                case 5:
 
-                        System.out.println("¿Cuántos billetes de 10€ quiere añadir?");
-                        g = entry.nextInt();
+                    String newC;
 
-                        System.out.println("¿Cuántos billetes de 20€ quiere añadir?");
-                        h = entry.nextInt();
+                    System.out.println("Indique la posición del artículo en el array:");
+                    p = entry.nextInt();
 
-                        this.recargarDeposito(a, b, c, d, e, f, g, h);
-                        
-                        repeat = true;
-                        break;
+                    System.out.println("Indique el nuevo código del producto:");
+                    newC = entry.next();
 
-                    case 5:
+                    this.cambiarCodigo(p, newC);
 
-                        String newC;
+                    break;
+                
+                //Similar al caso anterior, tras seleccionar el número del articulo,
+                //elegimos un nuevo nombre para sustituirlo (el precio del artículo
+                //será el mismo que el existente anteriormente).    
+                case 6:
 
-                        System.out.println("Indique la posición del artículo en el array:");
-                        p = entry.nextInt();
+                    String newN;
 
-                        System.out.println("Indique el nuevo código del producto:");
-                        newC = entry.next();
+                    System.out.println("Indique la posición del artículo en el array:");
+                    p = entry.nextInt();
 
-                        this.cambiarCodigo(p, newC);
+                    System.out.println("Indique el nuevo producto:");
+                    newN = entry.next();
 
-                        repeat = true;
-                        break;
+                    this.cambiarCodigo(p, newN);
 
-                    case 6:
+                    break;
+                
+                //Cambiar el stock del artículo (como máximo la máquina aceptará 
+                //un stock 15 artículos por bandeja).    
+                case 7:
 
-                        String newN;
+                    int newCantidad;
 
-                        System.out.println("Indique la posición del artículo en el array:");
-                        p = entry.nextInt();
+                    System.out.println("Indique la posición del artículo en el array:");
+                    p = entry.nextInt();
 
-                        System.out.println("Indique el nuevo producto:");
-                        newN = entry.next();
+                    System.out.println("Indique la nueva cantidad:");
+                    newCantidad = entry.nextInt();
 
-                        this.cambiarProducto(p, newN);
+                    this.cambiarStock(p, newCantidad);
 
-                        repeat = true;
-                        break;
+                    break;
+                
+                //Seleccionando el artículo, podremos modificar su precio por uno nuevo.
+                case 8:
 
-                    case 7:
+                    int newPrecio;
 
-                        int newCantidad;
-                        repeat = true;
+                    System.out.println("Indique la posición del artículo en el array:");
+                    p = entry.nextInt();
 
-                        System.out.println("Indique la posición del artículo en el array:");
-                        p = entry.nextInt();
+                    System.out.println("Indique el nuevo precio:");
+                    newPrecio = entry.nextInt();
 
-                        System.out.println("Indique la nueva cantidad:");
-                        newCantidad = entry.nextInt();
+                    this.cambiarPrecio(p, newPrecio);
 
-                        this.cambiarStock(p, newCantidad);
-
-                        break;
-
-                    case 8:
-
-                        int newPrecio;
-
-                        System.out.println("Indique la posición del artículo en el array:");
-                        p = entry.nextInt();
-
-                        System.out.println("Indique el nuevo precio:");
-                        newPrecio = entry.nextInt();
-
-                        this.cambiarPrecio(p, newPrecio);
-
-                        repeat = true;
-                        break;
-
-                    default:
-                        System.out.println("Saliendo del modo admin...");
-                        repeat = false;
-                        break;
-
-                }
-
-            } catch (InputMismatchException ime) {
-
-                System.out.println("ERROR, Caracter no numérico introducido indebidamente.");
-                entry.nextLine();
-                repeat = false;
+                    break;
+                
+                //Default que nos dejará salir del modo administrador y darnos 
+                //acceso nuevamente al panel inicial.
+                default:
+                    System.out.println("Saliendo del modo admin...");
+                    break;
 
             }
             
-        }while(repeat);
-
-    }
-
-    public void consultarBandejas() {
-        //Muestra todos los artículos (bandejas) de la máquina:
-
-        for (int i = 0; i < maquina.NUM_BANDEJAS; i++) {
-            //Método con arrays:
-
-            System.out.println(maquina.getBandejas()[i]);
-
+        }catch(InputMismatchException ime){
+            
+            System.out.println("ERROR, Caracter no numérico introducido indebidamente.");
+            entry.nextLine();
+            
         }
 
     }
 
+    //Método que nos muestra todos los artículos de la bandeja de la máquina.
+    public void consultarBandejas() {
+
+        //Método con arrays:
+        for(int i = 0; i < maquina.NUM_BANDEJAS; i++){
+            
+            
+            System.out.println(maquina.getBandejas()[i]);
+            
+        }       
+
+    }
+    //Método que nos muestra los datos del depósito de la máquina.
     public void consultarDeposito() {
-        //Muestra los datos del depósito de la máquina:
+        
 
         System.out.println(maquina.getDeposito());
 
     }
-
+    
+    //Recaudación del depósito (dejándo a 0 todo el depósito), en ella quedará constancia la fecha en la que 
+    //se ha realizado la recaudación.
     public void recaudarDelDeposito() {
-        //Vacía el depósito para recaudar beneficios y establece la fecha de la 
-        //acción acordemente:
+        
 
         maquina.getDeposito().vaciarDeposito();
 
         maquina.getDeposito().setFechaUltRecaudacion(LocalDate.now());
 
     }
-
+    
+    //Recarga del depósito, en ella quedará constancia de la fecha en la que se
+    //ha realizado la recarga.
     public void recargarDeposito(int m10c, int m20c, int m50c, int m1e, int m2e,
             int b5e, int b10e, int b20e) {
-        //Recarga el depósito para tener cambio y establece la fecha de la acción
-        //acordemente:
+        
 
         maquina.getDeposito().recargar(m10c, m20c, m50c, m1e, m2e, b5e, b10e,
-                b20e);
+                 b20e);
 
         maquina.getDeposito().setFechaUltRecarga(LocalDate.now());
 
     }
-
+    
+    //Método para cambiar el código del producto según la posición de las bandejas.
     public void cambiarCodigo(int posicion, String newCode) {
-        //Método que ajusta el código del artículo correspondiente a su posición
-        //en el array bandejas
+        
 
         maquina.getBandejas()[posicion].setCodigo(newCode);
 
     }
-
+    
+    //Método para cambiar de posición el producto de las bandejas.
     public void cambiarProducto(int posicion, String newProducto) {
-        //Método que ajusta el producto del artículo correspondiente a su posición
-        //en el array bandejas
-
-        maquina.getBandejas()[posicion].setNombre(newProducto);
+        
+        
+        maquina.getBandejas()[posicion].setNombre(newProducto);        
 
     }
-
+    
+    //Método para ajustar el stock del artículo seleccionado en la máquina.
     public void cambiarStock(int posicion, int nuevaCantidad) {
-        //Método que ajusta el stock del artículo correspondiente a su posición
-        //en el array bandejas
-
+        
+        
         maquina.getBandejas()[posicion].setCantidad(nuevaCantidad);
 
     }
-
+    
+    //Método para cambiar el precio del artiículo seleccionado en la máquina.
     public void cambiarPrecio(int posicion, int nuevoPrecio) {
-        //Método que ajusta el precio del artículo correspondiente a su posición
-        //en el array bandejas
-
+        
+        
         maquina.getBandejas()[posicion].setPrecio(nuevoPrecio);
-
+        
     }
-
+        
 }
