@@ -38,6 +38,9 @@ public class AdminMode {
         
         //Declaramos variables que vamos a necesitar.
         int select, p;
+        boolean repetir;
+        
+        do {                    
             
         //Método que nos indicará las opciones que podemos elegir dentro del modo 
         //administrador.
@@ -66,16 +69,19 @@ public class AdminMode {
                 case 1:
 
                     this.consultarBandejas();
+                    repetir = true;
                     break;
 
                 case 2:
 
                     this.consultarDeposito();
+                    repetir = true;
                     break;
 
                 case 3:
 
                     this.recaudarDelDeposito();
+                    repetir = true;
                     break;
                     
                 //Un sout nos preguntará por el número de monedas que queremos
@@ -109,6 +115,7 @@ public class AdminMode {
                     h = entry.nextInt();
 
                     this.recargarDeposito(a, b, c, d, e, f, g, h);
+                    repetir = true;
                     break;
                 
                 //Seleccionando este método, volvemos a introducir el número del
@@ -124,7 +131,7 @@ public class AdminMode {
                     newC = entry.next();
 
                     this.cambiarCodigo(p, newC);
-
+                    repetir = true;
                     break;
                 
                 //Similar al caso anterior, tras seleccionar el número del articulo,
@@ -141,7 +148,7 @@ public class AdminMode {
                     newN = entry.next();
 
                     this.cambiarCodigo(p, newN);
-
+                    repetir = true;
                     break;
                 
                 //Cambiar el stock del artículo (como máximo la máquina aceptará 
@@ -157,7 +164,7 @@ public class AdminMode {
                     newCantidad = entry.nextInt();
 
                     this.cambiarStock(p, newCantidad);
-
+                    repetir = true;
                     break;
                 
                 //Seleccionando el artículo, podremos modificar su precio por uno nuevo.
@@ -172,13 +179,14 @@ public class AdminMode {
                     newPrecio = entry.nextInt();
 
                     this.cambiarPrecio(p, newPrecio);
-
+                    repetir = true;
                     break;
                 
                 //Default que nos dejará salir del modo administrador y darnos 
                 //acceso nuevamente al panel inicial.
                 default:
                     System.out.println("Saliendo del modo admin...");
+                    repetir = false;
                     break;
 
             }
@@ -187,10 +195,13 @@ public class AdminMode {
             
             System.out.println("ERROR, Caracter no numérico introducido indebidamente.");
             entry.nextLine();
+            repetir = true;
             
         }
+        
+        }while (repetir);
 
-    }
+    } 
 
     //Método que nos muestra todos los artículos de la bandeja de la máquina.
     public void consultarBandejas() {
