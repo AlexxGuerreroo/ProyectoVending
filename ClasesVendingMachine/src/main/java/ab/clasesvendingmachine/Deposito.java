@@ -69,11 +69,11 @@ public class Deposito {
 
     public Deposito() {
 
-        m10c = 0;
-        m20c = 0;
-        m50c = 0;
-        m1e = 0;
-        m2e = 0;
+        m10c = 15;
+        m20c = 15;
+        m50c = 15;
+        m1e = 15;
+        m2e = 15;
         b5e = 0;
         b10e = 0;
         b20e = 0;
