@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.border.LineBorder;
 
 public class PruebaJBottom extends JFrame{
@@ -66,10 +67,11 @@ public class PruebaJBottom extends JFrame{
 
         @Override
         public void keyPressed(KeyEvent e) {
-          String ch = String.valueOf(e.getKeyChar());          
+            int key = e.getKeyCode();
+          String ch = String.valueOf(e.getKeyChar());
             display.setText(display.getText() + ch);
-          if (" ".equals(ch)){
-            display.setText("");
+          if (key == KeyEvent.VK_BACK_SPACE){
+            display.setText(" ");
           }
         }
 
@@ -305,7 +307,7 @@ public class PruebaJBottom extends JFrame{
       botonLimpiar.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          display.setText("");
+          display.setText("delete key");
           display.requestFocus();
         }
       });
