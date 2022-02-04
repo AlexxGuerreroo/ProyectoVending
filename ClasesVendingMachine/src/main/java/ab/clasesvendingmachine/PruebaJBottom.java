@@ -26,6 +26,7 @@ public class PruebaJBottom extends JFrame{
 
     //Declaro métodos en el constructor para simplificar el código
     initDisplay();
+    
     initBotones();
     initAcciones();
     initHovers();
@@ -70,9 +71,12 @@ public class PruebaJBottom extends JFrame{
             int key = e.getKeyCode();
           String ch = String.valueOf(e.getKeyChar());
             display.setText(display.getText() + ch);
-          if (key == KeyEvent.VK_BACK_SPACE){
+          if (key == KeyEvent.VK_BACK_SPACE){//Si le das al botón retroceder.
             display.setText(" ");
           }
+          if (key == KeyEvent.VK_ENTER){//Si le das al intro.
+              System.out.println(display.getText());
+          }          
         }
 
         @Override
@@ -308,6 +312,15 @@ public class PruebaJBottom extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
           display.setText("delete key");
+          display.requestFocus();
+        }
+      });
+      
+      botonAceptar.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+                     
+          System.out.println(display.getText());
           display.requestFocus();
         }
       });
@@ -668,7 +681,7 @@ public class PruebaJBottom extends JFrame{
   }
 
   public static void main(String[] args) {
-
+    
     new PruebaJBottom();
 
   }
