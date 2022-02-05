@@ -196,9 +196,9 @@ public class Articulo {
     //Método toString que devuelve los datos de la clase.
     @Override
     public String toString() { //Devuelve los datos de la clase como String
-        return "Articulo " + codigo + "\n" + '{' + "\n Nombre = " + nombre
-                + "\n Precio = " + precio + "0€" + "\n Cantidad = "
-                + cantidad + "\n" + '}';
+        return "Articulo " + codigo + ": " + '{' + "Nombre = " + nombre
+                + "; Precio = " + precio + "0€" + "; Cantidad = "
+                + cantidad + '}';
     }
 
 }
