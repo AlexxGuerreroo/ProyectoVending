@@ -117,6 +117,7 @@ public class PruebaJBottom extends JFrame{
       boton0.setBounds(81,285,61,50);
       botonAceptar.setBounds(147,285,62,50);
 
+      //Fuente del texto
       boton1.setFont(new Font("MONOSPACED",PLAIN,16));
       boton2.setFont(new Font("MONOSPACED",PLAIN,16));
       boton3.setFont(new Font("MONOSPACED",PLAIN,16));
@@ -130,6 +131,7 @@ public class PruebaJBottom extends JFrame{
       botonLimpiar.setFont(new Font("MONOSPACED",PLAIN,12));
       botonAceptar.setFont(new Font("MONOSPACED",PLAIN,12));
 
+      //Opacidad
       boton1.setOpaque(true);
       boton2.setOpaque(true);
       boton3.setOpaque(true);
@@ -143,6 +145,7 @@ public class PruebaJBottom extends JFrame{
       botonLimpiar.setOpaque(true);
       botonAceptar.setOpaque(true);
 
+      //Colores del botón (contenido, fondo, márgenes, etc.)
       boton1.setFocusPainted(false);
       boton1.setBackground(Color.DARK_GRAY);
       boton1.setBorder(new LineBorder(Color.DARK_GRAY));
@@ -203,6 +206,7 @@ public class PruebaJBottom extends JFrame{
       botonLimpiar.setBorder(new LineBorder(Color.DARK_GRAY));
       botonLimpiar.setForeground(Color.WHITE);
 
+      //Para añadir los botones a la ventana del JButton:
       add(boton1);
       add(boton2);
       add(boton3);
@@ -218,7 +222,7 @@ public class PruebaJBottom extends JFrame{
 
     }
 
-    //Eventos de acción de botón
+    //Eventos de acción de botón 
     private void initAcciones(){
 
       boton1.addActionListener(new ActionListener() {
