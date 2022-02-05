@@ -189,7 +189,7 @@ public class AdminMode {
 
                 }
 
-            } catch (NumberFormatException nfe) {
+            } catch (NumberFormatException nfe) {//El tipo de excepción que se activa es distinto al del Scanner
 
                 JOptionPane.showMessageDialog(null, "ERROR, Caracter no numérico"
                         + " introducido indebidamente.", "Error de Formato Introducido",
