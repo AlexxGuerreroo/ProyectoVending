@@ -3,12 +3,7 @@ package ab.clasesvendingmachine;
 import java.awt.Color;
 import java.awt.Font;
 import static java.awt.Font.PLAIN;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -34,10 +29,10 @@ public class InterfazJBottom extends JFrame {
         initBotones();
         initAcciones();
         initHovers();
-        initPantalla(); //El JFrame lo último para que me pinte correctamente los botones
+        initPantalla(test); //El JFrame lo último para que me pinte correctamente los botones
 
     }
-    
+
     public InterfazJBottom(Maquina maquina) {
 
         //Declaramos la máquina de prueba:
@@ -49,13 +44,13 @@ public class InterfazJBottom extends JFrame {
         initBotones();
         initAcciones();
         initHovers();
-        initPantalla(); //El JFrame lo último para que me pinte correctamente los botones
+        initPantalla(test); //El JFrame lo último para que me pinte correctamente los botones
 
     }
 
-    private void initPantalla() {
+    private void initPantalla(Maquina maquina) {
 
-        setTitle("Vending Machine");
+        setTitle("Vending Machine (" + maquina.getID_MAQUINA() + ")");
         setSize(750, 390);
         setResizable(false);
         setLayout(null);
@@ -129,7 +124,9 @@ public class InterfazJBottom extends JFrame {
 
         }
 
-        show.setText(show.getText() + "</html>");
+        show.setText(show.getText() + "<br/> <p> &nbsp; &nbsp; C&oacute;digo de "
+                + "Administrador: " + recipiente.getCODE_ADMIN() + "</p> <br/>"
+                + "</html>");
 
     }
 
