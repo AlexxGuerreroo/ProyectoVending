@@ -14,6 +14,7 @@ package ab.clasesvendingmachine;
 
 import java.time.LocalDate;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,18 +36,18 @@ public class AdminMode {
         //Este método indicará los métodos para poder seleccionarse:
 
         Scanner entry = new Scanner(System.in);
-        
+
         //Declaramos variables que vamos a necesitar.
         int select, p;
         boolean repetir;
-        
-        do {                    
-            
-        //Método que nos indicará las opciones que podemos elegir dentro del modo 
-        //administrador.
-        try{
 
-            System.out.println("ESTÁ EN MODO ADMINISTRADOR");
+        do {
+
+            //Método que nos indicará las opciones que podemos elegir dentro del modo 
+            //administrador.
+            try {
+
+                /* System.out.println("ESTÁ EN MODO ADMINISTRADOR");
             System.out.println("Elige una opción:");
             System.out.println("*********************************");
             System.out.println("1: Consultar Bandejas");
@@ -57,226 +58,224 @@ public class AdminMode {
             System.out.println("6: Cambiar Producto de una Bandeja");
             System.out.println("7: Cambiar Stock de una Bandeja");
             System.out.println("8: Cambiar Precio de un Producto");
-            System.out.println("*********************************");
-        
-        //Seleccionamos las opciones mediante un número introducido por Scanner
-            select = entry.nextInt();
+            System.out.println("*********************************"); */
+                //Seleccionamos las opciones mediante un número introducido por Scanner
+                select = JOptionPane.showOptionDialog(null, "Elige una opción: \n \n 1: Consultar Bandejas \n "
+                        + "2: Consultar Dinero \n 3: Recaudar Dinero \n 4: Recargar Dinero \n "
+                        + "5: Cambiar Código de una Bandeja \n 6: Cambiar Producto de una Bandeja \n "
+                        + "7: Cambiar Stock de una Bandeja \n 8: Cambiar Precio de un Producto \n 0: Volver",
+                        "MODO ADMINISTRADOR",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"1", "2", "3", "4",
+                            "5", "6", "7", "8", "0"}, 8);
+                System.out.println(select);
 
-            //Bucle switch que mediante el valor introducido por scanner 
-            //anteriormente, nos dará acceso a a cada uno de los métodos
-            switch(select){
+                //Bucle switch que mediante el valor introducido por scanner 
+                //anteriormente, nos dará acceso a a cada uno de los métodos
+                switch (select) {
 
-                case 1:
+                    case 0:
 
-                    this.consultarBandejas();
-                    repetir = true;
-                    break;
+                        this.consultarBandejas();
+                        repetir = true;
+                        break;
 
-                case 2:
+                    case 1:
 
-                    this.consultarDeposito();
-                    repetir = true;
-                    break;
+                        this.consultarDeposito();
+                        repetir = true;
+                        break;
 
-                case 3:
+                    case 2:
 
-                    this.recaudarDelDeposito();
-                    repetir = true;
-                    break;
-                    
-                //Un sout nos preguntará por el número de monedas que queremos
-                //recargar en la máquina.        
-                case 4: 
+                        this.recaudarDelDeposito();
+                        repetir = true;
+                        break;
 
-                    int a, b, c, d, e, f, g, h;
+                    //Un sout nos preguntará por el número de monedas que queremos
+                    //recargar en la máquina.        
+                    case 3:
 
-                    System.out.println("¿Cuántas monedas de 10cent quiere añadir?");
-                    a = entry.nextInt();
+                        int a,
+                         b,
+                         c,
+                         d,
+                         e,
+                         f,
+                         g,
+                         h;
 
-                    System.out.println("¿Cuántas monedas de 20cent quiere añadir?");
-                    b = entry.nextInt();
+                        a = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 10cent quiere añadir?"));
 
-                    System.out.println("¿Cuántas monedas de 50cent quiere añadir?");
-                    c = entry.nextInt();
+                        b = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 20cent quiere añadir?"));
 
-                    System.out.println("¿Cuántas monedas de 1€ quiere añadir?");
-                    d = entry.nextInt();
+                        c = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 50cent quiere añadir?"));
 
-                    System.out.println("¿Cuántas monedas de 2€ quiere añadir?");
-                    e = entry.nextInt();
+                        d = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 1€ quiere añadir?"));
 
-                    System.out.println("¿Cuántos billetes de 5€ quiere añadir?");
-                    f = entry.nextInt();
+                        e = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 2€ quiere añadir?"));
 
-                    System.out.println("¿Cuántos billetes de 10€ quiere añadir?");
-                    g = entry.nextInt();
+                        f = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántos billetes de 5€ quiere añadir?"));
 
-                    System.out.println("¿Cuántos billetes de 20€ quiere añadir?");
-                    h = entry.nextInt();
+                        g = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántos billetes de 10€ quiere añadir?"));
 
-                    this.recargarDeposito(a, b, c, d, e, f, g, h);
-                    repetir = true;
-                    break;
-                
-                //Seleccionando este método, volvemos a introducir el número del
-                //artículo y elegimos el nuevo valor que le queremos dar.
-                case 5:
+                        h = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántos billetes de 20€ quiere añadir?"));
 
-                    String newC;
+                        this.recargarDeposito(a, b, c, d, e, f, g, h);
+                        repetir = true;
+                        break;
 
-                    System.out.println("Indique la posición del artículo en el array:");
-                    p = entry.nextInt();
+                    //Seleccionando este método, volvemos a introducir el número del
+                    //artículo y elegimos el nuevo valor que le queremos dar.
+                    case 4:
 
-                    System.out.println("Indique el nuevo código del producto:");
-                    newC = entry.next();
+                        String newC;
 
-                    this.cambiarCodigo(p, newC);
-                    repetir = true;
-                    break;
-                
-                //Similar al caso anterior, tras seleccionar el número del articulo,
-                //elegimos un nuevo nombre para sustituirlo (el precio del artículo
-                //será el mismo que el existente anteriormente).    
-                case 6:
+                        p = Integer.parseInt(JOptionPane.showInputDialog("Indique la posición del artículo en el array:"));
 
-                    String newN;
+                        newC = JOptionPane.showInputDialog("Indique el nuevo código del producto:");
 
-                    System.out.println("Indique la posición del artículo en el array:");
-                    p = entry.nextInt();
+                        this.cambiarCodigo(p, newC);
+                        repetir = true;
+                        break;
 
-                    System.out.println("Indique el nuevo producto:");
-                    newN = entry.next();
+                    //Similar al caso anterior, tras seleccionar el número del articulo,
+                    //elegimos un nuevo nombre para sustituirlo (el precio del artículo
+                    //será el mismo que el existente anteriormente).    
+                    case 5:
 
-                    this.cambiarCodigo(p, newN);
-                    repetir = true;
-                    break;
-                
-                //Cambiar el stock del artículo (como máximo la máquina aceptará 
-                //un stock 15 artículos por bandeja).    
-                case 7:
+                        String newN;
 
-                    int newCantidad;
+                        p = Integer.parseInt(JOptionPane.showInputDialog("Indique la posición del artículo en el array:"));
 
-                    System.out.println("Indique la posición del artículo en el array:");
-                    p = entry.nextInt();
+                        newN = JOptionPane.showInputDialog("Indique el nuevo código del producto:");
 
-                    System.out.println("Indique la nueva cantidad:");
-                    newCantidad = entry.nextInt();
+                        this.cambiarCodigo(p, newN);
+                        repetir = true;
+                        break;
 
-                    this.cambiarStock(p, newCantidad);
-                    repetir = true;
-                    break;
-                
-                //Seleccionando el artículo, podremos modificar su precio por uno nuevo.
-                case 8:
+                    //Cambiar el stock del artículo (como máximo la máquina aceptará 
+                    //un stock 15 artículos por bandeja).    
+                    case 6:
 
-                    int newPrecio;
+                        int newCantidad;
 
-                    System.out.println("Indique la posición del artículo en el array:");
-                    p = entry.nextInt();
+                        p = Integer.parseInt(JOptionPane.showInputDialog("Indique la posición del artículo en el array:"));
 
-                    System.out.println("Indique el nuevo precio:");
-                    newPrecio = entry.nextInt();
+                        newCantidad = Integer.parseInt(JOptionPane.showInputDialog("Indique la nueva cantidad:"));
 
-                    this.cambiarPrecio(p, newPrecio);
-                    repetir = true;
-                    break;
-                
-                //Default que nos dejará salir del modo administrador y darnos 
-                //acceso nuevamente al panel inicial.
-                default:
-                    System.out.println("Saliendo del modo admin...");
-                    repetir = false;
-                    break;
+                        this.cambiarStock(p, newCantidad);
+                        repetir = true;
+                        break;
+
+                    //Seleccionando el artículo, podremos modificar su precio por uno nuevo.
+                    case 7:
+
+                        int newPrecio;
+
+                        p = Integer.parseInt(JOptionPane.showInputDialog("Indique la posición del artículo en el array:"));
+
+                        newPrecio = Integer.parseInt(JOptionPane.showInputDialog("Indique el nuevo precio:"));
+
+                        this.cambiarPrecio(p, newPrecio);
+                        repetir = true;
+                        break;
+
+                    //Default que nos dejará salir del modo administrador y darnos 
+                    //acceso nuevamente al panel inicial.
+                    default:
+                        System.out.println("Saliendo del modo admin...");
+                        repetir = false;
+                        break;
+
+                }
+
+            } catch (NumberFormatException nfe) {
+
+                JOptionPane.showMessageDialog(null, "ERROR, Caracter no numérico"
+                        + " introducido indebidamente.", "Error de Formato Introducido",
+                        JOptionPane.ERROR_MESSAGE);
+                entry.nextLine();
+                repetir = true;
 
             }
-            
-        }catch(InputMismatchException ime){
-            
-            System.out.println("ERROR, Caracter no numérico introducido indebidamente.");
-            entry.nextLine();
-            repetir = true;
-            
-        }
-        
-        }while (repetir);
 
-    } 
+        } while (repetir);
+
+    }
 
     //Método que nos muestra todos los artículos de la bandeja de la máquina.
     public void consultarBandejas() {
 
+        String mensaje = "";
+        
         //Método con arrays:
-        for(int i = 0; i < maquina.NUM_BANDEJAS; i++){
-            
-            
-            System.out.println(maquina.getBandejas()[i]);
-            
-        }       
+        for (int i = 0; i < maquina.NUM_BANDEJAS; i++) {
 
+            mensaje = mensaje + maquina.getBandejas()[i] + "\n";
+
+        }
+
+        JOptionPane.showMessageDialog(null, mensaje, "Bandejas", JOptionPane.INFORMATION_MESSAGE);
+        
     }
+
     //Método que nos muestra los datos del depósito de la máquina.
     public void consultarDeposito() {
+
+        String mensaje = maquina.getDeposito().toString();        
         
-
-        System.out.println(maquina.getDeposito());
-
+        JOptionPane.showMessageDialog(null, mensaje, "Depósito", JOptionPane.INFORMATION_MESSAGE);
+        
     }
-    
+
     //Recaudación del depósito (dejándo a 0 todo el depósito), en ella quedará constancia la fecha en la que 
     //se ha realizado la recaudación.
     public void recaudarDelDeposito() {
-        
 
         maquina.getDeposito().vaciarDeposito();
 
         maquina.getDeposito().setFechaUltRecaudacion(LocalDate.now());
 
     }
-    
+
     //Recarga del depósito, en ella quedará constancia de la fecha en la que se
     //ha realizado la recarga.
     public void recargarDeposito(int m10c, int m20c, int m50c, int m1e, int m2e,
             int b5e, int b10e, int b20e) {
-        
 
         maquina.getDeposito().recargar(m10c, m20c, m50c, m1e, m2e, b5e, b10e,
-                 b20e);
+                b20e);
 
         maquina.getDeposito().setFechaUltRecarga(LocalDate.now());
 
     }
-    
+
     //Método para cambiar el código del producto según la posición de las bandejas.
     public void cambiarCodigo(int posicion, String newCode) {
-        
 
         maquina.getBandejas()[posicion].setCodigo(newCode);
 
     }
-    
+
     //Método para cambiar de posición el producto de las bandejas.
     public void cambiarProducto(int posicion, String newProducto) {
-        
-        
-        maquina.getBandejas()[posicion].setNombre(newProducto);        
+
+        maquina.getBandejas()[posicion].setNombre(newProducto);
 
     }
-    
+
     //Método para ajustar el stock del artículo seleccionado en la máquina.
     public void cambiarStock(int posicion, int nuevaCantidad) {
-        
-        
+
         maquina.getBandejas()[posicion].setCantidad(nuevaCantidad);
 
     }
-    
+
     //Método para cambiar el precio del artiículo seleccionado en la máquina.
     public void cambiarPrecio(int posicion, int nuevoPrecio) {
-        
-        
+
         maquina.getBandejas()[posicion].setPrecio(nuevoPrecio);
-        
+
     }
-        
+
 }
