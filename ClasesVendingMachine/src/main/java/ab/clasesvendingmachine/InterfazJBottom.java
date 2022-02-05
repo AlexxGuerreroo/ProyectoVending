@@ -37,6 +37,21 @@ public class InterfazJBottom extends JFrame {
         initPantalla(); //El JFrame lo último para que me pinte correctamente los botones
 
     }
+    
+    public InterfazJBottom(Maquina maquina) {
+
+        //Declaramos la máquina de prueba:
+        test = maquina;
+
+        //Declaro métodos en el constructor para simplificar el código
+        initDisplay();
+        initProductShow(test);
+        initBotones();
+        initAcciones();
+        initHovers();
+        initPantalla(); //El JFrame lo último para que me pinte correctamente los botones
+
+    }
 
     private void initPantalla() {
 
