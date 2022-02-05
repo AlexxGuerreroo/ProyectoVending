@@ -328,4 +328,12 @@ public class Maquina {
 
     }
 
+    public String getCODE_ADMIN() {
+        
+        return CODE_ADMIN;
+        
+    }
+    
+    
+
 }
