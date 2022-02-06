@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import static java.awt.Font.PLAIN;
 import java.awt.event.*;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -14,22 +15,24 @@ import javax.swing.border.LineBorder;
 
 public class InterfazJBottom extends JFrame {
 
-    Maquina test;
-    JLabel display, show;
-    JButton boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9, boton0, botonLimpiar, botonAceptar;
+    private Maquina test;
+    private boolean update;
+    private JLabel display, show;
+    private JButton boton1, boton2, boton3, boton4, boton5, boton6, boton7,
+            boton8, boton9, boton0, botonLimpiar, botonAceptar;
 
     public InterfazJBottom() {
 
         //Declaramos la máquina de prueba:
-        test = new Maquina();
+        test = new Maquina();        
 
-        //Declaro métodos en el constructor para simplificar el código
-        initDisplay();
-        initProductShow(test);
-        initBotones();
-        initAcciones();
-        initHovers();
-        initPantalla(test); //El JFrame lo último para que me pinte correctamente los botones
+            //Declaro métodos en el constructor para simplificar el código
+            initDisplay(test);
+            initProductShow(test);
+            initBotones();
+            initAcciones(test);
+            initHovers();
+            initPantalla(test); //El JFrame lo último para que me pinte correctamente los botones            
 
     }
 
@@ -39,19 +42,19 @@ public class InterfazJBottom extends JFrame {
         test = maquina;
 
         //Declaro métodos en el constructor para simplificar el código
-        initDisplay();
-        initProductShow(test);
-        initBotones();
-        initAcciones();
-        initHovers();
-        initPantalla(test); //El JFrame lo último para que me pinte correctamente los botones
-
+            initDisplay(test);
+            initProductShow(test);
+            initBotones();
+            initAcciones(test);
+            initHovers();
+            initPantalla(test); //El JFrame lo último para que me pinte correctamente los botones
+        
     }
 
     private void initPantalla(Maquina maquina) {
 
         setTitle("Vending Machine (" + maquina.getID_MAQUINA() + ")");
-        setSize(750, 390);
+        setSize(770, 390);
         setResizable(false);
         setLayout(null);
         getContentPane().setBackground(Color.BLACK);
@@ -60,7 +63,7 @@ public class InterfazJBottom extends JFrame {
 
     }
 
-    private void initDisplay() {
+    private void initDisplay(Maquina maquina) {
 
         //Propiedades y estilos del JLabel
         display = new JLabel("");
@@ -83,13 +86,19 @@ public class InterfazJBottom extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 int key = e.getKeyCode();
-                String ch = String.valueOf(e.getKeyChar());
-                display.setText(display.getText() + ch);
+                if (key != KeyEvent.VK_SHIFT && key != KeyEvent.VK_ALT 
+                        && key != KeyEvent.VK_ALT_GRAPH                        
+                        && key != KeyEvent.VK_CONTROL && key != KeyEvent.VK_ENTER) {
+                    String ch = String.valueOf(e.getKeyChar());
+                    display.setText(display.getText() + ch);
+                }
                 if (key == KeyEvent.VK_BACK_SPACE) {//Si le das al botón retroceder.
-                    display.setText(" ");
+                    display.setText("");
                 }
                 if (key == KeyEvent.VK_ENTER) {//Si le das al intro.
-                    System.out.println(display.getText());
+                    maquina.insertarCodigo(display.getText());
+                    initProductShow(maquina);
+                    update = true;
                 }
             }
 
@@ -102,10 +111,11 @@ public class InterfazJBottom extends JFrame {
     }
 
     private void initProductShow(Maquina recipiente) {
+        //Muestra un cuadro con las bandejas y el código de administrador
 
         //Preparamos las propiedades y estilos del JLabel
         show = new JLabel("<html>");
-        show.setBounds(229, 15, 480, 320);
+        show.setBounds(229, 15, 500, 320);
         show.setOpaque(true);
         show.setBackground(Color.BLACK);
         show.setForeground(Color.WHITE);
@@ -266,7 +276,7 @@ public class InterfazJBottom extends JFrame {
     }
 
     //Eventos de acción de botón 
-    private void initAcciones() {
+    private void initAcciones(Maquina maquina) {
 
         boton1.addActionListener(new ActionListener() {
             @Override
@@ -360,10 +370,13 @@ public class InterfazJBottom extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                maquina.insertarCodigo(display.getText());
+                initProductShow(maquina);
                 System.out.println(display.getText());
-                display.requestFocus();
-            }
-        });
+                display.requestFocus(); 
+                
+            }                   
+        });                
 
     }
 
