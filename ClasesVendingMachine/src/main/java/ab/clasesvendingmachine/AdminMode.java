@@ -95,14 +95,7 @@ public class AdminMode {
                     //recargar en la máquina.        
                     case 3:
 
-                        int a,
-                         b,
-                         c,
-                         d,
-                         e,
-                         f,
-                         g,
-                         h;
+                        int a, b, c, d, e;
 
                         a = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 10cent quiere añadir?"));
 
@@ -114,13 +107,7 @@ public class AdminMode {
 
                         e = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 2€ quiere añadir?"));
 
-                        f = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántos billetes de 5€ quiere añadir?"));
-
-                        g = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántos billetes de 10€ quiere añadir?"));
-
-                        h = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántos billetes de 20€ quiere añadir?"));
-
-                        this.recargarDeposito(a, b, c, d, e, f, g, h);
+                        this.recargarDeposito(a, b, c, d, e);
                         repetir = true;
                         break;
 
@@ -147,9 +134,9 @@ public class AdminMode {
 
                         p = Integer.parseInt(JOptionPane.showInputDialog("Indique la posición del artículo en el array:"));
 
-                        newN = JOptionPane.showInputDialog("Indique el nuevo código del producto:");
+                        newN = JOptionPane.showInputDialog("Indique el nuevo producto:");
 
-                        this.cambiarCodigo(p, newN);
+                        this.cambiarProducto(p, newN);
                         repetir = true;
                         break;
 
@@ -240,11 +227,9 @@ public class AdminMode {
 
     //Recarga del depósito, en ella quedará constancia de la fecha en la que se
     //ha realizado la recarga.
-    public void recargarDeposito(int m10c, int m20c, int m50c, int m1e, int m2e,
-            int b5e, int b10e, int b20e) {
+    public void recargarDeposito(int m10c, int m20c, int m50c, int m1e, int m2e) {
 
-        maquina.getDeposito().recargar(m10c, m20c, m50c, m1e, m2e, b5e, b10e,
-                b20e);
+        maquina.getDeposito().recargarM(m10c, m20c, m50c, m1e, m2e);
 
         maquina.getDeposito().setFechaUltRecarga(LocalDate.now());
 

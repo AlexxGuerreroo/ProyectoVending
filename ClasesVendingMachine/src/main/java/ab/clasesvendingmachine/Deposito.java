@@ -210,6 +210,18 @@ public class Deposito {
         this.addB20e(b20e);
 
     }
+    
+    public void recargarM(int m10c, int m20c, int m50c, int m1e, int m2e) {
+        //Este método servirá para llamar a todos los add, en vez de llamarlos 
+        //uno a uno 
+
+        this.addM10c(m10c);
+        this.addM20c(m20c);
+        this.addM50c(m50c);
+        this.addM1e(m1e);
+        this.addM2e(m2e);
+
+    }
 
     public boolean coinCheck(Deposito d) {
         //El método comprueba si el depósito posee más monedas que el del 
@@ -299,6 +311,15 @@ public class Deposito {
 
         this.fechaUltRecarga = fechaUltRecarga;
 
+    }
+    
+    public String mostrarCambio(){
+        //Devolverá solo las monedas, de forma parecida al toString();
+                
+        return "\n" + "Monedas: \n -10cents: " + m10c + "\n -20cents: "
+                + m20c + "\n -50cents: " + m50c + "\n -1€: " + m1e + "\n -2€: "
+                + m2e;
+        
     }
 
     @Override

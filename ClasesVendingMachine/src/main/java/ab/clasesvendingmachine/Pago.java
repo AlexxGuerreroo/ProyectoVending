@@ -7,6 +7,7 @@ package ab.clasesvendingmachine;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import javax.swing.JOptionPane;
 
 public class Pago {
 
@@ -39,10 +40,9 @@ public class Pago {
                 && (this.producto.getCantidad() > 0)) {
             //Si la tarjeta puede realizar el pago y hay al menos un producto
             //del escogido, se podrá pagar:
-            
+
             //Cogerá el dinero de la tarjeta y lo sumará
             this.deposito.addDineroTarjeta(this.producto.getPrecio());
-            
 
             //Restará uno a la cantidad de productos
             this.producto.setCantidad(this.producto.getCantidad() - 1);
@@ -52,7 +52,8 @@ public class Pago {
         } else {//Si una de las dos condiciones falla, saltará error
             if (this.producto.getCantidad() < 1) {
                 //Si no hay stock del producto a pagar...
-                System.out.println("El producto se halla agotado");
+                JOptionPane.showMessageDialog(null, "El producto se halla agotado",
+                        "Fuera de Stock", JOptionPane.ERROR_MESSAGE);
 
             }
 
@@ -72,18 +73,18 @@ public class Pago {
         this.deposito = deposito;//El depósito de dinero de la máquina
         double aux;//Una variable auxiliar que ayudará respecto a realizar cambio
         cambioM = new Deposito();//Un "depósito" que devolverá el cambio en monedas
+        cambioM.vaciarDeposito();//Vaciamos el depósito del cambio.
         Deposito insertar = new Deposito();//Un "Depósito" auxiliar que añadirá 
         //al depósito de la máquina la cantidad introducida de monedas y billetes.
+        insertar.vaciarDeposito();//Vaciamos el depósito donde que se insertará el dinero
         fechaPago = LocalDate.now();//Recoge la fecha del pago
         horaPago = LocalTime.now();//Recoge la hora del pago
 
         if (this.producto.getCantidad() > 0) {//Si el producto no está agotado
 
-            
             /**
              * ******************Para introducir el pago**********************
              */
-                        
             aux = introducido * 100;
             insertar.addB20e((int) aux / 2000);//Se divide por 2000 para obtener 
             //los billetes de 20€ para meter en el depósito
@@ -109,11 +110,11 @@ public class Pago {
             //las monedas de 2€ para meter en el depósito
             aux -= insertar.getM50c() * 50;//Y se resta al auxiliar
 
-            cambioM.addM20c((int) aux / 20);//Se divide por 20 para obtener 
+            insertar.addM20c((int) aux / 20);//Se divide por 20 para obtener 
             //las monedas de 2€ para meter en el depósito
             aux -= insertar.getM20c() * 20;//Y se resta al auxiliar
 
-            cambioM.addM10c((int) aux / 10);//Se divide por 10 para obtener 
+            insertar.addM10c((int) aux / 10);//Se divide por 10 para obtener 
             //las monedas de 2€ para meter en el depósito
 
             //Y por último, añadimos todo al depósito:
@@ -121,14 +122,12 @@ public class Pago {
                     insertar.getM50c(), insertar.getM1e(), insertar.getM2e(),
                     insertar.getB5e(), insertar.getB10e(), insertar.getB20e());
 
-            
-            
             /**
              * ********************Para aportar el cambio*********************
              */
-                        
             cambio = introducido - producto.getPrecio();//Se calcula el cambio
-            aux = cambio * 100;//Se multiplica por 100 (se verá su utilidad más adelante
+            
+            aux = cambio * 100;//Se multiplica por 100 (se verá su utilidad más adelante)
 
             //Algoritmo para decidir cuantas monedas se dan en el cambio:
             cambioM.addM2e((int) aux / 200);//Se divide por 200 para obtener 
@@ -143,19 +142,19 @@ public class Pago {
             //las monedas de 50 céntimos y se resta al auxiliar          
             aux -= cambioM.getM50c() * 50;
 
-            cambioM.addM20c((int) aux / 20);//Se divide por 50 para obtener 
-            //las monedas de 50 céntimos y se resta al auxiliar          
+            cambioM.addM20c((int) aux / 20);//Se divide por 20 para obtener 
+            //las monedas de 20 céntimos y se resta al auxiliar          
             aux -= cambioM.getM20c() * 20;
-
-            cambioM.addM10c((int) aux / 10);//Se divide por 50 para obtener 
-            //las monedas de 50 céntimos y se resta al auxiliar           
+                            
+            cambioM.addM10c((int) aux / 10);//Se divide por 10 para obtener 
+            //las monedas de 10 céntimos
             aux -= cambioM.getM10c() * 10;
-
-            cambio = aux;//Por último se le asigna el valor restante al cambio
-
+            cambio = aux / 100;              
+            
+            
             if (this.deposito.coinCheck(cambioM)) {//Se comprueba si el depósito tiene
                 //la cantidad de monedas necesarias para el cambio.
-                
+
                 this.deposito.quitarM2e(cambioM.getM2e());
                 this.deposito.quitarM1e(cambioM.getM1e());
                 this.deposito.quitarM50c(cambioM.getM50c());
@@ -168,16 +167,18 @@ public class Pago {
             } else {  //En el caso de que no haya cambio suficiente nos aparecerá
                 //un error que nos impida seguir con el pago del artículo.
 
-                System.out.println("No hay cambio suficiente. Lo sentimos");
-                System.out.println("Tendrá que pagar la cantidad suficiente");
-                
+                JOptionPane.showMessageDialog(null, "No hay cambio suficiente. "
+                        + "Lo sentimos\nTendrá que pagar la cantidad suficiente",
+                        "Pago Insuficiente", JOptionPane.ERROR_MESSAGE);
+
                 fallo = true;
 
             }
 
         } else {//Si no hay stock del producto solicitado...
 
-            System.out.println("ERROR. No hay cantidad suficiente de productos");
+            JOptionPane.showMessageDialog(null, "El producto se halla agotado",
+                    "Fuera de Stock", JOptionPane.ERROR_MESSAGE);
             fallo = true;
 
         }
@@ -197,7 +198,7 @@ public class Pago {
             return "Factura{\nPagado con tarjeta "
                     + "\nProducto comprado: " + producto
                     + "\nDinero introducido: " + introducido
-                    + "\nFecha:  " + fechaPago + "\n}";
+                    + "€\nFecha:  " + fechaPago + "\n}";
 
         } else {//Si se ha pagado en metálico, se muestra este 
             //tipo de recibo:
@@ -205,8 +206,9 @@ public class Pago {
             return "Factura{ \nPagado en metálico "
                     + "\nProducto comprado: " + producto
                     + "\nDinero introducido: " + introducido
-                    + "\nCambio : " + '(' + cambioM + "\n" + cambio + ')'
-                    + "\nFecha: " + fechaPago + "\nHora: " + horaPago + "\n}";
+                    + "€\nCambio : " + '(' + cambioM.mostrarCambio() + "\n"
+                    + cambio + "€)" + "\nFecha: " + fechaPago + "\nHora: "
+                    + horaPago + "\n}";
 
         }
     }

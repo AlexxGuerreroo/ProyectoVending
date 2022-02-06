@@ -32,7 +32,7 @@ public class PruebaMaquina {
         
         Maquina alfa = new Maquina(rng, beta);
         
-        alfa.insertarCodigo();
+        alfa.insertarCodigo("777");
         
     }
     

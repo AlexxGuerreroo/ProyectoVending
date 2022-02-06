@@ -20,6 +20,7 @@ package ab.clasesvendingmachine;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import javax.swing.*;
 
 /**
  *
@@ -37,14 +38,14 @@ public class Maquina {
     public static final int NUM_TARJETAS = 3;//Para su array correspondiente
     //Se declara un array que contendrá un nº de artículos determinado por la
     //variable NUM_BANDEJAS:
-    private Articulo[] bandejas = new Articulo[NUM_BANDEJAS];    
+    private Articulo[] bandejas = new Articulo[NUM_BANDEJAS];
     private Deposito deposito;//El depósito que guarda el dinero de la máquina
     private final String CODE_ADMIN;//El código de administrador.
     private Pago pago;//La clase pago, que servirá para realizar dicha función
     //Se declara un array que contendrá un nº de tarjetas determinado por la
     //variable NUM_TARJETAS:
     private Tarjeta[] tarjetas = new Tarjeta[NUM_TARJETAS];
-    
+
     public Maquina(Articulo[] art, Deposito deposito) {
         //Constructor usando arrays
 
@@ -64,24 +65,22 @@ public class Maquina {
 
         //Y lo mostramos en consola
         System.out.println("Código de Administrador: " + CODE_ADMIN);
-        
-        
 
     }
 
     public Maquina() {
         //Constructor por defecto:        
-        
+
         for (int i = 0; i < NUM_BANDEJAS; i++) {
 
             //Este bucle generará artículos por defecto:
             bandejas[i] = new Articulo();
 
         }
-        
+
         //Establecemos un depósito vacío (lo rellenaremos en el modo admin
         deposito = new Deposito();
-        
+
         //Establecemos el código UUID al azar:
         ID_MAQUINA = UUID.randomUUID();
 
@@ -90,8 +89,8 @@ public class Maquina {
 
         //Y lo mostramos en consola
         System.out.println("Código de Administrador: " + CODE_ADMIN);
-        
-    }        
+
+    }
 
     public String generarCodigo() {
         //Este método genera al azar el código de Admin de la máquina con un 
@@ -172,125 +171,110 @@ public class Maquina {
                     + " producto.");
 
         }
-        
+
     }
 
     public void elegirPago(Articulo art) {
         //Declaramos e inicializamos las variables que vamos a necesitar.
-        Scanner entry = new Scanner(System.in);
-        boolean repeat;
+        int select;
 
-        do {
+        try {
 
-            try {
+            select = JOptionPane.showOptionDialog(null, "¿Cómo desea pagar?",
+                    "Método de pago", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+                    null, new Object[]{"Tarjeta", "Efectivo", "Volver"}, "Volver");
 
-                System.out.println("¿Desea pagar con tarjeta? (S para afirmar)");
+            if (select == 0) {
+                String numero;
+                String cvv;
+                int mes, ano;
 
-                if (entry.next().equalsIgnoreCase("S")) {
-                    String numero;
-                    String cvv;
-                    int mes, ano;
+                numero = JOptionPane.showInputDialog("Introduzca el número de su"
+                        + " tarjeta");
 
-                    System.out.println("Introduzca el número de su tarjeta");
-                    numero = entry.next();
-                    System.out.println("Introduzca el CVV");
-                    cvv = entry.next();
-                    System.out.println("Introduzca el mes de caducidad");
-                    mes = entry.nextInt();
-                    System.out.println("Introduzca el año de caducidad");
-                    ano = entry.nextInt();
+                cvv = JOptionPane.showInputDialog("Introduzca el CVV");
 
-                    Tarjeta t = new Tarjeta(numero, cvv, mes, ano);
+                mes = Integer.parseInt(JOptionPane.showInputDialog("Introduzca "
+                        + "el mes de caducidad"));
 
-                    pago = new Pago(t, deposito, art);
+                ano = Integer.parseInt(JOptionPane.showInputDialog("Introduzca "
+                        + "el año de caducidad"));
 
-                    switch (t.getContador() % 3) {
-                        //Dependiendo del contador, se pasarán los atributos de
-                        //t a una de las posiciones de tarjetas:
+                Tarjeta t = new Tarjeta(numero, cvv, mes, ano);
 
-                        case 1://Si el resto da uno (como cuando es la primera
-                            //tarjeta creada)
-                            this.tarjetas[0].copiar(t);
-                            break;
+                pago = new Pago(t, deposito, art);
 
-                        case 2://Si el resto da uno (como cuando es la segunda
-                            //tarjeta creada)
-                            this.tarjetas[1].copiar(t);
-                            break;
+                switch (t.getContador() % 3) {
+                    //Dependiendo del contador, se pasarán los atributos de
+                    //t a una de las posiciones de tarjetas:
 
-                        case 0://Si el resto da uno (como cuando es la tercera
-                            //tarjeta creada)
-                            this.tarjetas[2].copiar(t);
-                            break;
+                    case 1://Si el resto da uno (como cuando es la primera
+                        //tarjeta creada)
+                        this.tarjetas[0].copiar(t);
+                        break;
 
-                    }
+                    case 2://Si el resto da uno (como cuando es la segunda
+                        //tarjeta creada)
+                        this.tarjetas[1].copiar(t);
+                        break;
 
-                } else {
-
-                    System.out.println("Introduce la cantidad a pagar: ");
-                    double pag = entry.nextDouble();
-
-                    pago = new Pago(deposito, pag, art);
+                    case 0://Si el resto da uno (como cuando es la tercera
+                        //tarjeta creada)
+                        this.tarjetas[2].copiar(t);
+                        break;
 
                 }
 
-                repeat = false;
-                System.out.println(pago);
+            } else if (select == 1) {
 
-            } catch (InputMismatchException ime) {
+                double pag = Double.parseDouble(JOptionPane.showInputDialog("Introduce la cantidad a pagar: "));
 
-                System.out.println("ERROR. INTRODUCE UN NÚMERO.");
-                repeat = true;
+                pago = new Pago(deposito, pag, art);
 
             }
 
-        } while (repeat);
+            JOptionPane.showMessageDialog(null, pago, "Factura",
+                    JOptionPane.INFORMATION_MESSAGE);
 
-    }
+        } catch (NumberFormatException nfe) {
 
-    public void insertarCodigo() {
-        //Este método pide un código por pantalla/interfaz, comprobando primero
-        //si es de administador y si lo es, pasa a los controles de admin.
-        //Si no, pasa al método elegirProducto.
-
-        //Declaramos e inicializamos el Scanner.
-        Scanner entry = new Scanner(System.in);
-
-        //Declaramos e inicializamos las variables que vamos a necesitar.
-        String codigo;
-
-        //Creámos el método que pedirá por scanner introducir un código, que la
-        //propia máquina comprobará si se trata del código del administrador
-        //o del artículo que se desea pedir.
-        System.out.println("Introduce el código del producto");
-
-        codigo = entry.next();
-
-        if (this.adminCheck(codigo)) {
-
-            control = new AdminMode(this);
-
-        } else {
-
-            System.out.println("Buscando producto... ");
-
-            try {//Pausa el programa por 1 segundo.
-
-                TimeUnit.SECONDS.sleep(1);
-
-            } catch (InterruptedException ie) {
-
-                Thread.currentThread().interrupt();
-
-            }
-
-            //Llamamos la método.
-            elegirProducto(codigo);
+            JOptionPane.showMessageDialog(null, "LO INTRODUCIDO NO ES VÁLIDO", "Error de Input",
+                    JOptionPane.ERROR_MESSAGE);
 
         }
 
     }
-    
+
+    public void insertarCodigo(String codigo) {
+        //Este método recoge un código del JButton, comprobando primero
+        //si es de administador y, si lo es, pasa a los controles de admin.
+        //Si no, pasa al método elegirProducto.
+
+        if (!CODE_ADMIN.equals(codigo)) {
+            
+            System.out.println("Buscando producto... ");
+            
+            try {//Pausa el programa por 1 segundo.
+                
+                TimeUnit.SECONDS.sleep(1);
+                
+            } catch (InterruptedException ie) {
+                
+                Thread.currentThread().interrupt();
+                
+            }
+            
+            //Llamamos la método.
+            elegirProducto(codigo);
+            
+        } else {
+            
+            control = new AdminMode(this);
+            
+        }
+
+    }
+
     //Estos getters y setters se podrán usar en modo Admin:
     public Deposito getDeposito() {
 
@@ -329,11 +313,9 @@ public class Maquina {
     }
 
     public String getCODE_ADMIN() {
-        
+
         return CODE_ADMIN;
-        
+
     }
-    
-    
 
 }
