@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author pikac
  */
-public class Articulo {
+public class Bandeja {
 
     private String nombre; //Nombre del artículo
     private double precio; //Precio del artículo
@@ -19,7 +19,7 @@ public class Articulo {
     private String codigo; //Código del artículo
     public static final int MAX = 15;
 
-    public Articulo(String nombre, double precio, int cantidad, String codigo) {
+    public Bandeja(String nombre, double precio, int cantidad, String codigo) {
         Random generate = new Random();
         
         //Constructor que pedirá los datos como parámetros.
@@ -86,7 +86,7 @@ public class Articulo {
         }
     }
 
-    public Articulo() {
+    public Bandeja() {
         
         //Declaramos e inicializamos el constructor que generará los datos
         //del artículo al azar.
