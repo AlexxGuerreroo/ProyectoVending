@@ -95,19 +95,19 @@ public class AdminMode {
                     //recargar en la máquina.        
                     case 3:
 
-                        int a, b, c, d, e;
+                        int m10c, m20c, m50c, m1e, m2e;
 
-                        a = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 10cent quiere añadir?"));
+                        m10c = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 10cent quiere añadir?"));
 
-                        b = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 20cent quiere añadir?"));
+                        m20c = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 20cent quiere añadir?"));
 
-                        c = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 50cent quiere añadir?"));
+                        m50c = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 50cent quiere añadir?"));
 
-                        d = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 1€ quiere añadir?"));
+                        m1e = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 1€ quiere añadir?"));
 
-                        e = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 2€ quiere añadir?"));
+                        m2e = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 2€ quiere añadir?"));
 
-                        this.recargarDeposito(a, b, c, d, e);
+                        this.recargarDeposito(m10c, m20c, m50c, m1e, m2e);
                         repetir = true;
                         break;
 
