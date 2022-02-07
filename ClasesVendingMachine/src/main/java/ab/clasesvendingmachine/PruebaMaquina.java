@@ -9,6 +9,8 @@ package ab.clasesvendingmachine;
  *
  * @author pikac
  */
+import java.util.*;
+
 public class PruebaMaquina {
 
     /**
@@ -16,6 +18,9 @@ public class PruebaMaquina {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        Scanner entry = new Scanner(System.in);
+        String code;
         
         Bandeja[] rng = new Bandeja[8];
         
@@ -32,7 +37,10 @@ public class PruebaMaquina {
         
         Maquina alfa = new Maquina(rng, beta);
         
-        alfa.insertarCodigo("777");
+        System.out.println("¿Qué código desea introducir?");
+        code = entry.next();
+        
+        alfa.insertarCodigo(code);
         
     }
     
