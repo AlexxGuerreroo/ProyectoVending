@@ -86,15 +86,18 @@ public class Pago {
              * ******************Para introducir el pago**********************
              */
             while (introducido < producto.getPrecio()) {
-
+                    
+                //Bucle que nos ofrece las opciones de monedas que se van a poder introducir.
                 String[] options = {"10 céntimos", "20 céntimos", "50 céntimos",
                     "1€", "2€", "5€", "10€", "20€"};
-                String n = (String) JOptionPane.showInputDialog(null, "¿Qué moneda introduces?"
+                
+                //Pedimos en una ventana el tipo de moneda que se va a introducir
+                String entry = (String) JOptionPane.showInputDialog(null, "¿Qué moneda introduces?"
                         + "\n(Queda por pagar: " + (producto.getPrecio() - introducido)
                         + "0€)", "Pasarela de Pago", JOptionPane.QUESTION_MESSAGE,
                          null, options, options[0]);                                
 
-                switch (n) {
+                switch (entry) {
 
                     case "10 céntimos":
                         insertar.addM10c(1);
