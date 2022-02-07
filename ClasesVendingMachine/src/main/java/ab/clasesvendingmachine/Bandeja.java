@@ -192,6 +192,12 @@ public class Bandeja {
             this.codigo = codigo;
         }
     }
+    
+    public String forFactura() { //Devuelve como String los datos necesarios de 
+        //la clase para la factura 
+        return "Articulo " + codigo + ": " + '{' + "Nombre = " + nombre
+                + "; Precio = " + precio + "0€" + '}';
+    }
 
     //Método toString que devuelve los datos de la clase.
     @Override
