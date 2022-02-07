@@ -51,8 +51,10 @@ public class MainInterfazGrafica extends JFrame {
     }
 
     private void initPantalla(Maquina maquina) {
-
-        setTitle("Vending Machine (" + maquina.getID_MAQUINA() + ")");
+        //Este método crea la ventana de la interfaz gráfica
+        
+        //El título se compondrá de "Vending Machine" y la UUID de la máquina
+        setTitle("Vending Machine (UUID: " + maquina.getID_MAQUINA() + ")");
         setSize(770, 390);
         setResizable(false);
         setLayout(null);
@@ -131,8 +133,10 @@ public class MainInterfazGrafica extends JFrame {
                     + recipiente.getBandejas()[i].toString() + "</p> <br/>");
 
         }
-
-        show.setText(show.getText() + "<br/> <p> &nbsp; &nbsp; C&oacute;digo de "
+        //También mostramos el código de administrador y un indicativo de que 
+        //se puede escribir por teclado
+        show.setText(show.getText() + "<p>(Se puede escribir en teclado)</p>"
+                + "<p> &nbsp; &nbsp; C&oacute;digo de "
                 + "Administrador: " + recipiente.getCODE_ADMIN() + "</p> <br/>"
                 + "</html>");
 
@@ -141,6 +145,7 @@ public class MainInterfazGrafica extends JFrame {
     //Propiedades y estilos de los JButton
     private void initBotones() {
 
+        //Se crean los botones
         boton1 = new JButton("1");
         boton2 = new JButton("2");
         boton3 = new JButton("3");
@@ -154,7 +159,8 @@ public class MainInterfazGrafica extends JFrame {
         botonLimpiar = new JButton("Limpiar");
         botonAceptar = new JButton("Aceptar");
 
-        //Características de los botones: (Posición horizontal, posición vertical, tamaño horizontal, tamaño vertical).      
+        //Se le asignan las características siguientes: 
+        //(Posición horizontal, posición vertical, tamaño horizontal, tamaño vertical)     
         boton1.setBounds(15, 90, 61, 50);
         boton2.setBounds(81, 90, 61, 50);
         boton3.setBounds(147, 90, 62, 50);
@@ -168,7 +174,7 @@ public class MainInterfazGrafica extends JFrame {
         boton0.setBounds(81, 285, 61, 50);
         botonAceptar.setBounds(147, 285, 62, 50);
 
-        //Fuente del texto
+        //Se le asigna la fuente y tamaño del texto a cada botón
         boton1.setFont(new Font("MONOSPACED", PLAIN, 16));
         boton2.setFont(new Font("MONOSPACED", PLAIN, 16));
         boton3.setFont(new Font("MONOSPACED", PLAIN, 16));
@@ -182,7 +188,7 @@ public class MainInterfazGrafica extends JFrame {
         botonLimpiar.setFont(new Font("MONOSPACED", PLAIN, 12));
         botonAceptar.setFont(new Font("MONOSPACED", PLAIN, 12));
 
-        //Opacidad
+        //Se les aplica opacidad:
         boton1.setOpaque(true);
         boton2.setOpaque(true);
         boton3.setOpaque(true);
@@ -196,7 +202,7 @@ public class MainInterfazGrafica extends JFrame {
         botonLimpiar.setOpaque(true);
         botonAceptar.setOpaque(true);
 
-        //Colores del botón (contenido, fondo, márgenes, etc.)
+        //Se ajustan los colores del botón (contenido, fondo, márgenes, etc.)
         boton1.setFocusPainted(false);
         boton1.setBackground(Color.DARK_GRAY);
         boton1.setBorder(new LineBorder(Color.DARK_GRAY));
@@ -257,7 +263,7 @@ public class MainInterfazGrafica extends JFrame {
         botonLimpiar.setBorder(new LineBorder(Color.DARK_GRAY));
         botonLimpiar.setForeground(Color.WHITE);
 
-        //Para añadir los botones a la ventana del JButton:
+        //Y se añaden los botones a la ventana del JButton:
         add(boton1);
         add(boton2);
         add(boton3);
@@ -275,7 +281,8 @@ public class MainInterfazGrafica extends JFrame {
 
     //Eventos de acción de botón 
     private void initAcciones(Maquina maquina) {
-
+        //Indica qué ocurre al presionar el botón con el ratón
+        
         boton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -378,7 +385,7 @@ public class MainInterfazGrafica extends JFrame {
 
     }
 
-    //Eventos de mouse
+    //Eventos de ratón
     private void initHovers() {
 
         boton1.addMouseListener(new MouseListener() {
@@ -733,16 +740,19 @@ public class MainInterfazGrafica extends JFrame {
 
     public static void main(String[] args) {
 
+        //Se inicializa un array de bandejas y un depósito para añadir a la máquina:
         Bandeja[] bandejas = {new Bandeja("Kit Kat", 1.50, 10, "236"),
         new Bandeja("Oreo", 1.20, 10, "984"), new Bandeja("M&M", 1, 10, "479"),
         new Bandeja("Kinder Bueno", 2, 10, "170"), new Bandeja("Bits", 1, 10, "685"),
         new Bandeja("Takis", 1.50, 10, "236"), new Bandeja("Fanta", 1.50, 10, "236"),
         new Bandeja("Monster", 3.50, 10, "236")};
         
-        Deposito deposito = new Deposito();
+        Deposito deposito = new Deposito();//Se crea por defecto
         
+        //Se crea la máquina con el array de bandejas y el depósito como parámetros:
         Maquina maquina = new Maquina (bandejas, deposito);
         
+        //Se crea la interfaz gráfica, con la máquina como parámetro.
         new MainInterfazGrafica(maquina);
 
     }
