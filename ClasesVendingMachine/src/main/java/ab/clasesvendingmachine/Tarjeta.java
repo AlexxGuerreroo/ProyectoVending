@@ -25,7 +25,7 @@ public class Tarjeta {
     private String cvv;
     private double saldo;//Con cada pago, se reducirá esta cantidad.
     private boolean valido;
-    private LocalDate caducidad;
+    private YearMonth caducidad;
     private static int contador = 0;
 
     //Por último, estas dos clases determinan la cantidad mínima y máxima que 
@@ -77,10 +77,10 @@ public class Tarjeta {
         
 
         //Pasamos la fecha de caducidad y comprobamos si la fecha está cumplida.
-        this.caducidad = LocalDate.of(ano, mes, 1);
+        this.caducidad = YearMonth.of(ano, mes);
         if (this.caducado()) {
             
-            this.caducidad = LocalDate.of(2077, 9, 13);
+            this.caducidad = YearMonth.of(2077, 9);
          //Si ya ha pasado la fecha de caducidad, se reestablece por defecto:
         }
 
@@ -116,7 +116,7 @@ public class Tarjeta {
             
         }
         
-        this.caducidad = LocalDate.of(ano, mes, 1);
+        this.caducidad = YearMonth.of(ano, mes);
         
         //Valores creados por defecto.
         nombre = "User";
@@ -138,7 +138,7 @@ public class Tarjeta {
         apellido2 = "PIPO";
         banco = "Firewatch";
         saldo = 803.19;
-        caducidad = LocalDate.of(2077, 9, 13);
+        caducidad = YearMonth.of(2077, 9);
         valido = false; //Por defecto se crea anulada.
         contador++; //Aumentamos en 1 el contador.
 
@@ -216,7 +216,7 @@ public class Tarjeta {
     //Método para comprobar la validez de la tarjeta.
     public boolean caducado() {
 
-        LocalDate ahora = LocalDate.now();
+        YearMonth ahora = YearMonth.now();
         boolean caduco;
         if (!(ahora.isBefore(caducidad))) {
             //Si el día actual no es antior a la fecha de caducidad, se indica
@@ -237,7 +237,7 @@ public class Tarjeta {
 
     }
 
-    public LocalDate getCaducidad() {
+    public YearMonth getCaducidad() {
 
         return caducidad;
 
