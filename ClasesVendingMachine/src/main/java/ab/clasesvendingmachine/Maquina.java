@@ -226,11 +226,8 @@ public class Maquina {
                 }
 
             } else if (select == 1) {
-
-                double pag = Double.parseDouble(JOptionPane.showInputDialog(null, "Introduce la cantidad a pagar: "
-                        , "Pasarela de Pago", JOptionPane.QUESTION_MESSAGE));
-
-                pago = new Pago(deposito, pag, art);
+               
+                pago = new Pago(deposito, art);
 
             }
 
