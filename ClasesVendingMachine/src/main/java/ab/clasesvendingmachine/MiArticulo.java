@@ -17,11 +17,11 @@ public class MiArticulo {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Articulo random = new Articulo();
+        Bandeja random = new Bandeja();
         
         System.out.println(random);
         
-        Articulo noRandom = new Articulo("Kit Kat", 1.60, 10, "236");
+        Bandeja noRandom = new Bandeja("Kit Kat", 1.60, 10, "236");
         
         System.out.println(noRandom);
         

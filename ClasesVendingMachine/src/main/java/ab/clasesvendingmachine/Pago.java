@@ -18,12 +18,12 @@ public class Pago {
     private double cambio;
     private LocalDate fechaPago;
     private LocalTime horaPago;
-    private Articulo producto;
+    private Bandeja producto;
     private Deposito cambioM;
     private boolean fallo;
 
     //Contructor parametrizado para cuando se paga con tarjeta.
-    public Pago(Tarjeta tarjeta, Deposito deposito, Articulo producto) {
+    public Pago(Tarjeta tarjeta, Deposito deposito, Bandeja producto) {
 
         tarjetta = true;//La comprobación que determina si es pagado con tarjeta
         //o en metálico (en este caso es con tarjeta)
@@ -64,7 +64,7 @@ public class Pago {
     }
 
     //Constructor parametrizado para cuando se paga en metálico.
-    public Pago(Deposito deposito, double introducido, Articulo producto) {
+    public Pago(Deposito deposito, double introducido, Bandeja producto) {
 
         tarjetta = false;//La comprobación que determina si es pagado con tarjeta
         //o en metálico (en este caso es en metálico)

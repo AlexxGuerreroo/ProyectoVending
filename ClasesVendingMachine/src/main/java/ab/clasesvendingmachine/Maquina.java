@@ -38,7 +38,7 @@ public class Maquina {
     public static final int NUM_TARJETAS = 3;//Para su array correspondiente
     //Se declara un array que contendrá un nº de artículos determinado por la
     //variable NUM_BANDEJAS:
-    private Articulo[] bandejas = new Articulo[NUM_BANDEJAS];
+    private Bandeja[] bandejas = new Bandeja[NUM_BANDEJAS];
     private Deposito deposito;//El depósito que guarda el dinero de la máquina
     private final String CODE_ADMIN;//El código de administrador.
     private Pago pago;//La clase pago, que servirá para realizar dicha función
@@ -46,7 +46,7 @@ public class Maquina {
     //variable NUM_TARJETAS:
     private Tarjeta[] tarjetas = new Tarjeta[NUM_TARJETAS];
 
-    public Maquina(Articulo[] art, Deposito deposito) {
+    public Maquina(Bandeja[] art, Deposito deposito) {
         //Constructor usando arrays
 
         for (int i = 0; i < NUM_BANDEJAS; i++) {
@@ -74,7 +74,7 @@ public class Maquina {
         for (int i = 0; i < NUM_BANDEJAS; i++) {
 
             //Este bucle generará artículos por defecto:
-            bandejas[i] = new Articulo();
+            bandejas[i] = new Bandeja();
 
         }
 
@@ -174,7 +174,7 @@ public class Maquina {
 
     }
 
-    public void elegirPago(Articulo art) {
+    public void elegirPago(Bandeja art) {
         //Declaramos e inicializamos las variables que vamos a necesitar.
         int select;
 
@@ -227,7 +227,8 @@ public class Maquina {
 
             } else if (select == 1) {
 
-                double pag = Double.parseDouble(JOptionPane.showInputDialog("Introduce la cantidad a pagar: "));
+                double pag = Double.parseDouble(JOptionPane.showInputDialog(null, "Introduce la cantidad a pagar: "
+                        , "Pasarela de Pago", JOptionPane.QUESTION_MESSAGE));
 
                 pago = new Pago(deposito, pag, art);
 
@@ -288,13 +289,13 @@ public class Maquina {
 
     }
 
-    public Articulo[] getBandejas() {
+    public Bandeja[] getBandejas() {
 
         return bandejas;
 
     }
 
-    public void setBandejas(Articulo[] bandejas) {
+    public void setBandejas(Bandeja[] bandejas) {
 
         this.bandejas = bandejas;
 

@@ -17,16 +17,16 @@ public class PruebaMaquina {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Articulo[] rng = new Articulo[8];
+        Bandeja[] rng = new Bandeja[8];
         
-        rng[0] = new Articulo();
-        rng[1] = new Articulo();
-        rng[2] = new Articulo();
-        rng[3] = new Articulo();
-        rng[4] = new Articulo();
-        rng[5] = new Articulo();
-        rng[6] = new Articulo();
-        rng[7] = new Articulo();
+        rng[0] = new Bandeja();
+        rng[1] = new Bandeja();
+        rng[2] = new Bandeja();
+        rng[3] = new Bandeja();
+        rng[4] = new Bandeja();
+        rng[5] = new Bandeja();
+        rng[6] = new Bandeja();
+        rng[7] = new Bandeja();
         
         Deposito beta = new Deposito();
         
