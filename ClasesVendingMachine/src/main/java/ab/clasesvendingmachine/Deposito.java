@@ -51,6 +51,8 @@ public class Deposito {
              int b10e, int b20e) {
     //Constructor parametrizado del depósito de dinero (monedas y billetes)
 
+    //Por motivos de claridad, se ha decidido crear las variables para las 
+    //monedas y billetes por separado, en lugar de incluirlo todo en un array.
         this.m10c = m10c;
         this.m20c = m20c;
         this.m50c = m50c;
