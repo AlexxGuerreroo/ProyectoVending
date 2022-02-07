@@ -85,19 +85,25 @@ public class Pago {
             /**
              * ******************Para introducir el pago**********************
              */
+            
+            //Realizamos un bucle para pedir qué monedar introducir hasta alcanzar
+            //el precio del producto:
             while (introducido < producto.getPrecio()) {
                     
-                //Bucle que nos ofrece las opciones de monedas que se van a poder introducir.
+                //Array que almacena las opciones de monedas que se van a poder introducir.
                 String[] options = {"10 céntimos", "20 céntimos", "50 céntimos",
                     "1€", "2€", "5€", "10€", "20€"};
                 
                 //Pedimos en una ventana el tipo de moneda que se va a introducir
+                //y lo recoge en un String llamado entry
                 String entry = (String) JOptionPane.showInputDialog(null, "¿Qué moneda introduces?"
                         + "\n(Queda por pagar: " + (producto.getPrecio() - introducido)
                         + "0€)", "Pasarela de Pago", JOptionPane.QUESTION_MESSAGE,
                          null, options, options[0]);                                
 
                 switch (entry) {
+                    //Según el valor de entry, se añade a un depósito
+                    //la moneda o billete introducido
 
                     case "10 céntimos":
                         insertar.addM10c(1);
@@ -139,13 +145,13 @@ public class Pago {
                         introducido += 20;
                         break;
                         
-                    case "null":
+                    case "null"://Si se da a volver, se anula el pago
                         fallo = true;
                         break;
 
                 }
                 
-                if(fallo) break;
+                if(fallo) break;//Al darle a volver, se rompe el bucle.
 
             }
 
@@ -202,6 +208,7 @@ public class Pago {
                         + "Lo sentimos\nTendrá que pagar la cantidad suficiente",
                         "Pago Insuficiente", JOptionPane.ERROR_MESSAGE);
 
+                //Y quitamos todo lo que hemos añadido en la operación:
                 this.deposito.quitarM2e(insertar.getM2e());
                 this.deposito.quitarM1e(insertar.getM1e());
                 this.deposito.quitarM50c(insertar.getM50c());
