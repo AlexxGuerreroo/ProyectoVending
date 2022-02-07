@@ -13,15 +13,14 @@ import javax.swing.SwingConstants;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import javax.swing.border.LineBorder;
 
-public class InterfazJBottom extends JFrame {
+public class MainInterfazGrafica extends JFrame {
 
     private Maquina test;
-    private boolean update;
     private JLabel display, show;
     private JButton boton1, boton2, boton3, boton4, boton5, boton6, boton7,
             boton8, boton9, boton0, botonLimpiar, botonAceptar;
 
-    public InterfazJBottom() {
+    public MainInterfazGrafica() {
 
         //Declaramos la máquina de prueba:
         test = new Maquina();        
@@ -36,7 +35,7 @@ public class InterfazJBottom extends JFrame {
 
     }
 
-    public InterfazJBottom(Maquina maquina) {
+    public MainInterfazGrafica(Maquina maquina) {
 
         //Declaramos la máquina de prueba:
         test = maquina;
@@ -98,7 +97,6 @@ public class InterfazJBottom extends JFrame {
                 if (key == KeyEvent.VK_ENTER) {//Si le das al intro.
                     maquina.insertarCodigo(display.getText());
                     initProductShow(maquina);
-                    update = true;
                 }
             }
 
@@ -735,7 +733,17 @@ public class InterfazJBottom extends JFrame {
 
     public static void main(String[] args) {
 
-        new InterfazJBottom();
+        Bandeja[] bandejas = {new Bandeja("Kit Kat", 1.50, 10, "236"),
+        new Bandeja("Oreo", 1.20, 10, "984"), new Bandeja("M&M", 1, 10, "479"),
+        new Bandeja("Kinder Bueno", 2, 10, "170"), new Bandeja("Bits", 1, 10, "685"),
+        new Bandeja("Takis", 1.50, 10, "236"), new Bandeja("Fanta", 1.50, 10, "236"),
+        new Bandeja("Monster", 3.50, 10, "236")};
+        
+        Deposito deposito = new Deposito();
+        
+        Maquina maquina = new Maquina (bandejas, deposito);
+        
+        new MainInterfazGrafica(maquina);
 
     }
 
