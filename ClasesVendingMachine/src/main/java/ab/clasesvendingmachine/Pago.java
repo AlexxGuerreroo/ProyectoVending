@@ -241,7 +241,7 @@ public class Pago {
             //tipo de recibo:
 
             return "Factura{\nPagado con tarjeta "
-                    + "\nProducto comprado: " + producto
+                    + "\nProducto comprado: " + producto.forFactura()
                     + "\nDinero introducido: " + introducido
                     + "€\nFecha:  " + fechaPago + "\n}";
 
