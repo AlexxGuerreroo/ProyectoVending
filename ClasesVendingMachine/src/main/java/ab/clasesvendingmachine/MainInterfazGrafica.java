@@ -135,7 +135,7 @@ public class MainInterfazGrafica extends JFrame {
         }
         //También mostramos el código de administrador y un indicativo de que 
         //se puede escribir por teclado
-        show.setText(show.getText() + "<p>(Se puede escribir en teclado)</p>"
+        show.setText(show.getText() + "<p> &nbsp; &nbsp;(Se puede escribir en teclado)</p>"
                 + "<p> &nbsp; &nbsp; C&oacute;digo de "
                 + "Administrador: " + recipiente.getCODE_ADMIN() + "</p> <br/>"
                 + "</html>");
@@ -744,8 +744,8 @@ public class MainInterfazGrafica extends JFrame {
         Bandeja[] bandejas = {new Bandeja("Kit Kat", 1.50, 10, "236"),
         new Bandeja("Oreo", 1.20, 10, "984"), new Bandeja("M&M", 1, 10, "479"),
         new Bandeja("Kinder Bueno", 2, 10, "170"), new Bandeja("Bits", 1, 10, "685"),
-        new Bandeja("Takis", 1.50, 10, "236"), new Bandeja("Fanta", 1.50, 10, "236"),
-        new Bandeja("Monster", 3.50, 10, "236")};
+        new Bandeja("Takis", 1.50, 10, "632"), new Bandeja("Fanta", 1.50, 10, "347"),
+        new Bandeja("Monster", 3.50, 10, "931")};
         
         Deposito deposito = new Deposito();//Se crea por defecto
         
