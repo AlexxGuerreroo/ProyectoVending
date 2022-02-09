@@ -53,7 +53,7 @@ public class Pago {
         } else {//Si una de las dos condiciones falla, saltará error
             if (this.producto.getCantidad() < 1) {
                 //Si no hay stock del producto a pagar...
-                JOptionPane.showMessageDialog(null, "El producto se halla agotado",
+                JOptionPane.showMessageDialog(null, "El producto está agotado",
                         "Fuera de Stock", JOptionPane.ERROR_MESSAGE);
 
             }
@@ -96,7 +96,7 @@ public class Pago {
                 
                 //Pedimos en una ventana el tipo de moneda que se va a introducir
                 //y lo recoge en un String llamado entry
-                String entry = (String) JOptionPane.showInputDialog(null, "¿Qué moneda introduces?"
+                String entry = (String) JOptionPane.showInputDialog(null, "¿Qué desa moneda introducir?"
                         + "\n(Queda por pagar: " + (producto.getPrecio() - introducido)
                         + "0€)", "Pasarela de Pago", JOptionPane.QUESTION_MESSAGE,
                          null, options, options[0]);                                
@@ -204,8 +204,8 @@ public class Pago {
             } else {  //En el caso de que no haya cambio suficiente nos aparecerá
                 //un error que nos impida seguir con el pago del artículo.
 
-                JOptionPane.showMessageDialog(null, "No hay cambio suficiente. "
-                        + "Lo sentimos\nTendrá que pagar la cantidad suficiente",
+                JOptionPane.showMessageDialog(null, "Lo sentimos la máquina no "
+                        + "dispone de cambio sufieciente, deberá pagar la cantidad justa",
                         "Pago Insuficiente", JOptionPane.ERROR_MESSAGE);
 
                 //Y quitamos todo lo que hemos añadido en la operación:
@@ -221,7 +221,7 @@ public class Pago {
 
         } else {//Si no hay stock del producto solicitado...
 
-            JOptionPane.showMessageDialog(null, "El producto se halla agotado",
+            JOptionPane.showMessageDialog(null, "El producto está agotado",
                     "Fuera de Stock", JOptionPane.ERROR_MESSAGE);
 
             fallo = true;
