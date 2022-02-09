@@ -38,8 +38,10 @@ public class AdminMode {
         Scanner entry = new Scanner(System.in);
 
         //Declaramos variables que vamos a necesitar.
-        int select, p;
-        boolean repetir;
+        int select, posicionBandeja;
+        String codeBandeja;//El código para buscar la bandeja.
+        boolean repetir, found;//el boolean found servirá al
+        //cambiar atributos de las bandejas.
 
         do {
 
@@ -95,7 +97,11 @@ public class AdminMode {
                     //recargar en la máquina.        
                     case 3:
 
-                        int m10c, m20c, m50c, m1e, m2e;
+                        int m10c,
+                         m20c,
+                         m50c,
+                         m1e,
+                         m2e;
 
                         m10c = Integer.parseInt(JOptionPane.showInputDialog("¿Cuántas monedas de 10cent quiere añadir?"));
 
@@ -115,13 +121,59 @@ public class AdminMode {
                     //artículo y elegimos el nuevo valor que le queremos dar.
                     case 4:
 
-                        String newC;
+                        String newCode;
+                        posicionBandeja = 0;
+                        found = false;
+                        boolean duplicate = false;
 
-                        p = Integer.parseInt(JOptionPane.showInputDialog("Indique la posición del artículo en el array:"));
+                        codeBandeja = JOptionPane.showInputDialog("Indique el código del artículo:");
 
-                        newC = JOptionPane.showInputDialog("Indique el nuevo código del producto:");
+                        for (int i = 0; i < maquina.NUM_BANDEJAS; i++) {
 
-                        this.cambiarCodigo(p, newC);
+                            if (codeBandeja.equals(maquina.getBandejas()[i].getCodigo())) {
+
+                                posicionBandeja = i;
+                                found = true;
+                                break;
+
+                            }
+
+                        }
+
+                        if (found) {
+                            newCode = JOptionPane.showInputDialog("Indique "
+                                    + "el nuevo código del producto:");
+
+                            for (int i = 0; i < maquina.NUM_BANDEJAS; i++) {
+
+                                if (newCode.equals(maquina.getBandejas()[i].getCodigo())) {
+
+                                    duplicate = true;
+                                    break;
+
+                                }
+
+                            }
+                            if (!duplicate) {
+
+                                this.cambiarCodigo(posicionBandeja, newCode);
+
+                            } else {
+
+                                JOptionPane.showMessageDialog(null, "ERROR, El código ya"
+                                        + " ha sido asignado.", "Error de Duplicación",
+                                        JOptionPane.ERROR_MESSAGE);
+
+                            }
+
+                        } else {
+
+                            JOptionPane.showMessageDialog(null, "ERROR, No hay bandeja"
+                                    + " con el código introducido.", "Bandeja no encontrada",
+                                    JOptionPane.ERROR_MESSAGE);
+
+                        }
+
                         repetir = true;
                         break;
 
@@ -130,13 +182,38 @@ public class AdminMode {
                     //será el mismo que el existente anteriormente).    
                     case 5:
 
+                        posicionBandeja = 0;
+                        found = false;
                         String newN;
 
-                        p = Integer.parseInt(JOptionPane.showInputDialog("Indique la posición del artículo en el array:"));
+                        codeBandeja = JOptionPane.showInputDialog("Indique el código del artículo:");
 
-                        newN = JOptionPane.showInputDialog("Indique el nuevo producto:");
+                        for (int i = 0; i < maquina.NUM_BANDEJAS; i++) {
 
-                        this.cambiarProducto(p, newN);
+                            if (codeBandeja.equals(maquina.getBandejas()[i].getCodigo())) {
+
+                                posicionBandeja = i;
+                                found = true;
+                                break;
+
+                            }
+
+                        }
+
+                        if (found) {
+
+                            newN = JOptionPane.showInputDialog("Indique el nuevo producto:");
+
+                            this.cambiarProducto(posicionBandeja, newN);
+
+                        } else {
+
+                            JOptionPane.showMessageDialog(null, "ERROR, No hay bandeja"
+                                    + " con el código introducido.", "Bandeja no encontrada",
+                                    JOptionPane.ERROR_MESSAGE);
+
+                        }
+
                         repetir = true;
                         break;
 
@@ -144,26 +221,76 @@ public class AdminMode {
                     //un stock 15 artículos por bandeja).    
                     case 6:
 
+                        posicionBandeja = 0;
+                        found = false;
                         int newCantidad;
 
-                        p = Integer.parseInt(JOptionPane.showInputDialog("Indique la posición del artículo en el array:"));
+                        codeBandeja = JOptionPane.showInputDialog("Indique el código del artículo:");
 
-                        newCantidad = Integer.parseInt(JOptionPane.showInputDialog("Indique la nueva cantidad:"));
+                        for (int i = 0; i < maquina.NUM_BANDEJAS; i++) {
 
-                        this.cambiarStock(p, newCantidad);
+                            if (codeBandeja.equals(maquina.getBandejas()[i].getCodigo())) {
+
+                                posicionBandeja = i;
+                                found = true;
+                                break;
+
+                            }
+
+                        }
+
+                        if (found) {
+
+                            newCantidad = Integer.parseInt(JOptionPane.showInputDialog("Indique la nueva cantidad:"));
+
+                            this.cambiarStock(posicionBandeja, newCantidad);
+
+                        } else {
+
+                            JOptionPane.showMessageDialog(null, "ERROR, No hay bandeja"
+                                    + " con el código introducido.", "Bandeja no encontrada",
+                                    JOptionPane.ERROR_MESSAGE);
+
+                        }
+
                         repetir = true;
                         break;
 
                     //Seleccionando el artículo, podremos modificar su precio por uno nuevo.
                     case 7:
 
+                        posicionBandeja = 0;
+                        found = false;
                         int newPrecio;
 
-                        p = Integer.parseInt(JOptionPane.showInputDialog("Indique la posición del artículo en el array:"));
+                        codeBandeja = JOptionPane.showInputDialog("Indique el código del artículo:");
 
-                        newPrecio = Integer.parseInt(JOptionPane.showInputDialog("Indique el nuevo precio:"));
+                        for (int i = 0; i < maquina.NUM_BANDEJAS; i++) {
 
-                        this.cambiarPrecio(p, newPrecio);
+                            if (codeBandeja.equals(maquina.getBandejas()[i].getCodigo())) {
+
+                                posicionBandeja = i;
+                                found = true;
+                                break;
+
+                            }
+
+                        }
+
+                        if (found) {
+
+                            newPrecio = Integer.parseInt(JOptionPane.showInputDialog("Indique el nuevo precio:"));
+
+                            this.cambiarPrecio(posicionBandeja, newPrecio);
+
+                        } else {
+
+                            JOptionPane.showMessageDialog(null, "ERROR, No hay bandeja"
+                                    + " con el código introducido.", "Bandeja no encontrada",
+                                    JOptionPane.ERROR_MESSAGE);
+
+                        }
+
                         repetir = true;
                         break;
 
@@ -194,7 +321,7 @@ public class AdminMode {
     public void consultarBandejas() {
 
         String mensaje = "";
-        
+
         //Método con arrays:
         for (int i = 0; i < maquina.NUM_BANDEJAS; i++) {
 
@@ -203,16 +330,16 @@ public class AdminMode {
         }
 
         JOptionPane.showMessageDialog(null, mensaje, "Bandejas", JOptionPane.INFORMATION_MESSAGE);
-        
+
     }
 
     //Método que nos muestra los datos del depósito de la máquina.
     public void consultarDeposito() {
 
-        String mensaje = maquina.getDeposito().toString();        
-        
+        String mensaje = maquina.getDeposito().toString();
+
         JOptionPane.showMessageDialog(null, mensaje, "Depósito", JOptionPane.INFORMATION_MESSAGE);
-        
+
     }
 
     //Recaudación del depósito (dejándo a 0 todo el depósito), en ella quedará constancia la fecha en la que 
@@ -220,6 +347,9 @@ public class AdminMode {
     public void recaudarDelDeposito() {
 
         maquina.getDeposito().vaciarDeposito();
+
+        JOptionPane.showMessageDialog(null, "Recaudado dinero del depósito",
+                 "Recaudación", JOptionPane.INFORMATION_MESSAGE);
 
         maquina.getDeposito().setFechaUltRecaudacion(LocalDate.now());
 
@@ -230,6 +360,9 @@ public class AdminMode {
     public void recargarDeposito(int m10c, int m20c, int m50c, int m1e, int m2e) {
 
         maquina.getDeposito().recargarM(m10c, m20c, m50c, m1e, m2e);
+
+        JOptionPane.showMessageDialog(null, "Recargado dinero del depósito",
+                 "Recarga", JOptionPane.INFORMATION_MESSAGE);
 
         maquina.getDeposito().setFechaUltRecarga(LocalDate.now());
 
