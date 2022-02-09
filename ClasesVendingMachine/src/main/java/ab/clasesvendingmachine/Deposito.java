@@ -85,6 +85,20 @@ public class Deposito {
 
     public void vaciarDeposito() {
 
+        m10c = 0;
+        m20c = 0;
+        m50c = 0;
+        m1e = 0;
+        m2e = 0;
+        b5e = 0;
+        b10e = 0;
+        b20e = 0;
+        dineroTarjeta = 0;
+
+    }
+    
+    public void recaudarDeposito() {
+
         m10c = 10;
         m20c = 10;
         m50c = 10;
