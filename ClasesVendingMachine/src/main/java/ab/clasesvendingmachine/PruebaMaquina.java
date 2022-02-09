@@ -23,6 +23,7 @@ public class PruebaMaquina {
         String code;
         
         Bandeja[] rng = new Bandeja[8];
+        Tarjeta[] cards = new Tarjeta[3];
         
         rng[0] = new Bandeja();
         rng[1] = new Bandeja();
@@ -33,9 +34,13 @@ public class PruebaMaquina {
         rng[6] = new Bandeja();
         rng[7] = new Bandeja();
         
+        cards[0] = new Tarjeta();
+        cards[1] = new Tarjeta();
+        cards[2] = new Tarjeta();
+        
         Deposito beta = new Deposito();
         
-        Maquina alfa = new Maquina(rng, beta);
+        Maquina alfa = new Maquina(rng, beta, cards);
         
         System.out.println("¿Qué código desea introducir?");
         code = entry.next();

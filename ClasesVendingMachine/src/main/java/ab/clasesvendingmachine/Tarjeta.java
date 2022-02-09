@@ -13,6 +13,7 @@ package ab.clasesvendingmachine;
 import java.lang.Character;
 import java.time.*;
 import java.util.*;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class Tarjeta {
 
@@ -26,7 +27,6 @@ public class Tarjeta {
     private double saldo;//Con cada pago, se reducirá esta cantidad.
     private boolean valido;
     private YearMonth caducidad;
-    private static int contador = 0;
 
     //Por último, estas dos clases determinan la cantidad mínima y máxima que 
     //puede haber de saldo:
@@ -35,8 +35,7 @@ public class Tarjeta {
     public static final double MAX = 3000;//Máxima cantidad de dinero al crear
     //la tarjeta.
     
-    public Tarjeta(String numTarjeta, String nombre, String apellido1,
-            String apellido2, String banco, String cvv, double saldo, int mes,
+    public Tarjeta(String numTarjeta, String cvv, double saldo, int mes,
             int ano) {//Constructor para el método copiar:
 
         //Comprobamos que el número de la tarjeta y el nº secreto son válidos 
@@ -63,19 +62,15 @@ public class Tarjeta {
             this.cvv = "012";
         }
 
-        //Pasamos el nombre y los apellidos.
-        this.nombre = nombre;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-
-        //Pasamos el nombre de la entidad bancaria.
-        this.banco = banco;
+        //Asignamos estos valores por defecto:
+        nombre = "User";
+        apellido1 = "";
+        apellido2 = "";
+        banco = "PrepH";
 
         //Se pasa el valor parametrizado del saldo:
         this.saldo = saldo;
-
         
-
         //Pasamos la fecha de caducidad y comprobamos si la fecha está cumplida.
         this.caducidad = YearMonth.of(ano, mes);
         if (this.caducado()) {
@@ -93,6 +88,7 @@ public class Tarjeta {
     
     
     public Tarjeta(String numTarjeta, String cvv, int mes, int ano) {
+        
         //Constructor parametrizado:
         Random ruleta = new Random();
 
@@ -125,22 +121,20 @@ public class Tarjeta {
         banco = "PrepH";
         saldo = ruleta.nextInt(3000) + 1;//El saldo es generado al azar.
         valido = false;//Por defecto se crea anulada.
-        contador++; //Aumentamos en 1 el contador.
 
     }
 
     public Tarjeta() {//Constructor por defecto.
         //Introducimos valores por defecto:
-        numTarjeta = "0123456789012345";
-        cvv = "012";
-        nombre = "AlexElCapo";
-        apellido1 = "Contigo";
-        apellido2 = "PIPO";
-        banco = "Firewatch";
+        numTarjeta = RandomStringUtils.randomNumeric(16).toUpperCase();
+        cvv = RandomStringUtils.randomNumeric(3).toUpperCase();
+        nombre = "User";
+        apellido1 = "";
+        apellido2 = "";
+        banco = "BBVA";
         saldo = 803.19;
         caducidad = YearMonth.of(2077, 9);
         valido = false; //Por defecto se crea anulada.
-        contador++; //Aumentamos en 1 el contador.
 
         /*PD: Los valores del nombre, apellidos y la fecha son relacionados a un
         meme (este: https://www.youtube.com/watch?v=huie2_3Pekg ) */
@@ -307,13 +301,7 @@ public class Tarjeta {
 
         return banco;
 
-    }
-
-    public static int getContador() {
-
-        return contador;
-
-    }
+    }    
 
     public boolean isValido() {
 
@@ -373,8 +361,7 @@ public class Tarjeta {
     //Método copiar.
     public static Tarjeta copiar(Tarjeta c) {
 
-        Tarjeta aux = new Tarjeta(c.getNumTarjeta(), c.getNombre(), 
-                c.getApellido1(), c.getApellido2(), c.getBanco(), c.getCvv(),
+        Tarjeta aux = new Tarjeta(c.getNumTarjeta(), c.getCvv(),
                 c.getSaldo(), c.getCaducidad().getMonthValue(),
                 c.getCaducidad().getYear());
 
@@ -383,7 +370,8 @@ public class Tarjeta {
 
     @Override
     public String toString() {
-        return "Tarjeta{\n" + "\n\tNumTarjeta = " + numTarjeta + "\tCVV: " + cvv
+        return "Tarjeta{\n" + "\n\tNumTarjeta = " + numTarjeta + "\nCVV: " + cvv
+                + "\t Saldo: " + saldo
                 + "\n\tCaduca en " + caducidad.getMonthValue() + '/'
                 + caducidad.getYear() + "\n}";
     }

@@ -17,8 +17,7 @@ public class PruebaTarjeta {
         // TODO code application logic here
 
         Tarjeta t1 = new Tarjeta();
-        Tarjeta t2 = new Tarjeta("0486578623384976", "Xele", "Big",
-                "McSupreme", "BBVA", "864", 532.69, 8,
+        Tarjeta t2 = new Tarjeta("0486578623384976", "864", 532.69, 8,
                 2034);
 
         Tarjeta t3 = new Tarjeta();

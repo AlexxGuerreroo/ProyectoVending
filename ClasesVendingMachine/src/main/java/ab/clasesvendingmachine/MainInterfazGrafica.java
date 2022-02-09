@@ -747,10 +747,12 @@ public class MainInterfazGrafica extends JFrame {
         new Bandeja("Takis", 1.50, 10, "632"), new Bandeja("Fanta", 1.50, 10, "347"),
         new Bandeja("Monster", 3.50, 10, "931")};
         
+        Tarjeta[] cards = {new Tarjeta(), new Tarjeta(), new Tarjeta()};
+        
         Deposito deposito = new Deposito();//Se crea por defecto
         
         //Se crea la máquina con el array de bandejas y el depósito como parámetros:
-        Maquina maquina = new Maquina (bandejas, deposito);
+        Maquina maquina = new Maquina (bandejas, deposito, cards);
         
         //Se crea la interfaz gráfica, con la máquina como parámetro.
         new MainInterfazGrafica(maquina);

@@ -46,7 +46,7 @@ public class Maquina {
     //variable NUM_TARJETAS:
     private Tarjeta[] tarjetas = new Tarjeta[NUM_TARJETAS];
 
-    public Maquina(Bandeja[] art, Deposito deposito) {
+    public Maquina(Bandeja[] art, Deposito deposito, Tarjeta [] tarjetas) {
         //Constructor usando arrays
 
         for (int i = 0; i < NUM_BANDEJAS; i++) {
@@ -62,6 +62,8 @@ public class Maquina {
 
         //Usamos un método para generar el código de Admin
         CODE_ADMIN = this.generarCodigo();
+        
+        this.tarjetas = tarjetas;
 
         //Y lo mostramos en consola
         System.out.println("Código de Administrador: " + CODE_ADMIN);
@@ -188,42 +190,25 @@ public class Maquina {
                 String numero;
                 String cvv;
                 int mes, ano;
+                
+                String mensaje = "¿Con qué tarjeta quieres pagar? \n";
 
-                numero = JOptionPane.showInputDialog("Introduzca el número de su"
-                        + " tarjeta");
+            //Método con arrays:
+            for (int i = 0; i < NUM_TARJETAS; i++) {
 
-                cvv = JOptionPane.showInputDialog("Introduzca el CVV");
+                mensaje = mensaje + getTarjetas()[i] + "\n";
 
-                mes = Integer.parseInt(JOptionPane.showInputDialog("Introduzca "
-                        + "el mes de caducidad"));
+            }
 
-                ano = Integer.parseInt(JOptionPane.showInputDialog("Introduzca "
-                        + "el año de caducidad"));
+            JOptionPane.showMessageDialog(null, mensaje, "Tarjetas"
+                    , JOptionPane.INFORMATION_MESSAGE);
+            
+            select = JOptionPane.showOptionDialog(null, mensaje,
+                        "Selección de tarjeta",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, 
+                        new Object[]{"1", "2", "3"}, 0);
 
-                Tarjeta t = new Tarjeta(numero, cvv, mes, ano);
-
-                pago = new Pago(t, deposito, art);
-
-                switch (t.getContador() % 3) {
-                    //Dependiendo del contador, se pasarán los atributos de
-                    //t a una de las posiciones de tarjetas:
-
-                    case 1://Si el resto da uno (como cuando es la primera
-                        //tarjeta creada)
-                        this.tarjetas[0].copiar(t);
-                        break;
-
-                    case 2://Si el resto da uno (como cuando es la segunda
-                        //tarjeta creada)
-                        this.tarjetas[1].copiar(t);
-                        break;
-
-                    case 0://Si el resto da uno (como cuando es la tercera
-                        //tarjeta creada)
-                        this.tarjetas[2].copiar(t);
-                        break;
-
-                }
+                pago = new Pago(tarjetas[select], deposito, art);                
 
             } else if (select == 1) {
                
