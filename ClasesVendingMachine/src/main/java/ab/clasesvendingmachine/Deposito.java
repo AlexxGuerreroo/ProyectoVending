@@ -85,14 +85,14 @@ public class Deposito {
 
     public void vaciarDeposito() {
 
-        m10c = 0;
-        m20c = 0;
-        m50c = 0;
-        m1e = 0;
-        m2e = 0;
-        b5e = 0;
-        b10e = 0;
-        b20e = 0;
+        m10c = 10;
+        m20c = 10;
+        m50c = 10;
+        m1e = 10;
+        m2e = 10;
+        b5e = 10;
+        b10e = 10;
+        b20e = 10;
         dineroTarjeta = 0;
 
     }
@@ -210,6 +210,7 @@ public class Deposito {
         this.addB5e(b5e);
         this.addB10e(b10e);
         this.addB20e(b20e);
+        
 
     }
     
