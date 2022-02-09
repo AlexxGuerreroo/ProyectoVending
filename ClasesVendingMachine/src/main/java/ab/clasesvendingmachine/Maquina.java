@@ -186,22 +186,16 @@ public class Maquina {
                     "Método de pago", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
                     null, new Object[]{"Tarjeta", "Efectivo", "Volver"}, "Volver");
 
-            if (select == 0) {
-                String numero;
-                String cvv;
-                int mes, ano;
+            if (select == 0 && art.getCantidad() > 0) {
                 
                 String mensaje = "¿Con qué tarjeta quieres pagar? \n";
 
             //Método con arrays:
             for (int i = 0; i < NUM_TARJETAS; i++) {
 
-                mensaje = mensaje + getTarjetas()[i] + "\n";
+                mensaje = mensaje + "Tarjeta " + (i + 1) + getTarjetas()[i] + "\n";
 
             }
-
-            JOptionPane.showMessageDialog(null, mensaje, "Tarjetas"
-                    , JOptionPane.INFORMATION_MESSAGE);
             
             select = JOptionPane.showOptionDialog(null, mensaje,
                         "Selección de tarjeta",
@@ -210,10 +204,19 @@ public class Maquina {
 
                 pago = new Pago(tarjetas[select], deposito, art);                
 
-            } else if (select == 1) {
+            } else if (select == 1 && art.getCantidad() > 0) {
                
                 pago = new Pago(deposito, art);
 
+            }
+            
+            else{//Cuando no hay artículos 
+                
+                JOptionPane.showMessageDialog(null, "El producto se halla agotado",
+                    "Fuera de Stock", JOptionPane.ERROR_MESSAGE);
+                
+                pago = new Pago();
+                
             }
 
             JOptionPane.showMessageDialog(null, pago, "Factura",
@@ -224,7 +227,13 @@ public class Maquina {
             JOptionPane.showMessageDialog(null, "LO INTRODUCIDO NO ES VÁLIDO", "Error de Input",
                     JOptionPane.ERROR_MESSAGE);
 
-        }
+        }catch (NullPointerException npe) {//El tipo de excepción que se activa es distinto al del Scanner
+
+                JOptionPane.showMessageDialog(null, "Saliendo de la pasarela",
+                        "Paso nulo",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+            }
 
     }
 

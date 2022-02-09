@@ -747,7 +747,7 @@ public class MainInterfazGrafica extends JFrame {
         new Bandeja("Takis", 1.50, 10, "632"), new Bandeja("Fanta", 1.50, 10, "347"),
         new Bandeja("Monster", 3.50, 10, "931")};
         
-        Tarjeta[] cards = {new Tarjeta(), new Tarjeta(), new Tarjeta()};
+        Tarjeta[] cards = {new Tarjeta(15), new Tarjeta(20.6), new Tarjeta(11)};
         
         Deposito deposito = new Deposito();//Se crea por defecto
         

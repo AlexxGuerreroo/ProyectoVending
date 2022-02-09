@@ -39,7 +39,8 @@ public class AdminMode {
 
         //Declaramos variables que vamos a necesitar.
         int select, posicionBandeja;
-        String codeBandeja;//El código para buscar la bandeja.
+        String codigoBandeja;//El código para buscar la bandeja.
+        String mensaje; //Para las opciones relacionadas con tarjetas.
         boolean repetir, found;//el boolean found servirá al
         //cambiar atributos de las bandejas.
 
@@ -65,10 +66,11 @@ public class AdminMode {
                 select = JOptionPane.showOptionDialog(null, "Elige una opción: \n \n 1: Consultar Bandejas \n "
                         + "2: Consultar Dinero \n 3: Recaudar Dinero \n 4: Recargar Dinero \n "
                         + "5: Cambiar Código de una Bandeja \n 6: Cambiar Producto de una Bandeja \n "
-                        + "7: Cambiar Stock de una Bandeja \n 8: Cambiar Precio de un Producto \n 0: Volver",
+                        + "7: Cambiar Stock de una Bandeja \n 8: Cambiar Precio de un Producto"
+                        + "\n 9: Consultar Tarjetas" + "\n 10: Recargar Tarjeta" + " \n 0: Volver",
                         "MODO ADMINISTRADOR",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"1", "2", "3", "4",
-                            "5", "6", "7", "8", "0"}, 8);
+                            "5", "6", "7", "8", "9", "10", "0"}, 0);
                 System.out.println(select);
 
                 //Bucle switch que mediante el valor introducido por scanner 
@@ -126,11 +128,11 @@ public class AdminMode {
                         found = false;
                         boolean duplicate = false;
 
-                        codeBandeja = JOptionPane.showInputDialog("Indique el código del artículo:");
+                        codigoBandeja = JOptionPane.showInputDialog("Indique el código del artículo:");
 
                         for (int i = 0; i < maquina.NUM_BANDEJAS; i++) {
 
-                            if (codeBandeja.equals(maquina.getBandejas()[i].getCodigo())) {
+                            if (codigoBandeja.equals(maquina.getBandejas()[i].getCodigo())) {
 
                                 posicionBandeja = i;
                                 found = true;
@@ -157,6 +159,12 @@ public class AdminMode {
                             if (!duplicate) {
 
                                 this.cambiarCodigo(posicionBandeja, newCode);
+
+                            } else if (newCode.length() != 3) {
+
+                                JOptionPane.showMessageDialog(null, "ERROR, El código ya"
+                                        + " tiene que ser de 3 dígitos.", "Error de Longitud",
+                                        JOptionPane.ERROR_MESSAGE);
 
                             } else {
 
@@ -186,11 +194,11 @@ public class AdminMode {
                         found = false;
                         String newN;
 
-                        codeBandeja = JOptionPane.showInputDialog("Indique el código del artículo:");
+                        codigoBandeja = JOptionPane.showInputDialog("Indique el código del artículo:");
 
                         for (int i = 0; i < maquina.NUM_BANDEJAS; i++) {
 
-                            if (codeBandeja.equals(maquina.getBandejas()[i].getCodigo())) {
+                            if (codigoBandeja.equals(maquina.getBandejas()[i].getCodigo())) {
 
                                 posicionBandeja = i;
                                 found = true;
@@ -225,11 +233,11 @@ public class AdminMode {
                         found = false;
                         int newCantidad;
 
-                        codeBandeja = JOptionPane.showInputDialog("Indique el código del artículo:");
+                        codigoBandeja = JOptionPane.showInputDialog("Indique el código del artículo:");
 
                         for (int i = 0; i < maquina.NUM_BANDEJAS; i++) {
 
-                            if (codeBandeja.equals(maquina.getBandejas()[i].getCodigo())) {
+                            if (codigoBandeja.equals(maquina.getBandejas()[i].getCodigo())) {
 
                                 posicionBandeja = i;
                                 found = true;
@@ -261,13 +269,13 @@ public class AdminMode {
 
                         posicionBandeja = 0;
                         found = false;
-                        int newPrecio;
+                        double newPrecio;
 
-                        codeBandeja = JOptionPane.showInputDialog("Indique el código del artículo:");
+                        codigoBandeja = JOptionPane.showInputDialog("Indique el código del artículo:");
 
                         for (int i = 0; i < maquina.NUM_BANDEJAS; i++) {
 
-                            if (codeBandeja.equals(maquina.getBandejas()[i].getCodigo())) {
+                            if (codigoBandeja.equals(maquina.getBandejas()[i].getCodigo())) {
 
                                 posicionBandeja = i;
                                 found = true;
@@ -279,7 +287,7 @@ public class AdminMode {
 
                         if (found) {
 
-                            newPrecio = Integer.parseInt(JOptionPane.showInputDialog("Indique el nuevo precio:"));
+                            newPrecio = Double.parseDouble(JOptionPane.showInputDialog("Indique el nuevo precio:"));
 
                             this.cambiarPrecio(posicionBandeja, newPrecio);
 
@@ -291,6 +299,47 @@ public class AdminMode {
 
                         }
 
+                        repetir = true;
+                        break;
+
+                    case 8:
+
+                        mensaje = "";
+
+                        for (int i = 0; i < maquina.NUM_TARJETAS; i++) {
+
+                            mensaje = mensaje + maquina.getTarjetas()[i] + "\n";
+
+                        }
+
+                        JOptionPane.showMessageDialog(null, mensaje, "Tarjetas",
+                                JOptionPane.INFORMATION_MESSAGE);
+
+                        repetir = true;
+                        break;
+
+                    case 9:
+
+                        int selectTarjeta;
+                        double recarga;
+
+                        mensaje = "¿Qué tarjeta quiere recargar? \n";
+
+                        for (int i = 0; i < maquina.NUM_TARJETAS; i++) {
+
+                            mensaje = mensaje + "Tarjeta " + (i + 1)
+                                    + maquina.getTarjetas()[i] + "\n";
+
+                        }
+
+                        selectTarjeta = JOptionPane.showOptionDialog(null, mensaje,
+                                "Selección de tarjeta",
+                                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                                new Object[]{"1", "2", "3"}, 0);
+
+                        recarga = Double.parseDouble(JOptionPane.showInputDialog("¿Cuánto quiere añadir"));
+
+                        this.recargarTarjeta(selectTarjeta, recarga);
                         repetir = true;
                         break;
 
@@ -308,7 +357,13 @@ public class AdminMode {
                 JOptionPane.showMessageDialog(null, "ERROR, Caracter no numérico"
                         + " introducido indebidamente.", "Error de Formato Introducido",
                         JOptionPane.ERROR_MESSAGE);
-                entry.nextLine();
+                repetir = true;
+
+            } catch (NullPointerException npe) {//El tipo de excepción que se activa es distinto al del Scanner
+
+                JOptionPane.showMessageDialog(null, "Volviendo al inicio...",
+                        "Paso nulo",
+                        JOptionPane.INFORMATION_MESSAGE);
                 repetir = true;
 
             }
@@ -342,14 +397,31 @@ public class AdminMode {
 
     }
 
+    //Método que nos muestra los datos de las tarjetas.
+    public void consultarTarjetas() {
+
+        String mensaje = "";
+
+        //Método con arrays:
+        for (int i = 0; i < maquina.NUM_TARJETAS; i++) {
+
+            mensaje = mensaje + "Tarjeta " + (i + 1) + maquina.getTarjetas()[i]
+                    + "\n";
+
+        }
+
+        JOptionPane.showMessageDialog(null, mensaje, "Tarjetas", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
     //Recaudación del depósito (dejándo a 0 todo el depósito), en ella quedará constancia la fecha en la que 
     //se ha realizado la recaudación.
     public void recaudarDelDeposito() {
 
-        maquina.getDeposito().vaciarDeposito();
+        maquina.getDeposito().recaudarDeposito();
 
         JOptionPane.showMessageDialog(null, "Recaudado dinero del depósito",
-                 "Recaudación", JOptionPane.INFORMATION_MESSAGE);
+                "Recaudación", JOptionPane.INFORMATION_MESSAGE);
 
         maquina.getDeposito().setFechaUltRecaudacion(LocalDate.now());
 
@@ -362,9 +434,19 @@ public class AdminMode {
         maquina.getDeposito().recargarM(m10c, m20c, m50c, m1e, m2e);
 
         JOptionPane.showMessageDialog(null, "Recargado dinero del depósito",
-                 "Recarga", JOptionPane.INFORMATION_MESSAGE);
+                "Recarga Depósito", JOptionPane.INFORMATION_MESSAGE);
 
         maquina.getDeposito().setFechaUltRecarga(LocalDate.now());
+
+    }
+
+    public void recargarTarjeta(int posicion, double recarga) {
+
+        JOptionPane.showMessageDialog(null, "Recargado dinero de la tarjeta",
+                "Recarga Tarjeta", JOptionPane.INFORMATION_MESSAGE);
+
+        maquina.getTarjetas()[posicion].setSaldo(
+                maquina.getTarjetas()[posicion].getSaldo() + recarga);
 
     }
 
@@ -373,12 +455,18 @@ public class AdminMode {
 
         maquina.getBandejas()[posicion].setCodigo(newCode);
 
+        JOptionPane.showMessageDialog(null, "Realizado cambio con éxito",
+                "Cambio de Código", JOptionPane.INFORMATION_MESSAGE);
+
     }
 
     //Método para cambiar de posición el producto de las bandejas.
     public void cambiarProducto(int posicion, String newProducto) {
 
         maquina.getBandejas()[posicion].setNombre(newProducto);
+
+        JOptionPane.showMessageDialog(null, "Realizado cambio con éxito",
+                "Cambio de Producto", JOptionPane.INFORMATION_MESSAGE);
 
     }
 
@@ -387,12 +475,18 @@ public class AdminMode {
 
         maquina.getBandejas()[posicion].setCantidad(nuevaCantidad);
 
+        JOptionPane.showMessageDialog(null, "Realizado cambio con éxito",
+                "Cambio de Cantidad", JOptionPane.INFORMATION_MESSAGE);
+
     }
 
     //Método para cambiar el precio del artiículo seleccionado en la máquina.
-    public void cambiarPrecio(int posicion, int nuevoPrecio) {
+    public void cambiarPrecio(int posicion, double nuevoPrecio) {
 
         maquina.getBandejas()[posicion].setPrecio(nuevoPrecio);
+
+        JOptionPane.showMessageDialog(null, "Realizado cambio con éxito",
+                "Cambio de Precio", JOptionPane.INFORMATION_MESSAGE);
 
     }
 

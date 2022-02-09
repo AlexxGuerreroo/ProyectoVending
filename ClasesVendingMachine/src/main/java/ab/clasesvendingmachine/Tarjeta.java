@@ -34,30 +34,30 @@ public class Tarjeta {
     //la tarjeta.
     public static final double MAX = 3000;//Máxima cantidad de dinero al crear
     //la tarjeta.
-    
+
     public Tarjeta(String numTarjeta, String cvv, double saldo, int mes,
             int ano) {//Constructor para el método copiar:
 
         //Comprobamos que el número de la tarjeta y el nº secreto son válidos 
         //En caso afirmativo, ponemos los datos
-        if (validezNum(numTarjeta)){
-            
+        if (validezNum(numTarjeta)) {
+
             this.numTarjeta = numTarjeta;
-            
-        }else{//Si no, se pondrán datos por defecto.
-            
+
+        } else {//Si no, se pondrán datos por defecto.
+
             System.out.println("Nº de tarjeta introducido no es válido");
             this.numTarjeta = "0123456789012345";
-            
+
         }
-        
+
         //En caso afirmativo, ponemos los datos
         if (validezCVV(cvv)) {
-            
+
             this.cvv = cvv;
-            
+
         } else {    //Si no, se pondrán datos por defecto
-            
+
             System.out.println("Nº secreto introducido no es válido");
             this.cvv = "012";
         }
@@ -70,13 +70,13 @@ public class Tarjeta {
 
         //Se pasa el valor parametrizado del saldo:
         this.saldo = saldo;
-        
+
         //Pasamos la fecha de caducidad y comprobamos si la fecha está cumplida.
         this.caducidad = YearMonth.of(ano, mes);
         if (this.caducado()) {
-            
+
             this.caducidad = YearMonth.of(2077, 9);
-         //Si ya ha pasado la fecha de caducidad, se reestablece por defecto:
+            //Si ya ha pasado la fecha de caducidad, se reestablece por defecto:
         }
 
         //Se crea una tarjeta por defecto que no será validada, pero pudiéndose 
@@ -84,47 +84,8 @@ public class Tarjeta {
         valido = false;
 
     }
-    
-    
-    
-    public Tarjeta(String numTarjeta, String cvv, int mes, int ano) {
-        
-        //Constructor parametrizado:
-        Random ruleta = new Random();
 
-        if(this.validezNum(numTarjeta)){
-            
-            this.numTarjeta = numTarjeta;
-            
-        }else{
-            
-            this.numTarjeta = "0123456789012345";
-            
-        }
-        
-        if(this.validezCVV(cvv)){
-            
-            this.cvv = cvv;
-        
-        }else{
-            
-            this.cvv = "012";
-            
-        }
-        
-        this.caducidad = YearMonth.of(ano, mes);
-        
-        //Valores creados por defecto.
-        nombre = "User";
-        apellido1 = "";
-        apellido2 = "";
-        banco = "PrepH";
-        saldo = ruleta.nextInt(3000) + 1;//El saldo es generado al azar.
-        valido = false;//Por defecto se crea anulada.
-
-    }
-
-    public Tarjeta() {//Constructor por defecto.
+    public Tarjeta(double saldo) {//Constructor por defecto.
         //Introducimos valores por defecto:
         numTarjeta = RandomStringUtils.randomNumeric(16).toUpperCase();
         cvv = RandomStringUtils.randomNumeric(3).toUpperCase();
@@ -132,14 +93,12 @@ public class Tarjeta {
         apellido1 = "";
         apellido2 = "";
         banco = "BBVA";
-        saldo = 803.19;
+        this.saldo = saldo;
         caducidad = YearMonth.of(2077, 9);
         valido = false; //Por defecto se crea anulada.
 
-        /*PD: Los valores del nombre, apellidos y la fecha son relacionados a un
-        meme (este: https://www.youtube.com/watch?v=huie2_3Pekg ) */
     }
-        
+
     public boolean validezNum(String nT) {
 
         boolean v = true;
@@ -153,7 +112,7 @@ public class Tarjeta {
 
                 d = nT.charAt(i);
                 if (!(Character.isDigit(d))) {
-                    
+
                     //Si hay un caracter no numérico, salta el mensaje de error
                     System.out.println("El nº de tarjeta es inválido "
                             + "(no es numérico)");
@@ -161,7 +120,7 @@ public class Tarjeta {
 
                 }
 
-            }            
+            }
 
         } else {//Si el número de tarjeta no es de 16 cifras salta el error.
 
@@ -173,7 +132,7 @@ public class Tarjeta {
         return v;
 
     }
-    
+
     public boolean validezCVV(String cvv) {
 
         boolean v = true;
@@ -187,7 +146,7 @@ public class Tarjeta {
 
                 d = cvv.charAt(j);
                 if (!(Character.isDigit(d))) {
-                    
+
                     //Si hay un caracter no numérico, salta el mensaje de error
                     System.out.println("El CVV es inválido (no es numérico)");
                     v = false;
@@ -206,7 +165,7 @@ public class Tarjeta {
         return v;
 
     }
-    
+
     //Método para comprobar la validez de la tarjeta.
     public boolean caducado() {
 
@@ -301,7 +260,7 @@ public class Tarjeta {
 
         return banco;
 
-    }    
+    }
 
     public boolean isValido() {
 
@@ -324,17 +283,15 @@ public class Tarjeta {
         this.valido = false;
 
     }
-    
+
     //Método para efectuar el pago en el caso de que fuesen válidos todos los 
     //valores, o en su defecto devolver un error.
     public boolean pago(double coste) {
-        Scanner entry = new Scanner(System.in);
-        String cvv;
         int aux;
         boolean pago;
-        
+
         this.setValido();
-        
+
         if (this.valido && coste < saldo) {
 
             aux = (int) ((this.saldo * 100) - (coste * 100));
@@ -357,7 +314,7 @@ public class Tarjeta {
         return pago;
 
     }
-    
+
     //Método copiar.
     public static Tarjeta copiar(Tarjeta c) {
 
@@ -365,12 +322,12 @@ public class Tarjeta {
                 c.getSaldo(), c.getCaducidad().getMonthValue(),
                 c.getCaducidad().getYear());
 
-                return aux;
+        return aux;
     }
 
     @Override
     public String toString() {
-        return "Tarjeta{\n" + "\n\tNumTarjeta = " + numTarjeta + "\nCVV: " + cvv
+        return "{" + "\n\tNumTarjeta = " + numTarjeta + "\nCVV: " + cvv
                 + "\t Saldo: " + saldo
                 + "\n\tCaduca en " + caducidad.getMonthValue() + '/'
                 + caducidad.getYear() + "\n}";

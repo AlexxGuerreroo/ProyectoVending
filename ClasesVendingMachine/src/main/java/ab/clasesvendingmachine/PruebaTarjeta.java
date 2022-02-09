@@ -16,11 +16,11 @@ public class PruebaTarjeta {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        Tarjeta t1 = new Tarjeta();
+        Tarjeta t1 = new Tarjeta(30);
         Tarjeta t2 = new Tarjeta("0486578623384976", "864", 532.69, 8,
                 2034);
 
-        Tarjeta t3 = new Tarjeta();
+        Tarjeta t3 = new Tarjeta(30);
 
         System.out.println("T1: \n" + t1 + "\n");
 

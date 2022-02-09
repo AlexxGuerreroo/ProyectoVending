@@ -34,9 +34,9 @@ public class PruebaMaquina {
         rng[6] = new Bandeja();
         rng[7] = new Bandeja();
         
-        cards[0] = new Tarjeta();
-        cards[1] = new Tarjeta();
-        cards[2] = new Tarjeta();
+        cards[0] = new Tarjeta(9);
+        cards[1] = new Tarjeta(6);
+        cards[2] = new Tarjeta(76);
         
         Deposito beta = new Deposito();
         
