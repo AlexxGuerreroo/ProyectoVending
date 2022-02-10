@@ -210,11 +210,18 @@ public class Maquina {
 
             }
             
-            else{//Cuando no hay artículos 
+            else if (art.getCantidad() <= 0){//Cuando no hay artículos 
                 
                 JOptionPane.showMessageDialog(null, "El producto se halla agotado",
                     "Fuera de Stock", JOptionPane.ERROR_MESSAGE);
                 
+                pago = new Pago();
+                
+            }else{//Cuando se le da a volver antes de elegir el método de pago
+                
+                JOptionPane.showMessageDialog(null, "Saliendo de la pasarela",
+                        "Paso nulo",
+                        JOptionPane.INFORMATION_MESSAGE);
                 pago = new Pago();
                 
             }
@@ -222,12 +229,12 @@ public class Maquina {
             JOptionPane.showMessageDialog(null, pago, "Factura",
                     JOptionPane.INFORMATION_MESSAGE);
 
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {//El tipo de excepción que se activa es distinto al del Scanner
 
             JOptionPane.showMessageDialog(null, "LO INTRODUCIDO NO ES VÁLIDO", "Error de Input",
                     JOptionPane.ERROR_MESSAGE);
 
-        }catch (NullPointerException npe) {//El tipo de excepción que se activa es distinto al del Scanner
+        }catch (NullPointerException npe) {//Cuando se le da a volver en medio del pago en efectivo
 
                 JOptionPane.showMessageDialog(null, "Saliendo de la pasarela",
                         "Paso nulo",
