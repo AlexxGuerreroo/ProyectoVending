@@ -169,8 +169,9 @@ public class Maquina {
         if (!coincidencia) {
             //Si no coincide con ninguno, mandamos un mensaje de error:
 
-            System.out.println("El código introducido no coincide con ningún"
-                    + " producto.");
+            JOptionPane.showMessageDialog(null, "El código introducido no coincide con ningún"
+                    + " producto.",
+                    "Producto no existente", JOptionPane.ERROR_MESSAGE);
 
         }
 
